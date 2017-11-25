@@ -259,7 +259,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="特殊要点"><a href="#特殊要点" class="headerlink" title="特殊要点"></a>特殊要点</h2><ul>
+              <h2 id="特殊要点"><a href="#特殊要点" class="headerlink" title="特殊要点"></a>特殊要点</h2><ul>
 <li>字符串常量在声明的时候编译器会在其后加一个 <strong>/x00</strong> 空字符</li>
 <li>有 <strong>#</strong> 开头的命令都称为预处理命令</li>
 <li>变量代表的一个空间名字可以改变，而常量是一个确定的值，不能被改变</li>
@@ -295,89 +295,7 @@
 </tbody>
 </table>
 <h2 id="如何定义符号常量"><a href="#如何定义符号常量" class="headerlink" title="如何定义符号常量"></a>如何定义符号常量</h2><p><strong>格式：#define [name]</strong></p>
-<h2 id="常量标识符命名规则"><a href="#常量标识符命名规则" class="headerlink" title="常量标识符命名规则"></a>常量标识符命名规则</h2><p><strong>和变量命名基本一致</strong></p>
-<h2 id="备用表——转义字符"><a href="#备用表——转义字符" class="headerlink" title="备用表——转义字符"></a>备用表——转义字符</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">转义字符</th>
-<th style="text-align:center">意义</th>
-<th style="text-align:center">ASCII码值（十进制）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">\a</td>
-<td style="text-align:center">响铃</td>
-<td style="text-align:center">007</td>
-</tr>
-<tr>
-<td style="text-align:center">\b</td>
-<td style="text-align:center">退格</td>
-<td style="text-align:center">008</td>
-</tr>
-<tr>
-<td style="text-align:center">\f</td>
-<td style="text-align:center">换页</td>
-<td style="text-align:center">012</td>
-</tr>
-<tr>
-<td style="text-align:center">\n</td>
-<td style="text-align:center">换行</td>
-<td style="text-align:center">010</td>
-</tr>
-<tr>
-<td style="text-align:center">\r</td>
-<td style="text-align:center">回车</td>
-<td style="text-align:center">013</td>
-</tr>
-<tr>
-<td style="text-align:center">\t</td>
-<td style="text-align:center">水平制表</td>
-<td style="text-align:center">009</td>
-</tr>
-<tr>
-<td style="text-align:center">\v</td>
-<td style="text-align:center">垂直制表</td>
-<td style="text-align:center">011</td>
-</tr>
-<tr>
-<td style="text-align:center">\\</td>
-<td style="text-align:center">代表反斜线字符</td>
-<td style="text-align:center">092</td>
-</tr>
-<tr>
-<td style="text-align:center">\‘</td>
-<td style="text-align:center">代表一个单引号</td>
-<td style="text-align:center">039</td>
-</tr>
-<tr>
-<td style="text-align:center">\“</td>
-<td style="text-align:center">代表一个双引号</td>
-<td style="text-align:center">034</td>
-</tr>
-<tr>
-<td style="text-align:center">\?</td>
-<td style="text-align:center">代表一个问号</td>
-<td style="text-align:center">063</td>
-</tr>
-<tr>
-<td style="text-align:center">\0</td>
-<td style="text-align:center">代表一个空字符</td>
-<td style="text-align:center">000</td>
-</tr>
-<tr>
-<td style="text-align:center">\ooo</td>
-<td style="text-align:center">1到3位八进制数所代表的任意字符</td>
-<td style="text-align:center">三位八进制</td>
-</tr>
-<tr>
-<td style="text-align:center">\xff</td>
-<td style="text-align:center">1到2位十六进制所代表的任意字符</td>
-<td style="text-align:center">两位十六进制</td>
-</tr>
-</tbody>
-</table>
-
+          
       
       
     </div>
@@ -391,6 +309,10 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言笔记/">C语言笔记</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a  href="/20171125/C语言笔记——常量与宏定义/#more">&lt;&lt;more&gt;&gt; >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -435,7 +357,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>好不容易开始学C语言了，那就把笔记忘这上面搬过来吧。</strong></p>
+              <p><strong>好不容易开始学C语言了，那就把笔记忘这上面搬过来吧。</strong></p>
 <h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><ul>
 <li>C语言变量名只能是英文字母（A-Z,a-z）和数字（0-9）或者下划线（_）组成。</li>
 <li>必须是字母或者下划线开头。</li>
@@ -452,97 +374,8 @@
 ■ _Complex   ■ _Imaginary   ■ _Alignas   ■ _Alignof  
 ■ _Atomic   ■ _Static_assert   ■ _Noreturn
 ■ _Thread_local   ■ _Generic
-</code></pre><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>符号</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>整数型</td>
-<td>int</td>
-<td>整型，通常反映了所用机器中整数的最自然长度</td>
-</tr>
-<tr>
-<td>字符型</td>
-<td>char</td>
-<td>字符型，占用一个字节默认无符号</td>
-</tr>
-<tr>
-<td>单精度浮点型</td>
-<td>float</td>
-<td>（无）</td>
-</tr>
-<tr>
-<td>双精度浮点型</td>
-<td>double</td>
-<td>（无）</td>
-</tr>
-</tbody>
-</table>
-<h2 id="格式化字符串与变量对应转换规则"><a href="#格式化字符串与变量对应转换规则" class="headerlink" title="格式化字符串与变量对应转换规则"></a>格式化字符串与变量对应转换规则</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">格式码</th>
-<th style="text-align:center">参数</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">%c</td>
-<td style="text-align:center">字符</td>
-<td style="text-align:left">参数被裁剪为8位字节码并作为字符进行打印</td>
-</tr>
-<tr>
-<td style="text-align:center">%i,%d</td>
-<td style="text-align:center">数字值</td>
-<td style="text-align:left">参数作为一个十进制整数打印。如果给出了精度而且值的位数小于精度位数，前面就用0填充</td>
-</tr>
-<tr>
-<td style="text-align:center">%u,%o,%x,%X</td>
-<td style="text-align:center">数字值</td>
-<td style="text-align:left">参数作为一个无符号数字值打印，u使用十进制，o使用八进制，x或X使用十六进制，两者的区别是x约定使用abcdef，而X约定使用ABCDEF</td>
-</tr>
-<tr>
-<td style="text-align:center">%e,%E</td>
-<td style="text-align:center">数字值</td>
-<td style="text-align:left">参数根据指数形式打印。例如，6.023000e23是使用代码e，6.023000E23是使用代码E。小数点后面的位数由精度字段决定，缺省值是6</td>
-</tr>
-<tr>
-<td style="text-align:center">%f</td>
-<td style="text-align:center">数字值</td>
-<td style="text-align:left">参数按照的常规浮点格式打印。精度字段决定小数点后面的位数，缺省值是6</td>
-</tr>
-<tr>
-<td style="text-align:center">%g,%G</td>
-<td style="text-align:center">数字值</td>
-<td style="text-align:left">参数以%f或%e（如G则%E）的格式打印，取决于它的值。如果指数大于等于-4但小于精度字段就使用%f格式，否则使用指数格式</td>
-</tr>
-<tr>
-<td style="text-align:center">%s</td>
-<td style="text-align:center">字符串</td>
-<td style="text-align:left">打印一个字符串</td>
-</tr>
-<tr>
-<td style="text-align:center">%q</td>
-<td style="text-align:center">（无）</td>
-<td style="text-align:left">打印一个字符串，并将字符串置于一对引号中，如果字符串中包含引号换行等自动添加转义符。如果要读取一个字符串传为代码。为避免用户恶意注入引号等特殊字符，可以使用%q进行格式化</td>
-</tr>
-<tr>
-<td style="text-align:center">%%</td>
-<td style="text-align:center">（无）</td>
-<td style="text-align:left">取消%转义打印一个%字符,即用%%表示本来的%</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>注： %11.9f中的9表示精确到小数点后9位，以此类推；11表示输出字符串长度为11不够在后面加空格</p>
-</blockquote>
-
+</code></pre>
+          
       
       
     </div>
@@ -556,6 +389,10 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言笔记/">C语言笔记</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a  href="/20171125/C语言笔记——变量/#more">&lt;&lt;more&gt;&gt; >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
