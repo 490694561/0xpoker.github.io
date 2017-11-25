@@ -518,11 +518,20 @@
 
 
     
-        <section class="youyan" id="comments">
-  <div id="uyan_frame"></div>
-  <script src="http://v2.uyan.cc/code/uyan.js?uid=2149828"></script>
-</section>
-
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: '0xpoker',
+      repo: '490694561.github.io',
+      oauth: {
+        client_id: 'dbfc9c7c39943d23fdec',
+        client_secret: '2c26d8ba6d8c47e0eddba69f9efc5609643aee1a',
+      },
+    })
+    gitment.render('gitments')
+</script>
     
 
 
