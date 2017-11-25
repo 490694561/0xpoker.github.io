@@ -5,16 +5,17 @@
   
   <title>C语言笔记——变量 | Poker&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是一个很水的博客，大牛们见谅，真的很水很水~~~~">
+  <meta name="description" content="好不容易开始学C语言了，那就把笔记忘这上面搬过来吧。 易错点 C语言变量名只能是英文字母（A-Z,a-z）和数字（0-9）或者下划线（_）组成。 必须是字母或者下划线开头。 变量名区分大小写（如 F ≠ f ） 不能使用关键字对变量进行命名。 C语言的变量必须先声明再使用，包括实参和形参传统C语言关键词  ■ auto">
+<meta name="keywords" content="C语言,笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言笔记——变量">
 <meta property="og:url" content="http://0xpoker.cuit.site/20171125/C语言笔记——变量/index.html">
 <meta property="og:site_name" content="Poker&#39;s Blog">
-<meta property="og:description" content="这是一个很水的博客，大牛们见谅，真的很水很水~~~~">
-<meta property="og:updated_time" content="2017-11-25T09:52:10.052Z">
+<meta property="og:description" content="好不容易开始学C语言了，那就把笔记忘这上面搬过来吧。 易错点 C语言变量名只能是英文字母（A-Z,a-z）和数字（0-9）或者下划线（_）组成。 必须是字母或者下划线开头。 变量名区分大小写（如 F ≠ f ） 不能使用关键字对变量进行命名。 C语言的变量必须先声明再使用，包括实参和形参传统C语言关键词  ■ auto    ■ break   ■ case   ■ char   ■ const">
+<meta property="og:updated_time" content="2017-11-25T14:17:35.702Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言笔记——变量">
-<meta name="twitter:description" content="这是一个很水的博客，大牛们见谅，真的很水很水~~~~">
+<meta name="twitter:description" content="好不容易开始学C语言了，那就把笔记忘这上面搬过来吧。 易错点 C语言变量名只能是英文字母（A-Z,a-z）和数字（0-9）或者下划线（_）组成。 必须是字母或者下划线开头。 变量名区分大小写（如 F ≠ f ） 不能使用关键字对变量进行命名。 C语言的变量必须先声明再使用，包括实参和形参传统C语言关键词  ■ auto    ■ break   ■ case   ■ char   ■ const">
   
     <link rel="alternative" href="/atom.xml" title="Poker&#39;s Blog" type="application/atom+xml">
   
@@ -148,7 +149,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        
+                        <a href="/tags/C语言-笔记/" style="font-size: 10px;">C语言,笔记</a>
                     </div>
                 </section>
                 
@@ -255,6 +256,10 @@
         
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言-笔记/">C语言,笔记</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -262,7 +267,15 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <p><strong>好不容易开始学C语言了，那就把笔记忘这上面搬过来吧。</strong></p>
+<h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><ul>
+<li>C语言变量名只能是英文字母（A-Z,a-z）和数字（0-9）或者下划线（_）组成。</li>
+<li>必须是字母或者下划线开头。</li>
+<li>变量名区分大小写（如 F ≠ f ）</li>
+<li>不能使用关键字对变量进行命名。</li>
+<li>C语言的变量必须先声明再使用，包括实参和形参<h2 id="传统C语言关键词"><a href="#传统C语言关键词" class="headerlink" title="传统C语言关键词"></a>传统C语言关键词</h2>  ■ auto    ■ break   ■ case   ■ char   ■ const   ■ continue<br>  ■ default   ■ do   ■ double   ■ else   ■ enum   ■ extern<br>  ■ float   ■ for   ■ goto   ■ if   ■ int   ■ long   ■ register<br>  ■ return   ■ short  ■ signed  ■ sizeof   ■ static ■ struct<br>  ■ switch   ■ typedef   ■ union   ■ unsigned   ■ void<br>  ■ volatile   ■ while   ■ inline   ■ restrict   ■ _Bool<br>  ■ _Complex   ■ _Imaginary   ■ _Alignas   ■ _Alignof<br>  ■ _Atomic   ■ _Static_assert   ■ _Noreturn<br>  ■ _Thread_local   ■ _Generic<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2>类型|符号|说明<br>-|-|-<br>整数型|int|整型，通常反映了所用机器中整数的最自然长度<br>字符型|char|字符型，占用一个字节默认无符号<br>单精度浮点型|float|（无）<br>双精度浮点型|double|（无）<h2 id="格式化字符串与变量对应转换规则"><a href="#格式化字符串与变量对应转换规则" class="headerlink" title="格式化字符串与变量对应转换规则"></a>格式化字符串与变量对应转换规则</h2>格式码|参数|说明<br>:-:|:-:|:-<br>%c|字符|参数被裁剪为8位字节码并作为字符进行打印<br>%i,%d|数字值|参数作为一个十进制整数打印。如果给出了精度而且值的位数小于精度位数，前面就用0填充<br>%u,%o,%x,%X|数字值|参数作为一个无符号数字值打印，u使用十进制，o使用八进制，x或X使用十六进制，两者的区别是x约定使用abcdef，而X约定使用ABCDEF<br>%e,%E|数字值|参数根据指数形式打印。例如，6.023000e23是使用代码e，6.023000E23是使用代码E。小数点后面的位数由精度字段决定，缺省值是6<br>%f|数字值|参数按照的常规浮点格式打印。精度字段决定小数点后面的位数，缺省值是6<br>%g,%G|数字值|参数以%f或%e（如G则%E）的格式打印，取决于它的值。如果指数大于等于-4但小于精度字段就使用%f格式，否则使用指数格式<br>%s|字符串|打印一个字符串<br>%q|（无）| 打印一个字符串，并将字符串置于一对引号中，如果字符串中包含引号换行等自动添加转义符。如果要读取一个字符串传为代码。为避免用户恶意注入引号等特殊字符，可以使用%q进行格式化<br>%%|（无）|取消%转义打印一个%字符,即用%%表示本来的%<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注： %11.9f中的9表示精确到小数点后9位，以此类推；11表示输出字符串长度为11不够在后面加空格</span><br></pre></td></tr></table></figure></li>
+</ul>
+
       
       
         <div class="page-reward">
@@ -320,7 +333,7 @@
         <p><span>本文标题:</span><a href="/20171125/C语言笔记——变量/">C语言笔记——变量</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Poker 的个人博客">Poker</a></p>
         <p><span>发布时间:</span>2017年11月25日 - 01时52分</p>
-        <p><span>最后更新:</span>2017年11月25日 - 01时52分</p>
+        <p><span>最后更新:</span>2017年11月25日 - 06时17分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/20171125/C语言笔记——变量/" title="C语言笔记——变量">http://0xpoker.cuit.site/20171125/C语言笔记——变量/</a>
             <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171125/C语言笔记——变量/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -349,7 +362,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#易错点"><span class="toc-number">1.</span> <span class="toc-text">易错点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传统C语言关键词"><span class="toc-number">2.</span> <span class="toc-text">传统C语言关键词</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-number">3.</span> <span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#格式化字符串与变量对应转换规则"><span class="toc-number">4.</span> <span class="toc-text">格式化字符串与变量对应转换规则</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
