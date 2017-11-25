@@ -152,7 +152,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/C语言/" style="font-size: 10px;">C语言</a>
+                        <a href="/tags/C语言-笔记/" style="font-size: 10px;">C语言,笔记</a> <a href="/tags/C语言笔记/" style="font-size: 10px;">C语言笔记</a>
                     </div>
                 </section>
                 
@@ -235,6 +235,182 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-C语言笔记——常量与宏定义" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/20171125/C语言笔记——常量与宏定义/" class="article-date">
+      <time datetime="2017-11-25T15:06:54.000Z" itemprop="datePublished">2017-11-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/20171125/C语言笔记——常量与宏定义/">C语言笔记——常量与宏定义</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="特殊要点"><a href="#特殊要点" class="headerlink" title="特殊要点"></a>特殊要点</h2><ul>
+<li>字符串常量在声明的时候编译器会在其后加一个 <strong>/x00</strong> 空字符</li>
+<li>有 <strong>#</strong> 开头的命令都称为预处理命令</li>
+<li>变量代表的一个空间名字可以改变，而常量是一个确定的值，不能被改变</li>
+</ul>
+<h2 id="常量分类"><a href="#常量分类" class="headerlink" title="常量分类"></a>常量分类</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:left">示例或说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">整型常量</td>
+<td style="text-align:left">如：520，1314，123</td>
+</tr>
+<tr>
+<td style="text-align:center">实型常量</td>
+<td style="text-align:left">如：3.14，1.23，8.97</td>
+</tr>
+<tr>
+<td style="text-align:center">字符常量</td>
+<td style="text-align:left">又分为：普通字符，转义字符</td>
+</tr>
+<tr>
+<td style="text-align:center">字符串常量</td>
+<td style="text-align:left">如：“Love”</td>
+</tr>
+<tr>
+<td style="text-align:center">符号常量</td>
+<td style="text-align:left">使用前必须先定义</td>
+</tr>
+</tbody>
+</table>
+<h2 id="如何定义符号常量"><a href="#如何定义符号常量" class="headerlink" title="如何定义符号常量"></a>如何定义符号常量</h2><p><strong>格式：#define [name]</strong></p>
+<h2 id="常量标识符命名规则"><a href="#常量标识符命名规则" class="headerlink" title="常量标识符命名规则"></a>常量标识符命名规则</h2><p><strong>和变量命名基本一致</strong></p>
+<h2 id="备用表——转义字符"><a href="#备用表——转义字符" class="headerlink" title="备用表——转义字符"></a>备用表——转义字符</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">转义字符</th>
+<th style="text-align:center">意义</th>
+<th style="text-align:center">ASCII码值（十进制）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\a</td>
+<td style="text-align:center">响铃</td>
+<td style="text-align:center">007</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">退格</td>
+<td style="text-align:center">008</td>
+</tr>
+<tr>
+<td style="text-align:center">\f</td>
+<td style="text-align:center">换页</td>
+<td style="text-align:center">012</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td style="text-align:center">换行</td>
+<td style="text-align:center">010</td>
+</tr>
+<tr>
+<td style="text-align:center">\r</td>
+<td style="text-align:center">回车</td>
+<td style="text-align:center">013</td>
+</tr>
+<tr>
+<td style="text-align:center">\t</td>
+<td style="text-align:center">水平制表</td>
+<td style="text-align:center">009</td>
+</tr>
+<tr>
+<td style="text-align:center">\v</td>
+<td style="text-align:center">垂直制表</td>
+<td style="text-align:center">011</td>
+</tr>
+<tr>
+<td style="text-align:center">\\</td>
+<td style="text-align:center">代表反斜线字符</td>
+<td style="text-align:center">092</td>
+</tr>
+<tr>
+<td style="text-align:center">\‘</td>
+<td style="text-align:center">代表一个单引号</td>
+<td style="text-align:center">039</td>
+</tr>
+<tr>
+<td style="text-align:center">\“</td>
+<td style="text-align:center">代表一个双引号</td>
+<td style="text-align:center">034</td>
+</tr>
+<tr>
+<td style="text-align:center">\?</td>
+<td style="text-align:center">代表一个问号</td>
+<td style="text-align:center">063</td>
+</tr>
+<tr>
+<td style="text-align:center">\0</td>
+<td style="text-align:center">代表一个空字符</td>
+<td style="text-align:center">000</td>
+</tr>
+<tr>
+<td style="text-align:center">\ooo</td>
+<td style="text-align:center">1到3位八进制数所代表的任意字符</td>
+<td style="text-align:center">三位八进制</td>
+</tr>
+<tr>
+<td style="text-align:center">\xff</td>
+<td style="text-align:center">1到2位十六进制所代表的任意字符</td>
+<td style="text-align:center">两位十六进制</td>
+</tr>
+</tbody>
+</table>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言笔记/">C语言笔记</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-C语言笔记——变量" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -381,7 +557,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言/">C语言</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言-笔记/">C语言,笔记</a></li></ul>
     </div>
 
       
