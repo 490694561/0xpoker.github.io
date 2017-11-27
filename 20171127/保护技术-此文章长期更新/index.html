@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://0xpoker.cuit.site/20171127/保护技术-此文章长期更新/index.html">
 <meta property="og:site_name" content="Poker&#39;s Blog">
 <meta property="og:description" content="NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。参考资料：百度百科—-NX DEP保护DEP保护，全称为 Data Execut">
-<meta property="og:updated_time" content="2017-11-27T09:39:02.552Z">
+<meta property="og:updated_time" content="2017-11-27T09:43:04.426Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="保护技术-此文章长期更新">
 <meta name="twitter:description" content="NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。参考资料：百度百科—-NX DEP保护DEP保护，全称为 Data Execut">
@@ -280,6 +280,9 @@
 <p>这种技术的保护方式和NX方式有相同的地方，也就是让堆和堆栈上的内容不可执行。 <strong>可帮助防止数据页当作代码执行，从而有效分离数据与代码。</strong><br><strong>百度百科上有这样一句话：</strong>  </p>
 <blockquote>
 <p>可以说，溢出是操作系统(应用软件)永远的痛，Windows 7自然也不例外。所谓溢出主要指缓冲区溢出，就是利用系统(应用软件)漏洞从只有Windows和其他程序可以使用的内存位置执行恶意代码从而达到控制系统的目的。如前所述，缓冲区溢出攻击经常在其它程序的内存缓冲区写入可执行的恶意代码，然后诱骗程序执行恶意代码。使用DEP的目的是阻止恶意插入代码的执行，其运行机制是，Windows利用DEP标记只包含数据的内存位置为非可执行(NX)，当应用程序试图从标记为NX的内存位置执行代码时，Windows的DEP逻辑将阻止应用程序这样做，从而达到保护系统防止溢出。  </p>
+</blockquote>
+<p><strong>参考资料：</strong><a href="https://baike.baidu.com/item/DEP/7694630" title="DEP保护技术" target="_blank" rel="noopener">百度百科—-DEP</a></p>
+<blockquote>
 <p>好像这部分还分为硬件实施DEP和软件实施DEP，鉴于我才开始学习，这个坑先留着吧，过些日子理解之后我再来填</p>
 </blockquote>
 
@@ -340,7 +343,7 @@
         <p><span>本文标题:</span><a href="/20171127/保护技术-此文章长期更新/">保护技术-此文章长期更新</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Poker 的个人博客">Poker</a></p>
         <p><span>发布时间:</span>2017年11月27日 - 01时02分</p>
-        <p><span>最后更新:</span>2017年11月27日 - 01时39分</p>
+        <p><span>最后更新:</span>2017年11月27日 - 01时43分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/20171127/保护技术-此文章长期更新/" title="保护技术-此文章长期更新">http://0xpoker.cuit.site/20171127/保护技术-此文章长期更新/</a>
             <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171127/保护技术-此文章长期更新/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
