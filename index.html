@@ -150,7 +150,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/C语言笔记/" style="font-size: 10px;">C语言笔记</a>
+                        <a href="/tags/C语言笔记/" style="font-size: 20px;">C语言笔记</a> <a href="/tags/格式化字符串漏洞/" style="font-size: 10px;">格式化字符串漏洞</a>
                     </div>
                 </section>
                 
@@ -231,6 +231,107 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-格式化字符串漏洞学习笔记-一" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/20171127/格式化字符串漏洞学习笔记-一/" class="article-date">
+      <time datetime="2017-11-27T08:03:40.000Z" itemprop="datePublished">2017-11-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/20171127/格式化字符串漏洞学习笔记-一/">格式化字符串漏洞学习笔记(一)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="格式化字符串漏洞产生原因"><a href="#格式化字符串漏洞产生原因" class="headerlink" title="格式化字符串漏洞产生原因"></a>格式化字符串漏洞产生原因</h2><p><strong>该漏洞的产生主要是因为程序员偷懒</strong><br>格式化字符串漏洞在通用漏洞类型库 <strong>CWE</strong> 中的编号是 <strong>134</strong>，其解释为 <strong>“软件使用了格式化字符串作为参数，且该格式化字符串来自外部输入”</strong>。<br>下面举例说明下什么时候存在这样的漏洞什么时候没有  </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,str);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%s"</span>,str);</span><br></pre></td></tr></table></figure>
+<p>在上述这个程序中就不存在这样的漏洞，也是正常学习者编程的方式，但是接下来这样就会出现漏洞</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,str);</span><br><span class="line"><span class="built_in">printf</span>(str)</span><br></pre></td></tr></table></figure>
+<p>在上面这个程序中如果第一次输入的是如：“love”，那后来输出的一样是love，可是，如果我们输入如：<strong>%2$x</strong>，则输出<strong>偏移2处的16进制数据</strong>，在遇到 <strong>%开头的这类字符时</strong>，printf就会<strong>优先</strong>把他当成格式化字符去读取对应的数据甚至修改对应数据，从而达到利用格式化字符串漏洞的作用效果。  </p>
+<h2 id="基本的格式化字符串参数"><a href="#基本的格式化字符串参数" class="headerlink" title="基本的格式化字符串参数"></a>基本的格式化字符串参数</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">符号</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%c</td>
+<td style="text-align:left">输出字符，配上%n可用于向指定地址写数据。</td>
+</tr>
+<tr>
+<td style="text-align:center">%d</td>
+<td style="text-align:left">输出十进制整数，配上%n可用于向指定地址写数据。</td>
+</tr>
+<tr>
+<td style="text-align:center">%x</td>
+<td style="text-align:left">输出16进制数据，如%i$x表示要泄漏偏移i处4字节长的16进制数据，%i$lx表示要泄漏偏移i处8字节长的16进制数据，32bit和64bit环境下一样。</td>
+</tr>
+<tr>
+<td style="text-align:center">%p</td>
+<td style="text-align:left">输出16进制数据，与%x基本一样，只是附加了前缀0x，在32bit下输出4字节，在64bit下输出8字节，可通过输出字节的长度来判断目标环境是32bit还是64bit。</td>
+</tr>
+<tr>
+<td style="text-align:center">%s</td>
+<td style="text-align:left">输出的内容是字符串，即将偏移处指针指向的字符串输出，如%i$s表示输出偏移i处地址所指向的字符串，在32bit和64bit环境下一样，可用于读取GOT表等信息。</td>
+</tr>
+<tr>
+<td style="text-align:center">%n</td>
+<td style="text-align:left">将%n之前printf已经打印的字符个数赋值给偏移处指针所指向的地址位置，如%100x10$n表示将0x64写入偏移10处保存的指针所指向的地址（4字节），而%$hn表示写入的地址空间为2字节，%$hhn表示写入的地址空间为1字节，%$lln表示写入的地址空间为8字节，在32bit和64bit环境下一样。有时，直接写4字节会导致程序崩溃或等候时间过长，可以通过%$hn或%$hhn来适时调整。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注：<strong>%n</strong>是通过格式化字符串漏洞<strong>改变程序流程</strong>的关键方式，而其他格式化字符串参数可用于读取信息或配合%n写数据。</p>
+</blockquote>
+<h3 id="尾言"><a href="#尾言" class="headerlink" title="尾言"></a>尾言</h3><p>就先介绍这么多吧，本人也是才开始学习，晚上看完一些再继续写下一章吧。  </p>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/格式化字符串漏洞/">格式化字符串漏洞</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-C语言笔记——常量与宏定义" class="article article-type-post" itemscope itemprop="blogPost">
   
