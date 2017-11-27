@@ -5,17 +5,17 @@
   
   <title>格式化字符串漏洞学习笔记(一) | Poker&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="格式化字符串漏洞产生原因该漏洞的产生主要是因为程序员偷懒格式化字符串漏洞在通用漏洞类型库 CWE 中的编号是 134，其解释为 “软件使用了格式化字符串作为参数，且该格式化字符串来自外部输入”。下面举例说明下什么时候存在这样的漏洞什么时候没有   123char str[100];scanf(&quot;%s&quot">
+  <meta name="description" content="格式化字符串漏洞产生原因该漏洞的产生主要是因为程序员偷懒格式化字符串漏洞在通用漏洞类型库 CWE 中的编号是 134，其解释为 “软件使用了格式化字符串作为参数，且该格式化字符串来自外部输入”。下面举例说明下什么时候存在这样的漏洞什么时候没有">
 <meta name="keywords" content="格式化字符串漏洞">
 <meta property="og:type" content="article">
 <meta property="og:title" content="格式化字符串漏洞学习笔记(一)">
 <meta property="og:url" content="http://0xpoker.cuit.site/20171127/格式化字符串漏洞学习笔记-一/index.html">
 <meta property="og:site_name" content="Poker&#39;s Blog">
-<meta property="og:description" content="格式化字符串漏洞产生原因该漏洞的产生主要是因为程序员偷懒格式化字符串漏洞在通用漏洞类型库 CWE 中的编号是 134，其解释为 “软件使用了格式化字符串作为参数，且该格式化字符串来自外部输入”。下面举例说明下什么时候存在这样的漏洞什么时候没有   123char str[100];scanf(&quot;%s&quot;,str);printf(&quot;%s&quot;,str); 在上述这个程序中就不存在这样的漏洞，也是正常学习者">
-<meta property="og:updated_time" content="2017-11-27T08:50:48.472Z">
+<meta property="og:description" content="格式化字符串漏洞产生原因该漏洞的产生主要是因为程序员偷懒格式化字符串漏洞在通用漏洞类型库 CWE 中的编号是 134，其解释为 “软件使用了格式化字符串作为参数，且该格式化字符串来自外部输入”。下面举例说明下什么时候存在这样的漏洞什么时候没有">
+<meta property="og:updated_time" content="2017-11-27T08:58:43.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="格式化字符串漏洞学习笔记(一)">
-<meta name="twitter:description" content="格式化字符串漏洞产生原因该漏洞的产生主要是因为程序员偷懒格式化字符串漏洞在通用漏洞类型库 CWE 中的编号是 134，其解释为 “软件使用了格式化字符串作为参数，且该格式化字符串来自外部输入”。下面举例说明下什么时候存在这样的漏洞什么时候没有   123char str[100];scanf(&quot;%s&quot;,str);printf(&quot;%s&quot;,str); 在上述这个程序中就不存在这样的漏洞，也是正常学习者">
+<meta name="twitter:description" content="格式化字符串漏洞产生原因该漏洞的产生主要是因为程序员偷懒格式化字符串漏洞在通用漏洞类型库 CWE 中的编号是 134，其解释为 “软件使用了格式化字符串作为参数，且该格式化字符串来自外部输入”。下面举例说明下什么时候存在这样的漏洞什么时候没有">
   
     <link rel="alternative" href="/atom.xml" title="Poker&#39;s Blog" type="application/atom+xml">
   
@@ -267,7 +267,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="格式化字符串漏洞产生原因"><a href="#格式化字符串漏洞产生原因" class="headerlink" title="格式化字符串漏洞产生原因"></a>格式化字符串漏洞产生原因</h2><p><strong>该漏洞的产生主要是因为程序员偷懒</strong><br>格式化字符串漏洞在通用漏洞类型库 <strong>CWE</strong> 中的编号是 <strong>134</strong>，其解释为 <strong>“软件使用了格式化字符串作为参数，且该格式化字符串来自外部输入”</strong>。<br>下面举例说明下什么时候存在这样的漏洞什么时候没有  </p>
+        <h2 id="格式化字符串漏洞产生原因"><a href="#格式化字符串漏洞产生原因" class="headerlink" title="格式化字符串漏洞产生原因"></a>格式化字符串漏洞产生原因</h2><p><strong>该漏洞的产生主要是因为程序员偷懒</strong><br>格式化字符串漏洞在通用漏洞类型库 <strong>CWE</strong> 中的编号是 <strong>134</strong>，其解释为 <strong>“软件使用了格式化字符串作为参数，且该格式化字符串来自外部输入”</strong>。<br>下面举例说明下什么时候存在这样的漏洞什么时候没有<br><a id="more"></a></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,str);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%s"</span>,str);</span><br></pre></td></tr></table></figure>
 <p>在上述这个程序中就不存在这样的漏洞，也是正常学习者编程的方式，但是接下来这样就会出现漏洞</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,str);</span><br><span class="line"><span class="built_in">printf</span>(str)</span><br></pre></td></tr></table></figure>
@@ -368,7 +368,7 @@
         <p><span>本文标题:</span><a href="/20171127/格式化字符串漏洞学习笔记-一/">格式化字符串漏洞学习笔记(一)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Poker 的个人博客">Poker</a></p>
         <p><span>发布时间:</span>2017年11月27日 - 00时03分</p>
-        <p><span>最后更新:</span>2017年11月27日 - 00时50分</p>
+        <p><span>最后更新:</span>2017年11月27日 - 00时58分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/20171127/格式化字符串漏洞学习笔记-一/" title="格式化字符串漏洞学习笔记(一)">http://0xpoker.cuit.site/20171127/格式化字符串漏洞学习笔记-一/</a>
             <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171127/格式化字符串漏洞学习笔记-一/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
