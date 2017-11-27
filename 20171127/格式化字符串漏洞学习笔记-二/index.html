@@ -5,18 +5,18 @@
   
   <title>格式化字符串漏洞学习笔记(二) | Poker&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="利用格式化字符串漏洞构建任意读payload该漏洞形如：   scanf(&quot;%s&quot;,&amp;amp;a); printf(&amp;amp;a);  在代码中我们可以直接看到我们可以通过输入格式化字符，来泄露栈上内容，同理，我们先输入某个值，用一长串 %08X.%08X.%08X……..来定位我们">
+  <meta name="description" content="利用格式化字符串漏洞构建任意读payload该漏洞形如：   12scanf(&quot;%s&quot;,&amp;amp;a);printf(&amp;amp;a); 在代码中我们可以直接看到我们可以通过输入格式化字符，来泄露栈上内容，同理，我们先输入某个值，用一长串 %08X.%08X.%08X……..来定位我们">
 <meta name="keywords" content="格式化字符串,漏洞">
 <meta property="og:type" content="article">
 <meta property="og:title" content="格式化字符串漏洞学习笔记(二)">
 <meta property="og:url" content="http://0xpoker.cuit.site/20171127/格式化字符串漏洞学习笔记-二/index.html">
 <meta property="og:site_name" content="Poker&#39;s Blog">
-<meta property="og:description" content="利用格式化字符串漏洞构建任意读payload该漏洞形如：   scanf(&quot;%s&quot;,&amp;amp;a); printf(&amp;amp;a);  在代码中我们可以直接看到我们可以通过输入格式化字符，来泄露栈上内容，同理，我们先输入某个值，用一长串 %08X.%08X.%08X……..来定位我们输入的值是放在哪里的，然后就可以利用 %s 对那个地址所指向的内容进行读取。同时，还有个知识点，那就是不定参数的使用">
+<meta property="og:description" content="利用格式化字符串漏洞构建任意读payload该漏洞形如：   12scanf(&quot;%s&quot;,&amp;amp;a);printf(&amp;amp;a); 在代码中我们可以直接看到我们可以通过输入格式化字符，来泄露栈上内容，同理，我们先输入某个值，用一长串 %08X.%08X.%08X……..来定位我们输入的值是放在哪里的，然后就可以利用 %s 对那个地址所指向的内容进行读取。同时，还有个知识点，那就是不定参数的使用">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2405665-7a4f10104bdb0662.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-11-27T18:34:38.320Z">
+<meta property="og:updated_time" content="2017-11-27T18:39:19.466Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="格式化字符串漏洞学习笔记(二)">
-<meta name="twitter:description" content="利用格式化字符串漏洞构建任意读payload该漏洞形如：   scanf(&quot;%s&quot;,&amp;amp;a); printf(&amp;amp;a);  在代码中我们可以直接看到我们可以通过输入格式化字符，来泄露栈上内容，同理，我们先输入某个值，用一长串 %08X.%08X.%08X……..来定位我们输入的值是放在哪里的，然后就可以利用 %s 对那个地址所指向的内容进行读取。同时，还有个知识点，那就是不定参数的使用">
+<meta name="twitter:description" content="利用格式化字符串漏洞构建任意读payload该漏洞形如：   12scanf(&quot;%s&quot;,&amp;amp;a);printf(&amp;amp;a); 在代码中我们可以直接看到我们可以通过输入格式化字符，来泄露栈上内容，同理，我们先输入某个值，用一长串 %08X.%08X.%08X……..来定位我们输入的值是放在哪里的，然后就可以利用 %s 对那个地址所指向的内容进行读取。同时，还有个知识点，那就是不定参数的使用">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2405665-7a4f10104bdb0662.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="Poker&#39;s Blog" type="application/atom+xml">
@@ -274,20 +274,15 @@
       
           
         <h2 id="利用格式化字符串漏洞构建任意读payload"><a href="#利用格式化字符串漏洞构建任意读payload" class="headerlink" title="利用格式化字符串漏洞构建任意读payload"></a>利用格式化字符串漏洞构建任意读payload</h2><p>该漏洞形如：  </p>
-<pre><code class="C"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;a);
-<span class="built_in">printf</span>(&amp;a);
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;a);</span><br><span class="line"><span class="built_in">printf</span>(&amp;a);</span><br></pre></td></tr></table></figure>
 <p>在代码中我们可以直接看到我们可以通过输入格式化字符，来泄露栈上内容，同理，我们先输入某个值，用一长串 <strong>%08X.%08X.%08X……..</strong><br>来定位我们输入的值是放在哪里的，然后就可以利用 <strong>%s</strong> 对那个地址所指向的内容进行读取。<br>同时，还有个知识点，那就是不定参数的使用，比如： <strong>%10$08X</strong> 意为读取栈上 <strong>相对esp偏移量为10的参数</strong> 同理， <strong>%s、%p、%n</strong> 都可以使用这个方法，用法相似。  </p>
 <blockquote>
 <p><strong>用这个一般是泄漏地址，好像是libc函数库地址吧，这样好像可以推算出libc函数库的版本，然后加以利用。</strong>  </p>
 </blockquote>
 <h2 id="利用格式化字符串漏洞构建任意写payload"><a href="#利用格式化字符串漏洞构建任意写payload" class="headerlink" title="利用格式化字符串漏洞构建任意写payload"></a>利用格式化字符串漏洞构建任意写payload</h2><p>当然这个是建立在上一个知识点的基础上的，要是啥都不知道那不相当于乱写吗。<br><a id="more"></a></p>
-<pre><code class="C"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;a);
-<span class="built_in">printf</span>(&amp;a);
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;a);</span><br><span class="line"><span class="built_in">printf</span>(&amp;a);</span><br></pre></td></tr></table></figure>
 <p>代码格式还是不变吧……<br>printf在我们学习的过程中没有学过 <strong>%n</strong> 这些，而且我查百度百科也看到说现在的编译器一般是 <strong>默认禁掉了%n</strong> 但是这个printf任意写的漏洞依然是值得关注的。<br>而且printf任意写漏洞好像对printf家族都有效。在笔记(一)中有写到 <strong>%n的用法是将之前输出的内容长度写到某个地址上去</strong><br>假设我们先了解到了我们输入的内容是从栈上偏移11开始的，并且通过IDA我们找到了需要修改的相关地址。<br><strong>[这里假设地址为0x0804A02C]</strong><br>那就可以构建出如下payload：  </p>
-<pre><code class="C">\x2c\xa0\x04\x08%<span class="number">11</span>$n
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\x2c\xa0\x04\x08%<span class="number">11</span>$n</span><br></pre></td></tr></table></figure>
 <p>那上面输入的东西是什么意思呢？<br>解释一下，就是最开始 <strong>以字符形式</strong> 输入地址，因为字符可能没法直接打出来所以用的形式就像这样，但是这个字符不是重点，重点是他对应的地址我们知道是放在栈上偏移为11的地方，这时候我们就 <strong>相当于把一个地址存进了栈里</strong>，然后 <strong>%11$n</strong> 就意为 <strong>将之前输出的字符数量存到栈上偏移量为11的那个地址指向的空间里</strong> 。就这样就实现了任意写。  </p>
 <blockquote>
 <p>在写入时还要考虑精简不然输出字符过多服务器连接就自己断开了<br>精简格式：比如我们要加入4个无关的填充字符，我们可以写成aaaa+”……”但是这样写在短的时候无所谓，长了之后，比如上千个，可能就不支持了或者时间太久了。<br>这时候就考虑两个方法，%[数值][c/x]来输出指定长度的字符串最后再利用%n来对指定的地址写入数据<br>同时在写入数据时也有讲究……<br>正如之前说的我们直接改4字节可能需要输出的字符串长度太长了，这时候就需要 <strong>%hn[两字节]、%hhn[一字节]</strong> 来控制写入的长度，与之相关还有 <strong>%lln</strong> 对应8字节，但是这个好像就用的不是很多了。</p>
@@ -306,7 +301,7 @@
         <p><span>本文标题:</span><a href="/20171127/格式化字符串漏洞学习笔记-二/">格式化字符串漏洞学习笔记(二)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Poker 的个人博客">Poker</a></p>
         <p><span>发布时间:</span>2017年11月27日 - 09时23分</p>
-        <p><span>最后更新:</span>2017年11月27日 - 10时34分</p>
+        <p><span>最后更新:</span>2017年11月27日 - 10时39分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/20171127/格式化字符串漏洞学习笔记-二/" title="格式化字符串漏洞学习笔记(二)">http://0xpoker.cuit.site/20171127/格式化字符串漏洞学习笔记-二/</a>
             <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171127/格式化字符串漏洞学习笔记-二/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
