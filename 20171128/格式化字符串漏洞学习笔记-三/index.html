@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>C语言笔记——常量与宏定义 | Poker&#39;s Blog</title>
+  <title>格式化字符串漏洞学习笔记(三) | Poker&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="特殊要点 字符串常量在声明的时候编译器会在其后加一个 /x00 空字符 有 # 开头的命令都称为预处理命令 变量代表的一个空间名字可以改变，而常量是一个确定的值，不能被改变  常量分类   类型 示例或说明     整型常量 如：520，1314，123   实型常量 如：3.14，1.23，8.97   字符常量 又">
-<meta name="keywords" content="C语言,笔记">
+  <meta name="description" content="前言这个部分的相关知识快要完了，不过虽然知识没了，不过用起来却是灵活多变的，主要是用多种攻击手段的组合，来实现攻破的目的。所以，即使这个知识的知识点没了，但是还有其他的知识的，并不是没有需要学习的东西了。    还有一点，我回去又仔细看了下魔术公式，发现其实就是将需要写入的数据分段然后按指定的字节去输入再拼接。    ">
+<meta name="keywords" content="格式化字符串,漏洞">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C语言笔记——常量与宏定义">
-<meta property="og:url" content="http://0xpoker.cuit.site/20171125/C语言笔记——常量与宏定义/index.html">
+<meta property="og:title" content="格式化字符串漏洞学习笔记(三)">
+<meta property="og:url" content="http://0xpoker.cuit.site/20171128/格式化字符串漏洞学习笔记-三/index.html">
 <meta property="og:site_name" content="Poker&#39;s Blog">
-<meta property="og:description" content="特殊要点 字符串常量在声明的时候编译器会在其后加一个 /x00 空字符 有 # 开头的命令都称为预处理命令 变量代表的一个空间名字可以改变，而常量是一个确定的值，不能被改变  常量分类   类型 示例或说明     整型常量 如：520，1314，123   实型常量 如：3.14，1.23，8.97   字符常量 又分为：普通字符，转义字符   字符串常量 如：“Love”   符号常量 使用前">
-<meta property="og:updated_time" content="2017-11-27T09:49:24.597Z">
+<meta property="og:description" content="前言这个部分的相关知识快要完了，不过虽然知识没了，不过用起来却是灵活多变的，主要是用多种攻击手段的组合，来实现攻破的目的。所以，即使这个知识的知识点没了，但是还有其他的知识的，并不是没有需要学习的东西了。    还有一点，我回去又仔细看了下魔术公式，发现其实就是将需要写入的数据分段然后按指定的字节去输入再拼接。    有binary但是格式化字符串不在栈中可能会有点疑问，不在栈上能在哪里呢？在堆上">
+<meta property="og:updated_time" content="2017-11-28T17:55:00.781Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C语言笔记——常量与宏定义">
-<meta name="twitter:description" content="特殊要点 字符串常量在声明的时候编译器会在其后加一个 /x00 空字符 有 # 开头的命令都称为预处理命令 变量代表的一个空间名字可以改变，而常量是一个确定的值，不能被改变  常量分类   类型 示例或说明     整型常量 如：520，1314，123   实型常量 如：3.14，1.23，8.97   字符常量 又分为：普通字符，转义字符   字符串常量 如：“Love”   符号常量 使用前">
+<meta name="twitter:title" content="格式化字符串漏洞学习笔记(三)">
+<meta name="twitter:description" content="前言这个部分的相关知识快要完了，不过虽然知识没了，不过用起来却是灵活多变的，主要是用多种攻击手段的组合，来实现攻破的目的。所以，即使这个知识的知识点没了，但是还有其他的知识的，并不是没有需要学习的东西了。    还有一点，我回去又仔细看了下魔术公式，发现其实就是将需要写入的数据分段然后按指定的字节去输入再拼接。    有binary但是格式化字符串不在栈中可能会有点疑问，不在栈上能在哪里呢？在堆上">
   
     <link rel="alternative" href="/atom.xml" title="Poker&#39;s Blog" type="application/atom+xml">
   
@@ -229,11 +229,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-C语言笔记——常量与宏定义" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-格式化字符串漏洞学习笔记-三" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/20171125/C语言笔记——常量与宏定义/" class="article-date">
-      <time datetime="2017-11-25T15:06:54.000Z" itemprop="datePublished">2017-11-25</time>
+      <a href="/20171128/格式化字符串漏洞学习笔记-三/" class="article-date">
+      <time datetime="2017-11-28T16:07:29.000Z" itemprop="datePublished">2017-11-28</time>
 </a>
     </div>
   
@@ -246,7 +246,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      C语言笔记——常量与宏定义
+      格式化字符串漏洞学习笔记(三)
     </h1>
   
 
@@ -255,13 +255,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C语言笔记/">C语言笔记</a>
+    <a class="article-category-link" href="/categories/漏洞/">漏洞</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言/">C语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记/">笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/格式化字符串/">格式化字符串</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漏洞/">漏洞</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -271,125 +271,23 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="特殊要点"><a href="#特殊要点" class="headerlink" title="特殊要点"></a>特殊要点</h2><ul>
-<li>字符串常量在声明的时候编译器会在其后加一个 <strong>/x00</strong> 空字符</li>
-<li>有 <strong>#</strong> 开头的命令都称为预处理命令</li>
-<li>变量代表的一个空间名字可以改变，而常量是一个确定的值，不能被改变</li>
-</ul>
-<h2 id="常量分类"><a href="#常量分类" class="headerlink" title="常量分类"></a>常量分类</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">类型</th>
-<th style="text-align:left">示例或说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">整型常量</td>
-<td style="text-align:left">如：520，1314，123</td>
-</tr>
-<tr>
-<td style="text-align:center">实型常量</td>
-<td style="text-align:left">如：3.14，1.23，8.97</td>
-</tr>
-<tr>
-<td style="text-align:center">字符常量</td>
-<td style="text-align:left">又分为：普通字符，转义字符</td>
-</tr>
-<tr>
-<td style="text-align:center">字符串常量</td>
-<td style="text-align:left">如：“Love”</td>
-</tr>
-<tr>
-<td style="text-align:center">符号常量</td>
-<td style="text-align:left">使用前必须先定义</td>
-</tr>
-</tbody>
-</table>
-<h2 id="如何定义符号常量"><a href="#如何定义符号常量" class="headerlink" title="如何定义符号常量"></a>如何定义符号常量</h2><p><strong>格式：#define [name]</strong></p>
-<a id="more"></a>
-<h2 id="常量标识符命名规则"><a href="#常量标识符命名规则" class="headerlink" title="常量标识符命名规则"></a>常量标识符命名规则</h2><p><strong>和变量命名基本一致</strong></p>
-<h2 id="备用表——转义字符"><a href="#备用表——转义字符" class="headerlink" title="备用表——转义字符"></a>备用表——转义字符</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">转义字符</th>
-<th style="text-align:center">意义</th>
-<th style="text-align:center">ASCII码值（十进制）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">\a</td>
-<td style="text-align:center">响铃</td>
-<td style="text-align:center">007</td>
-</tr>
-<tr>
-<td style="text-align:center">\b</td>
-<td style="text-align:center">退格</td>
-<td style="text-align:center">008</td>
-</tr>
-<tr>
-<td style="text-align:center">\f</td>
-<td style="text-align:center">换页</td>
-<td style="text-align:center">012</td>
-</tr>
-<tr>
-<td style="text-align:center">\n</td>
-<td style="text-align:center">换行</td>
-<td style="text-align:center">010</td>
-</tr>
-<tr>
-<td style="text-align:center">\r</td>
-<td style="text-align:center">回车</td>
-<td style="text-align:center">013</td>
-</tr>
-<tr>
-<td style="text-align:center">\t</td>
-<td style="text-align:center">水平制表</td>
-<td style="text-align:center">009</td>
-</tr>
-<tr>
-<td style="text-align:center">\v</td>
-<td style="text-align:center">垂直制表</td>
-<td style="text-align:center">011</td>
-</tr>
-<tr>
-<td style="text-align:center">\\</td>
-<td style="text-align:center">代表反斜线字符</td>
-<td style="text-align:center">092</td>
-</tr>
-<tr>
-<td style="text-align:center">\‘</td>
-<td style="text-align:center">代表一个单引号</td>
-<td style="text-align:center">039</td>
-</tr>
-<tr>
-<td style="text-align:center">\“</td>
-<td style="text-align:center">代表一个双引号</td>
-<td style="text-align:center">034</td>
-</tr>
-<tr>
-<td style="text-align:center">\?</td>
-<td style="text-align:center">代表一个问号</td>
-<td style="text-align:center">063</td>
-</tr>
-<tr>
-<td style="text-align:center">\0</td>
-<td style="text-align:center">代表一个空字符</td>
-<td style="text-align:center">000</td>
-</tr>
-<tr>
-<td style="text-align:center">\ooo</td>
-<td style="text-align:center">1到3位八进制数所代表的任意字符</td>
-<td style="text-align:center">三位八进制</td>
-</tr>
-<tr>
-<td style="text-align:center">\xff</td>
-<td style="text-align:center">1到2位十六进制所代表的任意字符</td>
-<td style="text-align:center">两位十六进制</td>
-</tr>
-</tbody>
-</table>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这个部分的相关知识快要完了，不过虽然知识没了，不过用起来却是灵活多变的，主要是用多种攻击手段的组合，来实现攻破的目的。所以，即使这个知识的知识点没了，但是还有其他的知识的，并不是没有需要学习的东西了。  </p>
+<blockquote>
+<p>还有一点，我回去又仔细看了下魔术公式，发现其实就是将需要写入的数据分段然后按指定的字节去输入再拼接。  </p>
+</blockquote>
+<h2 id="有binary但是格式化字符串不在栈中"><a href="#有binary但是格式化字符串不在栈中" class="headerlink" title="有binary但是格式化字符串不在栈中"></a>有binary但是格式化字符串不在栈中</h2><p>可能会有点疑问，不在栈上能在哪里呢？<br><strong>在堆上</strong>  </p>
+<h3 id="什么是堆，什么是栈？"><a href="#什么是堆，什么是栈？" class="headerlink" title="什么是堆，什么是栈？"></a>什么是堆，什么是栈？</h3><p>堆栈是两种数据结构，两者都是一种数据项按序排列的数据结构。<br><strong>主要特点：堆，队列优先,先进先出（FIFO—first in first out）。栈，先进后出(FILO—First-In/Last-Out)。</strong><br><strong>参考资料：</strong><a href="https://baike.baidu.com/item/堆栈/1682032" title="堆栈介绍" target="_blank" rel="noopener">百度百科—-堆栈</a><br><a id="more"></a></p>
+<h3 id="那具体该如何操作呢？"><a href="#那具体该如何操作呢？" class="headerlink" title="那具体该如何操作呢？"></a>那具体该如何操作呢？</h3><p>首先使用检查的插件对程序进行保护检测，用以确定该程序开启了什么防护<br>然后使用 <strong>%08x….</strong> 这类的格式化字符泄漏栈上内容大概确定一个栈的结构为什么样的。在确定这一块的栈大致分布着什么和分布在什么位置之后再进行下一步操作。<br>如果是那种开启了 <strong>NX</strong> 保护的程序，那我们就没法通过 <strong>直接写shellcode然后返回地址指向shellcode并执行shellcode</strong> 这种方法来攻击了。<br>这时候我们期待找到一个现成的 <strong>system(“/bin/sh”)</strong> 的地址，然后直接用return的地址指向他来获得shell，可这是理想化的，很多时候这种方法行不通。这时候就得引入一个东西名叫libc函数库。  </p>
+<h4 id="什么是libc函数库？"><a href="#什么是libc函数库？" class="headerlink" title="什么是libc函数库？"></a>什么是libc函数库？</h4><p>libc是linux下C的标准函数库，它包含了C语言最基本的库函数。<br>libc函数库拥有不同的版本，每个版本有它 <strong>独特的特性</strong> ，我们也可以借助此特性找出他的版本。<strong>不同版本的libc里函数的偏移不同。</strong>  </p>
+<h4 id="用什么来查询libc的版本呢？"><a href="#用什么来查询libc的版本呢？" class="headerlink" title="用什么来查询libc的版本呢？"></a>用什么来查询libc的版本呢？</h4><p>首先是泄露出libc相关的参数然后参考下面的操作。  </p>
+<blockquote>
+<p><strong>niklasb</strong> 的 <strong>libc-database</strong> 可以根据main函数返回<strong>libc_start_main函数的 <strong>返回地址的后12bit</strong> 来确定libc版本，需要下载这个软件并运行get文件来获得最新的libc-symbol库。libc-database的原理就是遍历db文件夹下所有libc文件的symbol并比对最后12bit来确定libc版本。除了所有libc库函数的调用地址外，还特别加入了</strong>libc_start_main_ret和“/bin/sh”字符串地址。当然，好像方法不止这一种，大家可以自行百度谷歌看看其他的方法。  </p>
+</blockquote>
+<p>在知道这些东西以后我们可以通过直接使用 <strong>现成的“/bin/sh”</strong> 或者<strong>自己构建</strong> 。<br>通常自己构建的话，形如：  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload = %<span class="number">11</span>$x+p32(system)+‘AAAA’+p32(binsh)</span><br></pre></td></tr></table></figure>
+<p>解释下上面都是些什么意思吧，<br>先打印出偏移为11的栈存的值，然后是system的地址，<br>上述 <strong>++AAAA++</strong> 部分原本应该存放的是system函数的返回地址，可是我们做大部分题的时候调用完成之后不需要返回了，所以这里就自定义了4个字节。<br>最后是 <strong>/bin/sh</strong> 字符串，这里满足 <strong>call传参调用规则</strong> [先push然后进入call的时候往栈上放返回地址]<br>然后返回的时候会清理栈帧，这时候利用这一点，<strong>++(之前说过数据被存储在堆上)++</strong> 然后将栈上ebp的值覆盖为堆上相关的地址，这样一来，原本会执行如下这样的代码：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov esp,ebp</span><br><span class="line">pop ebp</span><br></pre></td></tr></table></figure>
+<p>现在执行之后，esp就会指向堆上的内容，这样就实现了堆栈互换，然后再操作堆和栈就基本一致了。<br>感觉头有点晕，什么地方写得不对的，改天再来改改吧，先去睡觉了！</p>
 
       
       
@@ -399,13 +297,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/20171125/C语言笔记——常量与宏定义/">C语言笔记——常量与宏定义</a></p>
+        <p><span>本文标题:</span><a href="/20171128/格式化字符串漏洞学习笔记-三/">格式化字符串漏洞学习笔记(三)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Poker 的个人博客">Poker</a></p>
-        <p><span>发布时间:</span>2017年11月25日 - 07时06分</p>
-        <p><span>最后更新:</span>2017年11月27日 - 01时49分</p>
+        <p><span>发布时间:</span>2017年11月28日 - 08时07分</p>
+        <p><span>最后更新:</span>2017年11月28日 - 09时55分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/20171125/C语言笔记——常量与宏定义/" title="C语言笔记——常量与宏定义">http://0xpoker.cuit.site/20171125/C语言笔记——常量与宏定义/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171125/C语言笔记——常量与宏定义/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/20171128/格式化字符串漏洞学习笔记-三/" title="格式化字符串漏洞学习笔记(三)">http://0xpoker.cuit.site/20171128/格式化字符串漏洞学习笔记-三/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171128/格式化字符串漏洞学习笔记-三/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -418,18 +316,9 @@
 
 <nav id="article-nav">
   
-    <a href="/20171127/格式化字符串漏洞学习笔记-一/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          格式化字符串漏洞学习笔记(一)
-        
-      </div>
-    </a>
   
-  
-    <a href="/20171125/C语言笔记——变量/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">C语言笔记——变量</div>
+    <a href="/20171127/格式化字符串漏洞学习笔记-二/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">格式化字符串漏洞学习笔记(二)</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -440,7 +329,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#特殊要点"><span class="toc-number">1.</span> <span class="toc-text">特殊要点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常量分类"><span class="toc-number">2.</span> <span class="toc-text">常量分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何定义符号常量"><span class="toc-number">3.</span> <span class="toc-text">如何定义符号常量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常量标识符命名规则"><span class="toc-number">4.</span> <span class="toc-text">常量标识符命名规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#备用表——转义字符"><span class="toc-number">5.</span> <span class="toc-text">备用表——转义字符</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有binary但是格式化字符串不在栈中"><span class="toc-number">2.</span> <span class="toc-text">有binary但是格式化字符串不在栈中</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是堆，什么是栈？"><span class="toc-number">2.1.</span> <span class="toc-text">什么是堆，什么是栈？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#那具体该如何操作呢？"><span class="toc-number">2.2.</span> <span class="toc-text">那具体该如何操作呢？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是libc函数库？"><span class="toc-number">2.2.1.</span> <span class="toc-text">什么是libc函数库？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用什么来查询libc的版本呢？"><span class="toc-number">2.2.2.</span> <span class="toc-text">用什么来查询libc的版本呢？</span></a></li></ol></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -491,13 +380,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/20171127/格式化字符串漏洞学习笔记-一/" title="上一篇: 格式化字符串漏洞学习笔记(一)">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/20171125/C语言笔记——变量/" title="下一篇: C语言笔记——变量">
+            <a href="/20171127/格式化字符串漏洞学习笔记-二/" title="下一篇: 格式化字符串漏洞学习笔记(二)">
                 <i class="fa fa-angle-right"></i>
             </a>
         

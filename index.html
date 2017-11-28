@@ -150,7 +150,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/C语言/" style="font-size: 20px;">C语言</a> <a href="/tags/格式化字符串/" style="font-size: 20px;">格式化字符串</a> <a href="/tags/漏洞/" style="font-size: 20px;">漏洞</a> <a href="/tags/漏洞防护/" style="font-size: 10px;">漏洞防护</a> <a href="/tags/笔记/" style="font-size: 20px;">笔记</a>
+                        <a href="/tags/C语言/" style="font-size: 15px;">C语言</a> <a href="/tags/格式化字符串/" style="font-size: 20px;">格式化字符串</a> <a href="/tags/漏洞/" style="font-size: 20px;">漏洞</a> <a href="/tags/漏洞防护/" style="font-size: 10px;">漏洞防护</a> <a href="/tags/笔记/" style="font-size: 15px;">笔记</a>
                     </div>
                 </section>
                 
@@ -231,6 +231,78 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-格式化字符串漏洞学习笔记-三" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/20171128/格式化字符串漏洞学习笔记-三/" class="article-date">
+      <time datetime="2017-11-28T16:07:29.000Z" itemprop="datePublished">2017-11-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/20171128/格式化字符串漏洞学习笔记-三/">格式化字符串漏洞学习笔记(三)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这个部分的相关知识快要完了，不过虽然知识没了，不过用起来却是灵活多变的，主要是用多种攻击手段的组合，来实现攻破的目的。所以，即使这个知识的知识点没了，但是还有其他的知识的，并不是没有需要学习的东西了。  </p>
+<blockquote>
+<p>还有一点，我回去又仔细看了下魔术公式，发现其实就是将需要写入的数据分段然后按指定的字节去输入再拼接。  </p>
+</blockquote>
+<h2 id="有binary但是格式化字符串不在栈中"><a href="#有binary但是格式化字符串不在栈中" class="headerlink" title="有binary但是格式化字符串不在栈中"></a>有binary但是格式化字符串不在栈中</h2><p>可能会有点疑问，不在栈上能在哪里呢？<br><strong>在堆上</strong>  </p>
+<h3 id="什么是堆，什么是栈？"><a href="#什么是堆，什么是栈？" class="headerlink" title="什么是堆，什么是栈？"></a>什么是堆，什么是栈？</h3><p>堆栈是两种数据结构，两者都是一种数据项按序排列的数据结构。<br><strong>主要特点：堆，队列优先,先进先出（FIFO—first in first out）。栈，先进后出(FILO—First-In/Last-Out)。</strong><br><strong>参考资料：</strong><a href="https://baike.baidu.com/item/堆栈/1682032" title="堆栈介绍" target="_blank" rel="noopener">百度百科—-堆栈</a><br>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/漏洞/">漏洞</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/格式化字符串/">格式化字符串</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漏洞/">漏洞</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/20171128/格式化字符串漏洞学习笔记-三/#more">For more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-格式化字符串漏洞学习笔记-二" class="article article-type-post" itemscope itemprop="blogPost">
   
