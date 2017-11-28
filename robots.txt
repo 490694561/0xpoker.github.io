@@ -1,0 +1,11 @@
+# hexo robots.txt
+User-agent: *
+
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /fancybox/
+
+Sitemap: http://0xpoker.cuit.site/sitemap.xml
+Sitemap: http://0xpoker.cuit.site/baidusitemap.xml
