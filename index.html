@@ -260,8 +260,10 @@
       
           
               <h2 id="利用格式化字符串漏洞构建任意读payload"><a href="#利用格式化字符串漏洞构建任意读payload" class="headerlink" title="利用格式化字符串漏洞构建任意读payload"></a>利用格式化字符串漏洞构建任意读payload</h2><p>该漏洞形如：  </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;a);</span><br><span class="line"><span class="built_in">printf</span>(&amp;a);</span><br></pre></td></tr></table></figure>
-<p>在代码中我们可以直接看到我们可以通过输入格式化字符，来泄露栈上内容，同理，我们先输入某个值，用一长串 <strong>%08X.%08X.%08X……..</strong><br>来定位我们输入的值是放在哪里的，然后就可以利用 <strong>%s</strong> 对那个地址所指向的内容进行读取。<br>同时，还有个知识点，那就是不定参数的使用，比如： <strong>%10$08X</strong> 意为读取栈上 <strong>相对esp偏移量为10的参数</strong> 同理， <strong>%s、%p、%n</strong> 都可以使用这个方法，用法相似。  </p>
+<pre><code class="C"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;a);
+<span class="built_in">printf</span>(&amp;a);
+</code></pre>
+<p>在代码中我们可以直接看到我们可以通过输入格式化字符，来泄露栈上内容，同理，我们先输入某个值，用一长串 <strong>%08X.%08X.%08X……..</strong><br>来定位我们输入的值是放在哪里的，然后就可以利用 <strong>%s</strong> 对那个地址所指向的内容进行读取。<br>同时，还有个知识点，那就是不定参数的使用，比如： <strong>%10$08X</strong> 意为读取栈上 <strong>相对esp偏移量为10的参数 [形如%08X这样的默认是读偏移为1的参数]</strong> 同理， <strong>%s、%p、%n</strong> 都可以使用这个方法，用法相似。<br>挂一张与之相关的图吧，方便理解<br><img src="http://p9.qhimg.com/dr/__50/t0163bde2c444318577.png" alt="栈结构" title="栈的结构">  </p>
 <blockquote>
 <p><strong>用这个一般是泄漏地址，好像是libc函数库地址吧，这样好像可以推算出libc函数库的版本，然后加以利用。</strong>  </p>
 </blockquote>
