@@ -12,13 +12,13 @@
 <meta property="og:url" content="http://0xpoker.cuit.site/20171127/保护技术-此文章长期更新/index.html">
 <meta property="og:site_name" content="Poker&#39;s Blog">
 <meta property="og:description" content="NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。参考资料：百度百科—-NX DEP保护DEP保护，全称为 Data Execut">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/1106510/201702/1106510-20170220163059163-1378285006.png">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/1106510/201702/1106510-20170220163116960-874670099.png">
-<meta property="og:updated_time" content="2017-11-28T07:04:19.143Z">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0060lm7Tly1fly8rbuqe5j30fh08jwev.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0060lm7Tly1fly8td94gdj30fh08pdg9.jpg">
+<meta property="og:updated_time" content="2017-11-28T16:02:12.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="保护技术-此文章长期更新">
 <meta name="twitter:description" content="NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。参考资料：百度百科—-NX DEP保护DEP保护，全称为 Data Execut">
-<meta name="twitter:image" content="http://images2015.cnblogs.com/blog/1106510/201702/1106510-20170220163059163-1378285006.png">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/0060lm7Tly1fly8rbuqe5j30fh08jwev.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Poker&#39;s Blog" type="application/atom+xml">
   
@@ -292,7 +292,7 @@
 <blockquote>
 <p>好像这部分还分为硬件实施DEP和软件实施DEP，鉴于我才开始学习，这个坑先留着吧，过些日子理解之后我再来填</p>
 </blockquote>
-<h2 id="Linux-Canary保护"><a href="#Linux-Canary保护" class="headerlink" title="Linux Canary保护"></a>Linux Canary保护</h2><p><strong>Canary</strong> ，又名 <strong>金丝雀</strong> ，是一个防止溢出修改ret的措施， <strong>Canary</strong> 是Linux众多安全保护机制中的一种，主要用于 <strong>防护栈溢出攻击</strong> 。我们知道，在32位系统上，对于栈溢出漏洞，攻击者通常是通过 <strong>溢出栈缓冲区</strong> ， <strong>覆盖栈上保存的函数返回地址</strong> 来达到 <strong>劫持程序执行流</strong> 的目的：<br><img src="http://images2015.cnblogs.com/blog/1106510/201702/1106510-20170220163059163-1378285006.png" alt="溢出栈缓冲区" title="劫持方式"><br>如上图所示我们只要能够精确计算出需要覆盖的长度是多少，就能精确覆盖ret的地址，达到攻击效果。<br>然而，针对此种攻击情况，如果在函数返回之前，我们能够判断ret地址是否被改写，若被改写则终止程序的执行，便可以有效地应对攻击。如何做到呢？一个很自然的想法是在刚进入函数时，在栈上放置一个标志，在函数结束时，<strong>判断该标志是否被改变</strong>，如果被改变，则表示有攻击行为发生。 <strong>Linux Canary保护机制</strong> 便是如此，如下：<br><img src="http://images2015.cnblogs.com/blog/1106510/201702/1106510-20170220163116960-874670099.png" alt="Canary保护机制" title="Canary保护机制"><br>攻击者如果要通过栈溢出覆盖ret，则必先覆盖Canary。如果我们能判断Canary前后是否一致，便能够判断是否有攻击行为发生。  </p>
+<h2 id="Linux-Canary保护"><a href="#Linux-Canary保护" class="headerlink" title="Linux Canary保护"></a>Linux Canary保护</h2><p><strong>Canary</strong> ，又名 <strong>金丝雀</strong> ，是一个防止溢出修改ret的措施， <strong>Canary</strong> 是Linux众多安全保护机制中的一种，主要用于 <strong>防护栈溢出攻击</strong> 。我们知道，在32位系统上，对于栈溢出漏洞，攻击者通常是通过 <strong>溢出栈缓冲区</strong> ， <strong>覆盖栈上保存的函数返回地址</strong> 来达到 <strong>劫持程序执行流</strong> 的目的：<br><img src="http://ww4.sinaimg.cn/large/0060lm7Tly1fly8rbuqe5j30fh08jwev.jpg" alt="溢出栈缓冲区" title="劫持方式"><br>如上图所示我们只要能够精确计算出需要覆盖的长度是多少，就能精确覆盖ret的地址，达到攻击效果。<br>然而，针对此种攻击情况，如果在函数返回之前，我们能够判断ret地址是否被改写，若被改写则终止程序的执行，便可以有效地应对攻击。如何做到呢？一个很自然的想法是在刚进入函数时，在栈上放置一个标志，在函数结束时，<strong>判断该标志是否被改变</strong>，如果被改变，则表示有攻击行为发生。 <strong>Linux Canary保护机制</strong> 便是如此，如下：<br><img src="http://ww2.sinaimg.cn/large/0060lm7Tly1fly8td94gdj30fh08pdg9.jpg" alt="Canary保护机制" title="Canary保护机制"><br>攻击者如果要通过栈溢出覆盖ret，则必先覆盖Canary。如果我们能判断Canary前后是否一致，便能够判断是否有攻击行为发生。  </p>
 <blockquote>
 <p><strong>注：上述图例仅用于说明，实际上canary并不一定是与栈上保存的BP地址相邻的。</strong><br><strong>参考资料：</strong><a href="https://www.cnblogs.com/gsharpsh00ter/p/6420233.html" title="Canary绕过之__stack_chk_fail劫持" target="_blank" rel="noopener">0ctf2015 flagen - Canary绕过之__stack_chk_fail劫持</a>  </p>
 </blockquote>
@@ -308,7 +308,7 @@
         <p><span>本文标题:</span><a href="/20171127/保护技术-此文章长期更新/">保护技术-此文章长期更新</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Poker 的个人博客">Poker</a></p>
         <p><span>发布时间:</span>2017年11月27日 - 01时02分</p>
-        <p><span>最后更新:</span>2017年11月27日 - 23时04分</p>
+        <p><span>最后更新:</span>2017年11月28日 - 08时02分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/20171127/保护技术-此文章长期更新/" title="保护技术-此文章长期更新">http://0xpoker.cuit.site/20171127/保护技术-此文章长期更新/</a>
             <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171127/保护技术-此文章长期更新/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
