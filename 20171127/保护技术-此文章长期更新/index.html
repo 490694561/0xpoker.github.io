@@ -5,19 +5,19 @@
   
   <title>保护技术-此文章长期更新 | Poker&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。">
+  <meta name="description" content="NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执">
 <meta name="keywords" content="漏洞防护">
 <meta property="og:type" content="article">
 <meta property="og:title" content="保护技术-此文章长期更新">
 <meta property="og:url" content="http://0xpoker.cuit.site/20171127/保护技术-此文章长期更新/index.html">
 <meta property="og:site_name" content="Poker&#39;s Blog">
-<meta property="og:description" content="NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。参考资料：百度百科—-NX DEP保护DEP保护，全称为 Data Execut">
+<meta property="og:description" content="NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。参考资料：百度百科—-NX DEP保护DEP保护，全称为 Data Exec">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/0060lm7Tly1fly8rbuqe5j30fh08jwev.jpg">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/0060lm7Tly1fly8td94gdj30fh08pdg9.jpg">
-<meta property="og:updated_time" content="2017-11-28T16:02:12.174Z">
+<meta property="og:updated_time" content="2017-11-29T18:09:18.993Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="保护技术-此文章长期更新">
-<meta name="twitter:description" content="NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。参考资料：百度百科—-NX DEP保护DEP保护，全称为 Data Execut">
+<meta name="twitter:description" content="NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。参考资料：百度百科—-NX DEP保护DEP保护，全称为 Data Exec">
 <meta name="twitter:image" content="http://ww4.sinaimg.cn/large/0060lm7Tly1fly8rbuqe5j30fh08jwev.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Poker&#39;s Blog" type="application/atom+xml">
@@ -274,7 +274,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="NX保护和DEP保护"><a href="#NX保护和DEP保护" class="headerlink" title="NX保护和DEP保护"></a>NX保护和DEP保护</h2><p>两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了执行权限  </p>
+        <h2 id="NX保护和DEP保护"><a href="#NX保护和DEP保护" class="headerlink" title="NX保护和DEP保护"></a>NX保护和DEP保护</h2><p>两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限  </p>
 <h3 id="NX保护"><a href="#NX保护" class="headerlink" title="NX保护"></a>NX保护</h3><p>NX保护，全称为 <strong>“No eXecute”</strong> ，意为 <strong>[禁止执行]</strong><br>我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。<br><strong>参考资料：</strong><a href="https://baike.baidu.com/item/NX/18775031" title="NX保护技术" target="_blank" rel="noopener">百度百科—-NX</a></p>
 <h3 id="DEP保护"><a href="#DEP保护" class="headerlink" title="DEP保护"></a>DEP保护</h3><p>DEP保护，全称为 <strong>Data Execution Prevention</strong> ，意为 <strong>数据执行保护</strong>  </p>
 <blockquote>
@@ -296,6 +296,18 @@
 <blockquote>
 <p><strong>注：上述图例仅用于说明，实际上canary并不一定是与栈上保存的BP地址相邻的。</strong><br><strong>参考资料：</strong><a href="https://www.cnblogs.com/gsharpsh00ter/p/6420233.html" title="Canary绕过之__stack_chk_fail劫持" target="_blank" rel="noopener">0ctf2015 flagen - Canary绕过之__stack_chk_fail劫持</a>  </p>
 </blockquote>
+<h2 id="ASLR地址空间布局随机化"><a href="#ASLR地址空间布局随机化" class="headerlink" title="ASLR地址空间布局随机化"></a>ASLR地址空间布局随机化</h2><p><strong>ASLR</strong> ，全称为 <strong>Address space layout randomization</strong><br>顾名思义，这个保护措施的主要内容就是把地址给随机化了，用以增加攻击者对地址预测的难度，防止攻击者直接定位攻击代码位置，达到阻止溢出攻击的目的的一种技术。  </p>
+<blockquote>
+<p>但是在百度百科上也说了这个措施只是能降低缓冲区溢出攻击的成功率，并不是能完全防止溢出。  </p>
+</blockquote>
+<p>关于这个，多的我也说不上来，给几个文章的地址吧。<br><strong>参考资料：</strong><br><a href="http://blog.csdn.net/yygydjkthh/article/details/41794395" title="ASLR地址随机化" target="_blank" rel="noopener">ASLR(Address space layout randomization)地址空间布局随机化</a><br><a href="https://baike.baidu.com/item/aslr/5779647" title="百度百科--ASLR" target="_blank" rel="noopener">百度百科—-ASLR</a>  </p>
+<h2 id="PIE"><a href="#PIE" class="headerlink" title="PIE"></a>PIE</h2><p><strong>PIE</strong> ，全称为 <strong>position-independent executables</strong><br>一般情况下NX和地址空间分布随机化会同时工作。在linux下内存空间随机化被称作PIE。</p>
+<p>内存地址随机化机制，有以下三种情况：<br>参数|意义<br>:-:|:-<br>0|表示关闭进程地址空间随机化。<br>1|表示将mmap的基址，stack和vdso页面随机化。<br>2|表示在1的基础上增加栈（heap）的随机化。</p>
+<blockquote>
+<p>可以防范基于Ret2libc方式的针对DEP的攻击。ASLR和DEP配合使用，能有效阻止攻击者在堆栈上运行恶意代码。<br><strong>Built as PIE：位置独立的可执行区域（position-independent executables）。这样使得在利用缓冲溢出和移动操作系统中存在的其他内存崩溃缺陷时采用面向返回的编程（return-oriented programming）方法变得难得多。</strong>  </p>
+</blockquote>
+<h2 id="FORTIFY"><a href="#FORTIFY" class="headerlink" title="FORTIFY"></a>FORTIFY</h2><p>这个好像是编译器的保护措施，将函数名改变了，从而达到防止缓冲区溢出的作用。具体的坑emmm等我以后学会了些再来填吧。  </p>
+<p>系统防护（全）：<br><a href="http://www.mamicode.com/info-detail-1990426.html" title="二进制的保护机制" target="_blank" rel="noopener">二进制的保护机制</a><br><a href="http://blog.csdn.net/x_nirvana/article/details/61420056" title="保护机制" target="_blank" rel="noopener">WINDOWS和LINUX的内存防护机制</a>  </p>
 
       
       
@@ -308,7 +320,7 @@
         <p><span>本文标题:</span><a href="/20171127/保护技术-此文章长期更新/">保护技术-此文章长期更新</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Poker 的个人博客">Poker</a></p>
         <p><span>发布时间:</span>2017年11月27日 - 01时02分</p>
-        <p><span>最后更新:</span>2017年11月28日 - 08时02分</p>
+        <p><span>最后更新:</span>2017年11月29日 - 10时09分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/20171127/保护技术-此文章长期更新/" title="保护技术-此文章长期更新">http://0xpoker.cuit.site/20171127/保护技术-此文章长期更新/</a>
             <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171127/保护技术-此文章长期更新/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -346,7 +358,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NX保护和DEP保护"><span class="toc-number">1.</span> <span class="toc-text">NX保护和DEP保护</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NX保护"><span class="toc-number">1.1.</span> <span class="toc-text">NX保护</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DEP保护"><span class="toc-number">1.2.</span> <span class="toc-text">DEP保护</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#主要优点"><span class="toc-number">1.2.1.</span> <span class="toc-text">主要优点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-Canary保护"><span class="toc-number">2.</span> <span class="toc-text">Linux Canary保护</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NX保护和DEP保护"><span class="toc-number">1.</span> <span class="toc-text">NX保护和DEP保护</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NX保护"><span class="toc-number">1.1.</span> <span class="toc-text">NX保护</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DEP保护"><span class="toc-number">1.2.</span> <span class="toc-text">DEP保护</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#主要优点"><span class="toc-number">1.2.1.</span> <span class="toc-text">主要优点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-Canary保护"><span class="toc-number">2.</span> <span class="toc-text">Linux Canary保护</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ASLR地址空间布局随机化"><span class="toc-number">3.</span> <span class="toc-text">ASLR地址空间布局随机化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PIE"><span class="toc-number">4.</span> <span class="toc-text">PIE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FORTIFY"><span class="toc-number">5.</span> <span class="toc-text">FORTIFY</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
