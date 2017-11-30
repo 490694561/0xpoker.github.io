@@ -14,7 +14,7 @@
 <meta property="og:description" content="NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。参考资料：百度百科—-NX DEP保护DEP保护，全称为 Data Exec">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/0060lm7Tly1fly8rbuqe5j30fh08jwev.jpg">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/0060lm7Tly1fly8td94gdj30fh08pdg9.jpg">
-<meta property="og:updated_time" content="2017-11-30T05:19:16.072Z">
+<meta property="og:updated_time" content="2017-11-30T05:21:29.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="保护技术-此文章长期更新">
 <meta name="twitter:description" content="NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。参考资料：百度百科—-NX DEP保护DEP保护，全称为 Data Exec">
@@ -302,7 +302,29 @@
 </blockquote>
 <p>关于这个，多的我也说不上来，给几个文章的地址吧。<br><strong>参考资料：</strong><br><a href="http://blog.csdn.net/yygydjkthh/article/details/41794395" title="ASLR地址随机化" target="_blank" rel="noopener">ASLR(Address space layout randomization)地址空间布局随机化</a><br><a href="https://baike.baidu.com/item/aslr/5779647" title="百度百科--ASLR" target="_blank" rel="noopener">百度百科—-ASLR</a>  </p>
 <h2 id="PIE"><a href="#PIE" class="headerlink" title="PIE"></a>PIE</h2><p><strong>PIE</strong> ，全称为 <strong>position-independent executables</strong><br>一般情况下NX和地址空间分布随机化会同时工作。在linux下内存空间随机化被称作PIE。</p>
-<p>内存地址随机化机制，有以下三种情况：<br>|参数|意义|<br>|:-:|:-|<br>|0|表示关闭进程地址空间随机化|<br>|1|表示将mmap的基址，stack和vdso页面随机化|<br>|2|表示在1的基础上增加栈（heap）的随机化|</p>
+<p>内存地址随机化机制，有以下三种情况：  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:left">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:left">表示关闭进程地址空间随机化</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:left">表示将mmap的基址，stack和vdso页面随机化</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:left">表示在1的基础上增加栈（heap）的随机化</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
 <p>可以防范基于Ret2libc方式的针对DEP的攻击。ASLR和DEP配合使用，能有效阻止攻击者在堆栈上运行恶意代码。<br><strong>Built as PIE：位置独立的可执行区域（position-independent executables）。这样使得在利用缓冲溢出和移动操作系统中存在的其他内存崩溃缺陷时采用面向返回的编程（return-oriented programming）方法变得难得多。</strong>  </p>
 </blockquote>
@@ -320,7 +342,7 @@
         <p><span>本文标题:</span><a href="/20171127/保护技术-此文章长期更新/">保护技术-此文章长期更新</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Poker 的个人博客">Poker</a></p>
         <p><span>发布时间:</span>2017年11月27日 - 01时02分</p>
-        <p><span>最后更新:</span>2017年11月29日 - 21时19分</p>
+        <p><span>最后更新:</span>2017年11月29日 - 21时21分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/20171127/保护技术-此文章长期更新/" title="保护技术-此文章长期更新">http://0xpoker.cuit.site/20171127/保护技术-此文章长期更新/</a>
             <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171127/保护技术-此文章长期更新/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
