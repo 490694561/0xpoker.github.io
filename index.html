@@ -266,7 +266,129 @@
 <blockquote>
 <p>peda的一个实用命令checksec检测安全保护<br>peda的另一个实用命令searchmem用搜索内存</p>
 </blockquote>
-<p><strong>下面介绍点命令及使用说明：</strong><br>命令符号|使用说明<br>:-:|:-<br>file 路径|附加文件<br>r|开始执行<br>c|继续执行<br>step|单步步入<br>next|单步步过<br>b [addr]|下断点<br>enable|激活断点<br>disable|禁用断点<br>info b|查看断点<br>del num|删除断点<br>x/wx $esp|以4字节16进制显示栈中内容<br>stack 100|插件提供的，显示栈中100项<br>find xxx|快速查找，很实用<br>s|按字符串输出<br>x|按十六进制格式显示变量。<br>d|按十进制格式显示变量。<br>u|按十六进制格式显示无符号整型。<br>o|按八进制格式显示变量。<br>t|按二进制格式显示变量。<br>a|按十六进制格式显示变量。<br>c|按字符格式显示变量。<br>f|按浮点数格式显示变量。<br>x/<n f="" u=""> [addr]|n、f、u是可选的参数。b表示单字节，h表示双字节，w表示四字 节，g表示八字节<br>(无)|但是实际的组合就那么几种<br>x/s 地址|查看字符串<br>x/wx 地址|查看DWORD<br>x/c 地址|单字节查看<br>x/16x $esp+12|查看寄存器偏移 </n></p>
+<p><strong>下面介绍点命令及使用说明：</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令符号</th>
+<th style="text-align:left">使用说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">file 路径</td>
+<td style="text-align:left">附加文件</td>
+</tr>
+<tr>
+<td style="text-align:center">r</td>
+<td style="text-align:left">开始执行</td>
+</tr>
+<tr>
+<td style="text-align:center">c</td>
+<td style="text-align:left">继续执行</td>
+</tr>
+<tr>
+<td style="text-align:center">step</td>
+<td style="text-align:left">单步步入</td>
+</tr>
+<tr>
+<td style="text-align:center">next</td>
+<td style="text-align:left">单步步过</td>
+</tr>
+<tr>
+<td style="text-align:center">b [addr]</td>
+<td style="text-align:left">下断点</td>
+</tr>
+<tr>
+<td style="text-align:center">enable</td>
+<td style="text-align:left">激活断点</td>
+</tr>
+<tr>
+<td style="text-align:center">disable</td>
+<td style="text-align:left">禁用断点</td>
+</tr>
+<tr>
+<td style="text-align:center">info b</td>
+<td style="text-align:left">查看断点</td>
+</tr>
+<tr>
+<td style="text-align:center">del num</td>
+<td style="text-align:left">删除断点</td>
+</tr>
+<tr>
+<td style="text-align:center">x/wx $esp</td>
+<td style="text-align:left">以4字节16进制显示栈中内容</td>
+</tr>
+<tr>
+<td style="text-align:center">stack 100</td>
+<td style="text-align:left">插件提供的，显示栈中100项</td>
+</tr>
+<tr>
+<td style="text-align:center">find xxx</td>
+<td style="text-align:left">快速查找，很实用</td>
+</tr>
+<tr>
+<td style="text-align:center">s</td>
+<td style="text-align:left">按字符串输出</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:left">按十六进制格式显示变量。</td>
+</tr>
+<tr>
+<td style="text-align:center">d</td>
+<td style="text-align:left">按十进制格式显示变量。</td>
+</tr>
+<tr>
+<td style="text-align:center">u</td>
+<td style="text-align:left">按十六进制格式显示无符号整型。</td>
+</tr>
+<tr>
+<td style="text-align:center">o</td>
+<td style="text-align:left">按八进制格式显示变量。</td>
+</tr>
+<tr>
+<td style="text-align:center">t</td>
+<td style="text-align:left">按二进制格式显示变量。</td>
+</tr>
+<tr>
+<td style="text-align:center">a</td>
+<td style="text-align:left">按十六进制格式显示变量。</td>
+</tr>
+<tr>
+<td style="text-align:center">c</td>
+<td style="text-align:left">按字符格式显示变量。</td>
+</tr>
+<tr>
+<td style="text-align:center">f</td>
+<td style="text-align:left">按浮点数格式显示变量。</td>
+</tr>
+<tr>
+<td style="text-align:center">x/<n f="" u=""> [addr]</n></td>
+<td style="text-align:left">n、f、u是可选的参数。b表示单字节，h表示双字节，w表示四字 节，g表示八字节</td>
+</tr>
+<tr>
+<td style="text-align:center">(无)</td>
+<td style="text-align:left">但是实际的组合就那么几种</td>
+</tr>
+<tr>
+<td style="text-align:center">x/s 地址</td>
+<td style="text-align:left">查看字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">x/wx 地址</td>
+<td style="text-align:left">查看DWORD</td>
+</tr>
+<tr>
+<td style="text-align:center">x/c 地址</td>
+<td style="text-align:left">单字节查看</td>
+</tr>
+<tr>
+<td style="text-align:center">x/16x $esp+12</td>
+<td style="text-align:left">查看寄存器偏移</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
 <p>set args 可指定运行时参数。(如：set args 10 20 30 40 50)<br>show args 命令可以查看设置好的运行参数。 </p>
 </blockquote>
