@@ -151,7 +151,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/C语言/" style="font-size: 15px;">C语言</a> <a href="/tags/格式化字符串/" style="font-size: 20px;">格式化字符串</a> <a href="/tags/漏洞/" style="font-size: 20px;">漏洞</a> <a href="/tags/漏洞防护/" style="font-size: 10px;">漏洞防护</a> <a href="/tags/笔记/" style="font-size: 15px;">笔记</a>
+                        <a href="/tags/C语言/" style="font-size: 15px;">C语言</a> <a href="/tags/使用说明/" style="font-size: 10px;">使用说明</a> <a href="/tags/格式化字符串/" style="font-size: 20px;">格式化字符串</a> <a href="/tags/漏洞/" style="font-size: 20px;">漏洞</a> <a href="/tags/漏洞防护/" style="font-size: 10px;">漏洞防护</a> <a href="/tags/笔记/" style="font-size: 15px;">笔记</a> <a href="/tags/调试器/" style="font-size: 10px;">调试器</a>
                     </div>
                 </section>
                 
@@ -233,11 +233,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-格式化字符串漏洞学习笔记(四)" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Linux下的动态调试起GDB的使用说明" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/20171130/格式化字符串漏洞学习笔记(四)/" class="article-date">
-      <time datetime="2017-11-30T15:32:10.000Z" itemprop="datePublished">2017-11-30</time>
+      <a href="/20171129/Linux下的动态调试起GDB的使用说明/" class="article-date">
+      <time datetime="2017-11-30T01:53:16.000Z" itemprop="datePublished">2017-11-30</time>
 </a>
     </div>
   
@@ -250,7 +250,84 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/20171130/格式化字符串漏洞学习笔记(四)/">格式化字符串漏洞学习笔记(四)</a>
+      <a class="article-title" href="/20171129/Linux下的动态调试起GDB的使用说明/">Linux下的动态调试起GDB的使用说明</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Linux下的动态调试起GDB的使用说明"><a href="#Linux下的动态调试起GDB的使用说明" class="headerlink" title="Linux下的动态调试起GDB的使用说明"></a>Linux下的动态调试起GDB的使用说明</h1><h2 id="什么是GDB"><a href="#什么是GDB" class="headerlink" title="什么是GDB"></a>什么是GDB</h2><p><strong>参考资料：</strong><a href="https://baike.baidu.com/item/gdb/10869514" title="百度百科----GDB" target="_blank" rel="noopener">百度百科—-GDB</a><br>简单的叙述，GDB就是一个在linux下运行的动态调试器，使用方法和Windows上的那些差不多，但是操作较为复杂，毕竟是命令行控制的动态调试器，不过这也没埋没他的光点，GDB的强大只有用过才知道。  </p>
+<h2 id="人生苦短，我用gdb-peda"><a href="#人生苦短，我用gdb-peda" class="headerlink" title="人生苦短，我用gdb-peda"></a>人生苦短，我用gdb-peda</h2><p>正如我标题叙述的这样，我用的GDB不是原生态的GDB，那个原生态版的太难操作，所以推荐大家去下载使用pwn版的GDB下面给个安装方法，安装环境是Ubuntu：<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git  </span><br><span class="line">sudo apt-get install gdb</span><br><span class="line">git clone https://github.com/longld/peda.git ~/peda  </span><br><span class="line">echo <span class="string">"source ~/peda/peda.py"</span> &gt;&gt; ~/.gdbinit  </span><br><span class="line">echo <span class="string">"DONE! debug your program with gdb and enjoy"</span></span><br></pre></td></tr></table></figure></p>
+<p>这也是官方github给的安装示例。  </p>
+<blockquote>
+<p>peda的一个实用命令checksec检测安全保护<br>peda的另一个实用命令searchmem用搜索内存</p>
+</blockquote>
+<p><strong>下面介绍点命令及使用说明：</strong><br>命令符号|使用说明<br>:-:|:-<br>file 路径|附加文件<br>r|开始执行<br>c|继续执行<br>step|单步步入<br>next|单步步过<br>b [addr]|下断点<br>enable|激活断点<br>disable|禁用断点<br>info b|查看断点<br>del num|删除断点<br>x/wx $esp|以4字节16进制显示栈中内容<br>stack 100|插件提供的，显示栈中100项<br>find xxx|快速查找，很实用<br>s|按字符串输出<br>x|按十六进制格式显示变量。<br>d|按十进制格式显示变量。<br>u|按十六进制格式显示无符号整型。<br>o|按八进制格式显示变量。<br>t|按二进制格式显示变量。<br>a|按十六进制格式显示变量。<br>c|按字符格式显示变量。<br>f|按浮点数格式显示变量。<br>x/<n f="" u=""> [addr]|n、f、u是可选的参数。b表示单字节，h表示双字节，w表示四字 节，g表示八字节<br>(无)|但是实际的组合就那么几种<br>x/s 地址|查看字符串<br>x/wx 地址|查看DWORD<br>x/c 地址|单字节查看<br>x/16x $esp+12|查看寄存器偏移 </n></p>
+<blockquote>
+<p>set args 可指定运行时参数。(如：set args 10 20 30 40 50)<br>show args 命令可以查看设置好的运行参数。 </p>
+</blockquote>
+<p><strong>使用截图：</strong><br><img src="http://ww1.sinaimg.cn/large/0060lm7Tly1fm0ny2xs5rj30ju0c40uo.jpg" alt="GDB" title="GDB">  </p>
+<p>这是peda的栈视图。其中红色的是栈帧的返回地址，蓝色的表示这个值可能为指针。  </p>
+<blockquote>
+<p>本篇摘自0x9A82师傅的博客<a href="http://www.cnblogs.com/Ox9A82/p/5483186.html" title="相关博文----GDB调试实用命令" target="_blank" rel="noopener">相关博文—-GDB调试实用命令</a></p>
+</blockquote>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/调试器/">调试器</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/使用说明/">使用说明</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调试器/">调试器</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-格式化字符串漏洞学习笔记(四)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/20171129/格式化字符串漏洞学习笔记(四)/" class="article-date">
+      <time datetime="2017-11-29T23:32:10.000Z" itemprop="datePublished">2017-11-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/20171129/格式化字符串漏洞学习笔记(四)/">格式化字符串漏洞学习笔记(四)</a>
     </h1>
   
 
@@ -286,7 +363,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/20171130/格式化字符串漏洞学习笔记(四)/#more">For more >></a>
+          <a  href="/20171129/格式化字符串漏洞学习笔记(四)/#more">For more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -308,8 +385,8 @@
     <article id="post-格式化字符串漏洞学习笔记(三)" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/20171128/格式化字符串漏洞学习笔记(三)/" class="article-date">
-      <time datetime="2017-11-28T16:07:29.000Z" itemprop="datePublished">2017-11-29</time>
+      <a href="/20171127/格式化字符串漏洞学习笔记(三)/" class="article-date">
+      <time datetime="2017-11-28T00:07:29.000Z" itemprop="datePublished">2017-11-28</time>
 </a>
     </div>
   
@@ -322,7 +399,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/20171128/格式化字符串漏洞学习笔记(三)/">格式化字符串漏洞学习笔记(三)</a>
+      <a class="article-title" href="/20171127/格式化字符串漏洞学习笔记(三)/">格式化字符串漏洞学习笔记(三)</a>
     </h1>
   
 
@@ -358,7 +435,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/20171128/格式化字符串漏洞学习笔记(三)/#more">For more >></a>
+          <a  href="/20171127/格式化字符串漏洞学习笔记(三)/#more">For more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -380,8 +457,8 @@
     <article id="post-格式化字符串漏洞学习笔记(二)" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/20171127/格式化字符串漏洞学习笔记(二)/" class="article-date">
-      <time datetime="2017-11-27T17:23:56.000Z" itemprop="datePublished">2017-11-28</time>
+      <a href="/20171126/格式化字符串漏洞学习笔记(二)/" class="article-date">
+      <time datetime="2017-11-27T01:23:56.000Z" itemprop="datePublished">2017-11-27</time>
 </a>
     </div>
   
@@ -394,7 +471,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/20171127/格式化字符串漏洞学习笔记(二)/">格式化字符串漏洞学习笔记(二)</a>
+      <a class="article-title" href="/20171126/格式化字符串漏洞学习笔记(二)/">格式化字符串漏洞学习笔记(二)</a>
     </h1>
   
 
@@ -431,7 +508,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/20171127/格式化字符串漏洞学习笔记(二)/#more">For more >></a>
+          <a  href="/20171126/格式化字符串漏洞学习笔记(二)/#more">For more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -453,8 +530,8 @@
     <article id="post-保护技术-此文章长期更新" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/20171127/保护技术-此文章长期更新/" class="article-date">
-      <time datetime="2017-11-27T09:02:50.000Z" itemprop="datePublished">2017-11-27</time>
+      <a href="/20171126/保护技术-此文章长期更新/" class="article-date">
+      <time datetime="2017-11-26T17:02:50.000Z" itemprop="datePublished">2017-11-27</time>
 </a>
     </div>
   
@@ -467,7 +544,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/20171127/保护技术-此文章长期更新/">保护技术-此文章长期更新</a>
+      <a class="article-title" href="/20171126/保护技术-此文章长期更新/">保护技术-此文章长期更新</a>
     </h1>
   
 
@@ -510,7 +587,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/20171127/保护技术-此文章长期更新/#more">For more >></a>
+          <a  href="/20171126/保护技术-此文章长期更新/#more">For more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -532,8 +609,8 @@
     <article id="post-格式化字符串漏洞学习笔记(一)" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/20171127/格式化字符串漏洞学习笔记(一)/" class="article-date">
-      <time datetime="2017-11-27T08:03:40.000Z" itemprop="datePublished">2017-11-27</time>
+      <a href="/20171126/格式化字符串漏洞学习笔记(一)/" class="article-date">
+      <time datetime="2017-11-26T16:03:40.000Z" itemprop="datePublished">2017-11-27</time>
 </a>
     </div>
   
@@ -546,7 +623,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/20171127/格式化字符串漏洞学习笔记(一)/">格式化字符串漏洞学习笔记(一)</a>
+      <a class="article-title" href="/20171126/格式化字符串漏洞学习笔记(一)/">格式化字符串漏洞学习笔记(一)</a>
     </h1>
   
 
@@ -579,7 +656,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/20171127/格式化字符串漏洞学习笔记(一)/#more">For more >></a>
+          <a  href="/20171126/格式化字符串漏洞学习笔记(一)/#more">For more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -601,8 +678,8 @@
     <article id="post-C语言笔记——常量与宏定义" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/20171125/C语言笔记——常量与宏定义/" class="article-date">
-      <time datetime="2017-11-25T15:06:54.000Z" itemprop="datePublished">2017-11-25</time>
+      <a href="/20171124/C语言笔记——常量与宏定义/" class="article-date">
+      <time datetime="2017-11-24T23:06:54.000Z" itemprop="datePublished">2017-11-25</time>
 </a>
     </div>
   
@@ -615,7 +692,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/20171125/C语言笔记——常量与宏定义/">C语言笔记——常量与宏定义</a>
+      <a class="article-title" href="/20171124/C语言笔记——常量与宏定义/">C语言笔记——常量与宏定义</a>
     </h1>
   
 
@@ -681,7 +758,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/20171125/C语言笔记——常量与宏定义/#more">For more >></a>
+          <a  href="/20171124/C语言笔记——常量与宏定义/#more">For more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -703,8 +780,8 @@
     <article id="post-C语言笔记——变量" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/20171125/C语言笔记——变量/" class="article-date">
-      <time datetime="2017-11-25T09:52:10.000Z" itemprop="datePublished">2017-11-25</time>
+      <a href="/20171124/C语言笔记——变量/" class="article-date">
+      <time datetime="2017-11-24T17:52:10.000Z" itemprop="datePublished">2017-11-25</time>
 </a>
     </div>
   
@@ -717,7 +794,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/20171125/C语言笔记——变量/">C语言笔记——变量</a>
+      <a class="article-title" href="/20171124/C语言笔记——变量/">C语言笔记——变量</a>
     </h1>
   
 
@@ -765,7 +842,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/20171125/C语言笔记——变量/#more">For more >></a>
+          <a  href="/20171124/C语言笔记——变量/#more">For more >></a>
         </p>
       
       <div class="clearfix"></div>

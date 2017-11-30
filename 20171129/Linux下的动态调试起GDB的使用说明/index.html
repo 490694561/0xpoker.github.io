@@ -3,19 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>about | Poker&#39;s Blog</title>
+  <title>Linux下的动态调试起GDB的使用说明 | Poker&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是一个很水的博客，大牛们见谅，真的很水很水~~~~">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://0xpoker.cuit.site/about/index.html">
+  <meta name="description" content="Linux下的动态调试起GDB的使用说明什么是GDB参考资料：百度百科—-GDB简单的叙述，GDB就是一个在linux下运行的动态调试器，使用方法和Windows上的那些差不多，但是操作较为复杂，毕竟是命令行控制的动态调试器，不过这也没埋没他的光点，GDB的强大只有用过才知道。   人生苦短，我用gdb-peda正如我">
+<meta name="keywords" content="调试器,使用说明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux下的动态调试起GDB的使用说明">
+<meta property="og:url" content="http://0xpoker.cuit.site/20171129/Linux下的动态调试起GDB的使用说明/index.html">
 <meta property="og:site_name" content="Poker&#39;s Blog">
-<meta property="og:description" content="这是一个很水的博客，大牛们见谅，真的很水很水~~~~">
+<meta property="og:description" content="Linux下的动态调试起GDB的使用说明什么是GDB参考资料：百度百科—-GDB简单的叙述，GDB就是一个在linux下运行的动态调试器，使用方法和Windows上的那些差不多，但是操作较为复杂，毕竟是命令行控制的动态调试器，不过这也没埋没他的光点，GDB的强大只有用过才知道。   人生苦短，我用gdb-peda正如我标题叙述的这样，我用的GDB不是原生态的GDB，那个原生态版的太难操作，所以推荐">
 <meta property="og:locale" content="zh-cmn-Hans">
-<meta property="og:updated_time" content="2017-11-25T14:49:10.223Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0060lm7Tly1fm0ny2xs5rj30ju0c40uo.jpg">
+<meta property="og:updated_time" content="2017-11-30T18:21:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="这是一个很水的博客，大牛们见谅，真的很水很水~~~~">
+<meta name="twitter:title" content="Linux下的动态调试起GDB的使用说明">
+<meta name="twitter:description" content="Linux下的动态调试起GDB的使用说明什么是GDB参考资料：百度百科—-GDB简单的叙述，GDB就是一个在linux下运行的动态调试器，使用方法和Windows上的那些差不多，但是操作较为复杂，毕竟是命令行控制的动态调试器，不过这也没埋没他的光点，GDB的强大只有用过才知道。   人生苦短，我用gdb-peda正如我标题叙述的这样，我用的GDB不是原生态的GDB，那个原生态版的太难操作，所以推荐">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/0060lm7Tly1fm0ny2xs5rj30ju0c40uo.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Poker&#39;s Blog" type="application/atom+xml">
   
@@ -41,7 +44,7 @@
           fancybox: true,
           animate: true,
           isHome: false,
-          isPost: false,
+          isPost: true,
           isArchive: false,
           isTag: false,
           isCategory: false,
@@ -229,11 +232,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Linux下的动态调试起GDB的使用说明" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/about/index.html" class="article-date">
-      <time datetime="2017-11-24T22:49:09.000Z" itemprop="datePublished">2017-11-25</time>
+      <a href="/20171129/Linux下的动态调试起GDB的使用说明/" class="article-date">
+      <time datetime="2017-11-30T01:53:16.000Z" itemprop="datePublished">2017-11-30</time>
 </a>
     </div>
   
@@ -246,7 +249,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      about
+      Linux下的动态调试起GDB的使用说明
     </h1>
   
 
@@ -254,8 +257,16 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/调试器/">调试器</a>
+    </div>
+
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/使用说明/">使用说明</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调试器/">调试器</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -263,42 +274,22 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta {
-        display: none;
-    }
-    #container .article .article-title {
-        padding-right: 0;
-    }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
-    }
-    .article-header:hover {
-        border-left: none;
-    }
-    .article-title {
-        font-size: 1.6em
-    }
-    .article-meta {
-        display: none;
-    }
-    .article-entry hr {
-        margin: 0;
-    }
-    #container .article-info-post.article-info {
-      display: none;
-      }
-    #container .article .article-title {
-    padding: 0;
-    }
-</style>
+        <h1 id="Linux下的动态调试起GDB的使用说明"><a href="#Linux下的动态调试起GDB的使用说明" class="headerlink" title="Linux下的动态调试起GDB的使用说明"></a>Linux下的动态调试起GDB的使用说明</h1><h2 id="什么是GDB"><a href="#什么是GDB" class="headerlink" title="什么是GDB"></a>什么是GDB</h2><p><strong>参考资料：</strong><a href="https://baike.baidu.com/item/gdb/10869514" title="百度百科----GDB" target="_blank" rel="noopener">百度百科—-GDB</a><br>简单的叙述，GDB就是一个在linux下运行的动态调试器，使用方法和Windows上的那些差不多，但是操作较为复杂，毕竟是命令行控制的动态调试器，不过这也没埋没他的光点，GDB的强大只有用过才知道。  </p>
+<h2 id="人生苦短，我用gdb-peda"><a href="#人生苦短，我用gdb-peda" class="headerlink" title="人生苦短，我用gdb-peda"></a>人生苦短，我用gdb-peda</h2><p>正如我标题叙述的这样，我用的GDB不是原生态的GDB，那个原生态版的太难操作，所以推荐大家去下载使用pwn版的GDB下面给个安装方法，安装环境是Ubuntu：<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git  </span><br><span class="line">sudo apt-get install gdb</span><br><span class="line">git clone https://github.com/longld/peda.git ~/peda  </span><br><span class="line">echo <span class="string">"source ~/peda/peda.py"</span> &gt;&gt; ~/.gdbinit  </span><br><span class="line">echo <span class="string">"DONE! debug your program with gdb and enjoy"</span></span><br></pre></td></tr></table></figure></p>
+<p>这也是官方github给的安装示例。  </p>
+<blockquote>
+<p>peda的一个实用命令checksec检测安全保护<br>peda的另一个实用命令searchmem用搜索内存</p>
+</blockquote>
+<p><strong>下面介绍点命令及使用说明：</strong><br>命令符号|使用说明<br>:-:|:-<br>file 路径|附加文件<br>r|开始执行<br>c|继续执行<br>step|单步步入<br>next|单步步过<br>b [addr]|下断点<br>enable|激活断点<br>disable|禁用断点<br>info b|查看断点<br>del num|删除断点<br>x/wx $esp|以4字节16进制显示栈中内容<br>stack 100|插件提供的，显示栈中100项<br>find xxx|快速查找，很实用<br>s|按字符串输出<br>x|按十六进制格式显示变量。<br>d|按十进制格式显示变量。<br>u|按十六进制格式显示无符号整型。<br>o|按八进制格式显示变量。<br>t|按二进制格式显示变量。<br>a|按十六进制格式显示变量。<br>c|按字符格式显示变量。<br>f|按浮点数格式显示变量。<br>x/<n f="" u=""> [addr]|n、f、u是可选的参数。b表示单字节，h表示双字节，w表示四字 节，g表示八字节<br>(无)|但是实际的组合就那么几种<br>x/s 地址|查看字符串<br>x/wx 地址|查看DWORD<br>x/c 地址|单字节查看<br>x/16x $esp+12|查看寄存器偏移 </n></p>
+<blockquote>
+<p>set args 可指定运行时参数。(如：set args 10 20 30 40 50)<br>show args 命令可以查看设置好的运行参数。 </p>
+</blockquote>
+<p><strong>使用截图：</strong><br><img src="http://ww1.sinaimg.cn/large/0060lm7Tly1fm0ny2xs5rj30ju0c40uo.jpg" alt="GDB" title="GDB">  </p>
+<p>这是peda的栈视图。其中红色的是栈帧的返回地址，蓝色的表示这个值可能为指针。  </p>
+<blockquote>
+<p>本篇摘自0x9A82师傅的博客<a href="http://www.cnblogs.com/Ox9A82/p/5483186.html" title="相关博文----GDB调试实用命令" target="_blank" rel="noopener">相关博文—-GDB调试实用命令</a></p>
+</blockquote>
 
-
-          
-        
       
       
     </div>
@@ -306,10 +297,67 @@
   </div>
   
     
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/20171129/Linux下的动态调试起GDB的使用说明/">Linux下的动态调试起GDB的使用说明</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Poker 的个人博客">Poker</a></p>
+        <p><span>发布时间:</span>2017年11月30日 - 09时53分</p>
+        <p><span>最后更新:</span>2017年11月30日 - 10时21分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/20171129/Linux下的动态调试起GDB的使用说明/" title="Linux下的动态调试起GDB的使用说明">http://0xpoker.cuit.site/20171129/Linux下的动态调试起GDB的使用说明/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171129/Linux下的动态调试起GDB的使用说明/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
 
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/20171129/格式化字符串漏洞学习笔记(四)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">格式化字符串漏洞学习笔记(四)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
   
 </article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux下的动态调试起GDB的使用说明"><span class="toc-number">1.</span> <span class="toc-text">Linux下的动态调试起GDB的使用说明</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是GDB"><span class="toc-number">1.1.</span> <span class="toc-text">什么是GDB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#人生苦短，我用gdb-peda"><span class="toc-number">1.2.</span> <span class="toc-text">人生苦短，我用gdb-peda</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
 
 
 
@@ -330,6 +378,37 @@
     
 
 
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/20171129/格式化字符串漏洞学习笔记(四)/" title="下一篇: 格式化字符串漏洞学习笔记(四)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/20171129/Linux下的动态调试起GDB的使用说明/">Linux下的动态调试起GDB的使用说明</a></li><li class="post-list-item"><a class="post-list-link" href="/20171129/格式化字符串漏洞学习笔记(四)/">格式化字符串漏洞学习笔记(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171127/格式化字符串漏洞学习笔记(三)/">格式化字符串漏洞学习笔记(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171126/格式化字符串漏洞学习笔记(二)/">格式化字符串漏洞学习笔记(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171126/保护技术-此文章长期更新/">保护技术-此文章长期更新</a></li><li class="post-list-item"><a class="post-list-link" href="/20171126/格式化字符串漏洞学习笔记(一)/">格式化字符串漏洞学习笔记(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171124/C语言笔记——常量与宏定义/">C语言笔记——常量与宏定义</a></li><li class="post-list-item"><a class="post-list-link" href="/20171124/C语言笔记——变量/">C语言笔记——变量</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
 
 
 
