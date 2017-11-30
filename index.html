@@ -260,144 +260,14 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="Linux下的动态调试起GDB的使用说明"><a href="#Linux下的动态调试起GDB的使用说明" class="headerlink" title="Linux下的动态调试起GDB的使用说明"></a>Linux下的动态调试起GDB的使用说明</h1><h2 id="什么是GDB"><a href="#什么是GDB" class="headerlink" title="什么是GDB"></a>什么是GDB</h2><p><strong>参考资料：</strong><a href="https://baike.baidu.com/item/gdb/10869514" title="百度百科----GDB" target="_blank" rel="noopener">百度百科—-GDB</a><br>简单的叙述，GDB就是一个在linux下运行的动态调试器，使用方法和Windows上的那些差不多，但是操作较为复杂，毕竟是命令行控制的动态调试器，不过这也没埋没他的光点，GDB的强大只有用过才知道。  </p>
+              <h1 id="Linux下的动态调试起GDB的使用说明"><a href="#Linux下的动态调试起GDB的使用说明" class="headerlink" title="Linux下的动态调试起GDB的使用说明"></a>Linux下的动态调试起GDB的使用说明</h1><h2 id="什么是GDB"><a href="#什么是GDB" class="headerlink" title="什么是GDB"></a>什么是GDB</h2><p><strong>参考资料：</strong><a href="https://baike.baidu.com/item/gdb/10869514" title="百度百科----GDB" target="_blank" rel="noopener">百度百科—-GDB</a><br>简单的叙述，GDB就是一个在linux下运行的动态调试器，使用方法和Windows上的那些差不多，但是操作较为复杂，毕竟是命令行控制的动态调试器，不过这也没埋没他的光点，GDB的强大只有用过才知道。  </p>
 <h2 id="人生苦短，我用gdb-peda"><a href="#人生苦短，我用gdb-peda" class="headerlink" title="人生苦短，我用gdb-peda"></a>人生苦短，我用gdb-peda</h2><p>正如我标题叙述的这样，我用的GDB不是原生态的GDB，那个原生态版的太难操作，所以推荐大家去下载使用pwn版的GDB下面给个安装方法，安装环境是Ubuntu：<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git  </span><br><span class="line">sudo apt-get install gdb</span><br><span class="line">git clone https://github.com/longld/peda.git ~/peda  </span><br><span class="line">echo <span class="string">"source ~/peda/peda.py"</span> &gt;&gt; ~/.gdbinit  </span><br><span class="line">echo <span class="string">"DONE! debug your program with gdb and enjoy"</span></span><br></pre></td></tr></table></figure></p>
 <p>这也是官方github给的安装示例。  </p>
 <blockquote>
 <p>peda的一个实用命令checksec检测安全保护<br>peda的另一个实用命令searchmem用搜索内存</p>
 </blockquote>
-<p><strong>下面介绍点命令及使用说明：</strong>  </p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">命令符号</th>
-<th style="text-align:left">使用说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">file 路径</td>
-<td style="text-align:left">附加文件</td>
-</tr>
-<tr>
-<td style="text-align:center">r</td>
-<td style="text-align:left">开始执行</td>
-</tr>
-<tr>
-<td style="text-align:center">c</td>
-<td style="text-align:left">继续执行</td>
-</tr>
-<tr>
-<td style="text-align:center">step</td>
-<td style="text-align:left">单步步入</td>
-</tr>
-<tr>
-<td style="text-align:center">next</td>
-<td style="text-align:left">单步步过</td>
-</tr>
-<tr>
-<td style="text-align:center">b [addr]</td>
-<td style="text-align:left">下断点</td>
-</tr>
-<tr>
-<td style="text-align:center">enable</td>
-<td style="text-align:left">激活断点</td>
-</tr>
-<tr>
-<td style="text-align:center">disable</td>
-<td style="text-align:left">禁用断点</td>
-</tr>
-<tr>
-<td style="text-align:center">info b</td>
-<td style="text-align:left">查看断点</td>
-</tr>
-<tr>
-<td style="text-align:center">del num</td>
-<td style="text-align:left">删除断点</td>
-</tr>
-<tr>
-<td style="text-align:center">x/wx $esp</td>
-<td style="text-align:left">以4字节16进制显示栈中内容</td>
-</tr>
-<tr>
-<td style="text-align:center">stack 100</td>
-<td style="text-align:left">插件提供的，显示栈中100项</td>
-</tr>
-<tr>
-<td style="text-align:center">find xxx</td>
-<td style="text-align:left">快速查找，很实用</td>
-</tr>
-<tr>
-<td style="text-align:center">s</td>
-<td style="text-align:left">按字符串输出</td>
-</tr>
-<tr>
-<td style="text-align:center">x</td>
-<td style="text-align:left">按十六进制格式显示变量。</td>
-</tr>
-<tr>
-<td style="text-align:center">d</td>
-<td style="text-align:left">按十进制格式显示变量。</td>
-</tr>
-<tr>
-<td style="text-align:center">u</td>
-<td style="text-align:left">按十六进制格式显示无符号整型。</td>
-</tr>
-<tr>
-<td style="text-align:center">o</td>
-<td style="text-align:left">按八进制格式显示变量。</td>
-</tr>
-<tr>
-<td style="text-align:center">t</td>
-<td style="text-align:left">按二进制格式显示变量。</td>
-</tr>
-<tr>
-<td style="text-align:center">a</td>
-<td style="text-align:left">按十六进制格式显示变量。</td>
-</tr>
-<tr>
-<td style="text-align:center">c</td>
-<td style="text-align:left">按字符格式显示变量。</td>
-</tr>
-<tr>
-<td style="text-align:center">f</td>
-<td style="text-align:left">按浮点数格式显示变量。</td>
-</tr>
-<tr>
-<td style="text-align:center">x/<n f="" u=""> [addr]</n></td>
-<td style="text-align:left">n、f、u是可选的参数。b表示单字节，h表示双字节，w表示四字 节，g表示八字节</td>
-</tr>
-<tr>
-<td style="text-align:center">(无)</td>
-<td style="text-align:left">但是实际的组合就那么几种</td>
-</tr>
-<tr>
-<td style="text-align:center">x/s 地址</td>
-<td style="text-align:left">查看字符串</td>
-</tr>
-<tr>
-<td style="text-align:center">x/wx 地址</td>
-<td style="text-align:left">查看DWORD</td>
-</tr>
-<tr>
-<td style="text-align:center">x/c 地址</td>
-<td style="text-align:left">单字节查看</td>
-</tr>
-<tr>
-<td style="text-align:center">x/16x $esp+12</td>
-<td style="text-align:left">查看寄存器偏移</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>set args 可指定运行时参数。(如：set args 10 20 30 40 50)<br>show args 命令可以查看设置好的运行参数。 </p>
-</blockquote>
-<p><strong>使用截图：</strong><br><img src="http://ww1.sinaimg.cn/large/0060lm7Tly1fm0ny2xs5rj30ju0c40uo.jpg" alt="GDB" title="GDB">  </p>
-<p>这是peda的栈视图。其中红色的是栈帧的返回地址，蓝色的表示这个值可能为指针。  </p>
-<blockquote>
-<p>本篇摘自0x9A82师傅的博客<a href="http://www.cnblogs.com/Ox9A82/p/5483186.html" title="相关博文----GDB调试实用命令" target="_blank" rel="noopener">相关博文—-GDB调试实用命令</a></p>
-</blockquote>
-
+<p><strong>下面介绍点命令及使用说明：</strong><br>
+          
       
       
     </div>
@@ -415,6 +285,10 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/使用说明/">使用说明</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调试器/">调试器</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a  href="/20171129/Linux下的动态调试起GDB的使用说明/#more">For more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
