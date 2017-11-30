@@ -5,19 +5,19 @@
   
   <title>保护技术-此文章长期更新 | Poker&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执">
+  <meta name="description" content="保护技术-此文章长期更新NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在">
 <meta name="keywords" content="漏洞防护">
 <meta property="og:type" content="article">
 <meta property="og:title" content="保护技术-此文章长期更新">
 <meta property="og:url" content="http://0xpoker.cuit.site/20171127/保护技术-此文章长期更新/index.html">
 <meta property="og:site_name" content="Poker&#39;s Blog">
-<meta property="og:description" content="NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。参考资料：百度百科—-NX DEP保护DEP保护，全称为 Data Exec">
+<meta property="og:description" content="保护技术-此文章长期更新NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。    linux最早的漏洞防护机制nx-stack">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/0060lm7Tly1fly8rbuqe5j30fh08jwev.jpg">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/0060lm7Tly1fly8td94gdj30fh08pdg9.jpg">
-<meta property="og:updated_time" content="2017-11-30T05:21:29.538Z">
+<meta property="og:updated_time" content="2017-11-30T17:40:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="保护技术-此文章长期更新">
-<meta name="twitter:description" content="NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。参考资料：百度百科—-NX DEP保护DEP保护，全称为 Data Exec">
+<meta name="twitter:description" content="保护技术-此文章长期更新NX保护和DEP保护两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限   NX保护NX保护，全称为 “No eXecute” ，意为 [禁止执行]我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。    linux最早的漏洞防护机制nx-stack">
 <meta name="twitter:image" content="http://ww4.sinaimg.cn/large/0060lm7Tly1fly8rbuqe5j30fh08jwev.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Poker&#39;s Blog" type="application/atom+xml">
@@ -274,8 +274,12 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="NX保护和DEP保护"><a href="#NX保护和DEP保护" class="headerlink" title="NX保护和DEP保护"></a>NX保护和DEP保护</h2><p>两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限  </p>
-<h3 id="NX保护"><a href="#NX保护" class="headerlink" title="NX保护"></a>NX保护</h3><p>NX保护，全称为 <strong>“No eXecute”</strong> ，意为 <strong>[禁止执行]</strong><br>我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。<br><strong>参考资料：</strong><a href="https://baike.baidu.com/item/NX/18775031" title="NX保护技术" target="_blank" rel="noopener">百度百科—-NX</a></p>
+        <h1 id="保护技术-此文章长期更新"><a href="#保护技术-此文章长期更新" class="headerlink" title="保护技术-此文章长期更新"></a>保护技术-此文章长期更新</h1><h2 id="NX保护和DEP保护"><a href="#NX保护和DEP保护" class="headerlink" title="NX保护和DEP保护"></a>NX保护和DEP保护</h2><p>两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限  </p>
+<h3 id="NX保护"><a href="#NX保护" class="headerlink" title="NX保护"></a>NX保护</h3><p>NX保护，全称为 <strong>“No eXecute”</strong> ，意为 <strong>[禁止执行]</strong><br>我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。  </p>
+<blockquote>
+<p><strong>linux最早的漏洞防护机制nx-stack刚刚出现后就有人想出了突破方法。那就是只有栈是不可执行，而除了栈以外的其他地方还是可以执行的，只要把返回地址执行别的地方就可以。</strong></p>
+</blockquote>
+<p><strong>参考资料：</strong><a href="https://baike.baidu.com/item/NX/18775031" title="NX保护技术" target="_blank" rel="noopener">百度百科—-NX</a></p>
 <h3 id="DEP保护"><a href="#DEP保护" class="headerlink" title="DEP保护"></a>DEP保护</h3><p>DEP保护，全称为 <strong>Data Execution Prevention</strong> ，意为 <strong>数据执行保护</strong>  </p>
 <blockquote>
 <p><strong>数据执行保护(DEP)</strong> 是一套软硬件技术，能够在内存上执行额外检查以帮助防止在系统上运行恶意代码</p>
@@ -342,7 +346,7 @@
         <p><span>本文标题:</span><a href="/20171127/保护技术-此文章长期更新/">保护技术-此文章长期更新</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Poker 的个人博客">Poker</a></p>
         <p><span>发布时间:</span>2017年11月27日 - 01时02分</p>
-        <p><span>最后更新:</span>2017年11月29日 - 21时21分</p>
+        <p><span>最后更新:</span>2017年11月30日 - 09时40分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/20171127/保护技术-此文章长期更新/" title="保护技术-此文章长期更新">http://0xpoker.cuit.site/20171127/保护技术-此文章长期更新/</a>
             <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171127/保护技术-此文章长期更新/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -358,7 +362,7 @@
 
 <nav id="article-nav">
   
-    <a href="/20171127/格式化字符串漏洞学习笔记-二/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/20171127/格式化字符串漏洞学习笔记(二)/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
@@ -368,7 +372,7 @@
     </a>
   
   
-    <a href="/20171127/格式化字符串漏洞学习笔记-一/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/20171127/格式化字符串漏洞学习笔记(一)/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">格式化字符串漏洞学习笔记(一)</div>
       <strong class="article-nav-caption">></strong>
     </a>
@@ -380,7 +384,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NX保护和DEP保护"><span class="toc-number">1.</span> <span class="toc-text">NX保护和DEP保护</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NX保护"><span class="toc-number">1.1.</span> <span class="toc-text">NX保护</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DEP保护"><span class="toc-number">1.2.</span> <span class="toc-text">DEP保护</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#主要优点"><span class="toc-number">1.2.1.</span> <span class="toc-text">主要优点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-Canary保护"><span class="toc-number">2.</span> <span class="toc-text">Linux Canary保护</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ASLR地址空间布局随机化"><span class="toc-number">3.</span> <span class="toc-text">ASLR地址空间布局随机化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PIE"><span class="toc-number">4.</span> <span class="toc-text">PIE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FORTIFY"><span class="toc-number">5.</span> <span class="toc-text">FORTIFY</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#保护技术-此文章长期更新"><span class="toc-number">1.</span> <span class="toc-text">保护技术-此文章长期更新</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NX保护和DEP保护"><span class="toc-number">1.1.</span> <span class="toc-text">NX保护和DEP保护</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NX保护"><span class="toc-number">1.1.1.</span> <span class="toc-text">NX保护</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DEP保护"><span class="toc-number">1.1.2.</span> <span class="toc-text">DEP保护</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#主要优点"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">主要优点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-Canary保护"><span class="toc-number">1.2.</span> <span class="toc-text">Linux Canary保护</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ASLR地址空间布局随机化"><span class="toc-number">1.3.</span> <span class="toc-text">ASLR地址空间布局随机化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PIE"><span class="toc-number">1.4.</span> <span class="toc-text">PIE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FORTIFY"><span class="toc-number">1.5.</span> <span class="toc-text">FORTIFY</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -431,18 +435,18 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/20171127/格式化字符串漏洞学习笔记-二/" title="上一篇: 格式化字符串漏洞学习笔记(二)">
+            <a href="/20171127/格式化字符串漏洞学习笔记(二)/" title="上一篇: 格式化字符串漏洞学习笔记(二)">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/20171127/格式化字符串漏洞学习笔记-一/" title="下一篇: 格式化字符串漏洞学习笔记(一)">
+            <a href="/20171127/格式化字符串漏洞学习笔记(一)/" title="下一篇: 格式化字符串漏洞学习笔记(一)">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/20171128/格式化字符串漏洞学习笔记-三/">格式化字符串漏洞学习笔记(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171127/格式化字符串漏洞学习笔记-二/">格式化字符串漏洞学习笔记(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171127/保护技术-此文章长期更新/">保护技术-此文章长期更新</a></li><li class="post-list-item"><a class="post-list-link" href="/20171127/格式化字符串漏洞学习笔记-一/">格式化字符串漏洞学习笔记(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171125/C语言笔记——常量与宏定义/">C语言笔记——常量与宏定义</a></li><li class="post-list-item"><a class="post-list-link" href="/20171125/C语言笔记——变量/">C语言笔记——变量</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/20171130/格式化字符串漏洞学习笔记(四)/">格式化字符串漏洞学习笔记(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171128/格式化字符串漏洞学习笔记(三)/">格式化字符串漏洞学习笔记(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171127/格式化字符串漏洞学习笔记(二)/">格式化字符串漏洞学习笔记(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171127/保护技术-此文章长期更新/">保护技术-此文章长期更新</a></li><li class="post-list-item"><a class="post-list-link" href="/20171127/格式化字符串漏洞学习笔记(一)/">格式化字符串漏洞学习笔记(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171125/C语言笔记——常量与宏定义/">C语言笔记——常量与宏定义</a></li><li class="post-list-item"><a class="post-list-link" href="/20171125/C语言笔记——变量/">C语言笔记——变量</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
