@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Poker&#39;s Blog">
 <meta property="og:description" content="脱壳这东西emmm知识点挺广的，我就写一点点基础的，后面需要复杂的，我再去补充成二三好了.........">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-01T18:03:43.041Z">
+<meta property="og:updated_time" content="2017-12-01T18:35:59.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OD脱壳学习笔记(一)">
 <meta name="twitter:description" content="脱壳这东西emmm知识点挺广的，我就写一点点基础的，后面需要复杂的，我再去补充成二三好了.........">
@@ -301,7 +301,7 @@
 <h3 id="ESP定律法"><a href="#ESP定律法" class="headerlink" title="ESP定律法"></a>ESP定律法</h3><ol>
 <li>F8，观察OD右上角寄存器中ESP有没有实现（红色）</li>
 <li>命令行下 <code>DD XXXXXXXX</code>（当前代码ESP值），回车</li>
-<li>DD就选中下端地址，断点—硬件访问—DWORD断点，F9运行，到跳转处按F8 到OEP<blockquote>
+<li>DD就选中下端地址，断点—硬件访问—DWORD断点，F9运行，到跳转处按F8 到OEP  <blockquote>
 <p>讲到ESP定律脱壳，先载入程序然后F8单步执行并观察寄存器中ESP的值变化，当ESP值变红时右键数据窗口跟随，然后数据窗口跟随的值右键断点word，之后F9运行到断点，然后再往下找很长的jmp之后到入口。<br>emm大概就是这样吧。</p>
 </blockquote>
 </li>
@@ -328,7 +328,7 @@
         <p><span>本文标题:</span><a href="/20171130/OD脱壳学习笔记(一)/">OD脱壳学习笔记(一)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Poker 的个人博客">Poker</a></p>
         <p><span>发布时间:</span>2017年12月01日 - 09时29分</p>
-        <p><span>最后更新:</span>2017年12月01日 - 10时03分</p>
+        <p><span>最后更新:</span>2017年12月01日 - 10时35分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/20171130/OD脱壳学习笔记(一)/" title="OD脱壳学习笔记(一)">http://0xpoker.cuit.site/20171130/OD脱壳学习笔记(一)/</a>
             <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171130/OD脱壳学习笔记(一)/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
