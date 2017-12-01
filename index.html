@@ -327,13 +327,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="Linux下的动态调试起GDB的使用说明"><a href="#Linux下的动态调试起GDB的使用说明" class="headerlink" title="Linux下的动态调试起GDB的使用说明"></a>Linux下的动态调试起GDB的使用说明</h1><h2 id="什么是GDB"><a href="#什么是GDB" class="headerlink" title="什么是GDB"></a>什么是GDB</h2><p><strong>参考资料：</strong><a href="https://baike.baidu.com/item/gdb/10869514" title="百度百科----GDB" target="_blank" rel="noopener">百度百科—-GDB</a><br>简单的叙述，GDB就是一个在linux下运行的动态调试器，使用方法和Windows上的那些差不多，但是操作较为复杂，毕竟是命令行控制的动态调试器，不过这也没埋没他的光点，GDB的强大只有用过才知道。  </p>
-<h2 id="人生苦短，我用gdb-peda"><a href="#人生苦短，我用gdb-peda" class="headerlink" title="人生苦短，我用gdb-peda"></a>人生苦短，我用gdb-peda</h2><p>正如我标题叙述的这样，我用的GDB不是原生态的GDB，那个原生态版的太难操作，所以推荐大家去下载使用pwn版的GDB下面给个安装方法，安装环境是Ubuntu：<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git  </span><br><span class="line">sudo apt-get install gdb</span><br><span class="line">git clone https://github.com/longld/peda.git ~/peda  </span><br><span class="line">echo <span class="string">"source ~/peda/peda.py"</span> &gt;&gt; ~/.gdbinit  </span><br><span class="line">echo <span class="string">"DONE! debug your program with gdb and enjoy"</span></span><br></pre></td></tr></table></figure></p>
-<p>这也是官方github给的安装示例。  </p>
-<blockquote>
-<p>peda的一个实用命令checksec检测安全保护<br>peda的另一个实用命令searchmem用搜索内存</p>
-</blockquote>
-<p><strong>下面介绍点命令及使用说明：</strong><br>
+              GDB这东西以前没用过，也没想到有这么强大，我感觉比OD强大，而且这是linux最有效的动态调试工具，所以还是学习下吧，正好去0x9A82师傅博客上搜刮了一点资源，2333.............
           
       
       
@@ -400,12 +394,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="格式化字符串漏洞学习笔记-四"><a href="#格式化字符串漏洞学习笔记-四" class="headerlink" title="格式化字符串漏洞学习笔记(四)"></a>格式化字符串漏洞学习笔记(四)</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>格式化字符串的相关内容我也学习了很久了，虽然菜，但还是基本上都看了下，不管看懂没看懂，始终是有一点自己的理解的，所以今天的这篇文章也应该是我学习格式化字符串漏洞的一个阶段的最后一片文章，如果我后续还知道了什么新的骚操作，我一定会补上的。  </p>
-<h2 id="格式化字符串漏洞的灵活运用"><a href="#格式化字符串漏洞的灵活运用" class="headerlink" title="格式化字符串漏洞的灵活运用"></a>格式化字符串漏洞的灵活运用</h2><p>在我之前的学习中我也就学会了格式化字符串来 <strong>读取任意地址的内存和向任意地址写内存</strong> 。可是，仅仅这么一些操作就能满足黑客的心吗？答案是，不能的。在今天的学习中，我发现了用 <strong>printf</strong> 来leak内存，然后把一个原本只能 <strong>nc</strong> 连接的文件给下载下来。  </p>
-<blockquote>
-<p>首先这个操作是应用于那种没有给文件，而又有人需要放进IDA分析一波的，要是弄不下来岂不是很难受了，所有才有了这样的操作。</p>
-</blockquote>
-<h3 id="大致原理"><a href="#大致原理" class="headerlink" title="大致原理"></a>大致原理</h3><p>既然要学习一个东西，那肯定是要先看看原理的。<br>首先，这种没有给文件，直接上一个 <strong>nc</strong> 连接给做pwn题的，叫做 <strong>“blind pwn”</strong> ,故名思意嘛，这就类似于 <strong>web</strong> 题的盲注。可是，不知道是哪位大牛发现这个方式的，真的很厉害。<br><strong>原理：</strong>格式化字符串漏洞的读取任意地址的内存并输出出来。<br><strong>dump .text段：</strong><br>从泄露的栈信息中，我们还可以发现别的东西，比如说我们输入的字符串在栈中的偏移(调用printf时的栈)。可以通过这个来确定一下大概栈上的分布是怎样的。<br>
+              好吧，纠正下上一次笔记，我错了，看来我到今天都还没学完printf的格式化字符串漏洞.................博大精深，遥不可及啊。
           
       
       
@@ -472,12 +461,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="格式化字符串漏洞学习笔记-三"><a href="#格式化字符串漏洞学习笔记-三" class="headerlink" title="格式化字符串漏洞学习笔记(三)"></a>格式化字符串漏洞学习笔记(三)</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这个部分的相关知识快要完了，不过虽然知识没了，不过用起来却是灵活多变的，主要是用多种攻击手段的组合，来实现攻破的目的。所以，即使这个知识的知识点没了，但是还有其他的知识的，并不是没有需要学习的东西了。  </p>
-<blockquote>
-<p>还有一点，我回去又仔细看了下魔术公式，发现其实就是将需要写入的数据分段然后按指定的字节去输入再拼接。  </p>
-</blockquote>
-<h2 id="有binary但是格式化字符串不在栈中"><a href="#有binary但是格式化字符串不在栈中" class="headerlink" title="有binary但是格式化字符串不在栈中"></a>有binary但是格式化字符串不在栈中</h2><p>可能会有点疑问，不在栈上能在哪里呢？<br><strong>在堆上</strong>  </p>
-<h3 id="什么是堆，什么是栈？"><a href="#什么是堆，什么是栈？" class="headerlink" title="什么是堆，什么是栈？"></a>什么是堆，什么是栈？</h3><p>堆栈是两种数据结构，两者都是一种数据项按序排列的数据结构。<br><strong>主要特点：堆，队列优先,先进先出（FIFO—first in first out）。栈，先进后出(FILO—First-In/Last-Out)。</strong><br><strong>参考资料：</strong><a href="https://baike.baidu.com/item/堆栈/1682032" title="堆栈介绍" target="_blank" rel="noopener">百度百科—-堆栈</a><br>
+              我感觉我学到这里差不多应该把格式化字符串漏洞的相关内容学完了吧..............emmmmm，应该吧。
           
       
       
@@ -544,13 +528,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="格式化字符串漏洞学习笔记-二"><a href="#格式化字符串漏洞学习笔记-二" class="headerlink" title="格式化字符串漏洞学习笔记(二)"></a>格式化字符串漏洞学习笔记(二)</h1><h2 id="利用格式化字符串漏洞构建任意读payload"><a href="#利用格式化字符串漏洞构建任意读payload" class="headerlink" title="利用格式化字符串漏洞构建任意读payload"></a>利用格式化字符串漏洞构建任意读payload</h2><p>该漏洞形如：  </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;a);</span><br><span class="line"><span class="built_in">printf</span>(&amp;a);</span><br></pre></td></tr></table></figure>
-<p>在代码中我们可以直接看到我们可以通过输入格式化字符，来泄露栈上内容，同理，我们先输入某个值，用一长串 <strong>%08X.%08X.%08X……..</strong><br>来定位我们输入的值是放在哪里的，然后就可以利用 <strong>%s</strong> 对那个地址所指向的内容进行读取。<br>同时，还有个知识点，那就是不定参数的使用，比如： <strong>%10$08X</strong> 意为读取栈上 <strong>相对esp偏移量为10的参数 [形如%08X这样的默认是读偏移为1的参数]</strong> 同理， <strong>%s、%p、%n</strong> 都可以使用这个方法，用法相似。<br>挂一张与之相关的图吧，方便理解<br><img src="http://p9.qhimg.com/dr/__50/t0163bde2c444318577.png" alt="栈结构" title="栈的结构">  </p>
-<blockquote>
-<p><strong>用这个一般是泄漏地址，好像是libc函数库地址吧，这样好像可以推算出libc函数库的版本，然后加以利用。</strong>  </p>
-</blockquote>
-<h2 id="利用格式化字符串漏洞构建任意写payload"><a href="#利用格式化字符串漏洞构建任意写payload" class="headerlink" title="利用格式化字符串漏洞构建任意写payload"></a>利用格式化字符串漏洞构建任意写payload</h2><p>当然这个是建立在上一个知识点的基础上的，要是啥都不知道那不相当于乱写吗。<br>
+              实不相瞒，我感觉这个格式化字符加printf家族的成员可以搞好多事啊，不如叫printf家族作搞事家族算了。
           
       
       
@@ -617,19 +595,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="保护技术-此文章长期更新"><a href="#保护技术-此文章长期更新" class="headerlink" title="保护技术-此文章长期更新"></a>保护技术-此文章长期更新</h1><h2 id="NX保护和DEP保护"><a href="#NX保护和DEP保护" class="headerlink" title="NX保护和DEP保护"></a>NX保护和DEP保护</h2><p>两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限  </p>
-<h3 id="NX保护"><a href="#NX保护" class="headerlink" title="NX保护"></a>NX保护</h3><p>NX保护，全称为 <strong>“No eXecute”</strong> ，意为 <strong>[禁止执行]</strong><br>我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。  </p>
-<blockquote>
-<p><strong>linux最早的漏洞防护机制nx-stack刚刚出现后就有人想出了突破方法。那就是只有栈是不可执行，而除了栈以外的其他地方还是可以执行的，只要把返回地址执行别的地方就可以。</strong></p>
-</blockquote>
-<p><strong>参考资料：</strong><a href="https://baike.baidu.com/item/NX/18775031" title="NX保护技术" target="_blank" rel="noopener">百度百科—-NX</a></p>
-<h3 id="DEP保护"><a href="#DEP保护" class="headerlink" title="DEP保护"></a>DEP保护</h3><p>DEP保护，全称为 <strong>Data Execution Prevention</strong> ，意为 <strong>数据执行保护</strong>  </p>
-<blockquote>
-<p><strong>数据执行保护(DEP)</strong> 是一套软硬件技术，能够在内存上执行额外检查以帮助防止在系统上运行恶意代码</p>
-</blockquote>
-<h4 id="主要优点"><a href="#主要优点" class="headerlink" title="主要优点"></a>主要优点</h4><blockquote>
-<p>我觉得这种保护技术组要应用于Windows</p>
-</blockquote>
+              这篇文章就用来汇总我看到过的和我后期学习看到的软件保护和系统保护技术吧，这些东西，记着总没错。
           
       
       
@@ -696,9 +662,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="格式化字符串漏洞学习笔记-一"><a href="#格式化字符串漏洞学习笔记-一" class="headerlink" title="格式化字符串漏洞学习笔记(一)"></a>格式化字符串漏洞学习笔记(一)</h1><h2 id="格式化字符串漏洞产生原因"><a href="#格式化字符串漏洞产生原因" class="headerlink" title="格式化字符串漏洞产生原因"></a>格式化字符串漏洞产生原因</h2><p><strong>该漏洞的产生主要是因为程序员偷懒</strong><br>格式化字符串漏洞在通用漏洞类型库 <strong>CWE</strong> 中的编号是 <strong>134</strong>，其解释为 <strong>“软件使用了格式化字符串作为参数，且该格式化字符串来自外部输入”</strong>。<br>下面举例说明下什么时候存在这样的漏洞什么时候没有  </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,str);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%s"</span>,str);</span><br></pre></td></tr></table></figure>
-<p>在上述这个程序中就不存在这样的漏洞，也是正常学习者编程的方式，但是接下来这样就会出现漏洞<br>
+              从今天开始重新学习格式化字符串了，这东西感觉挺厉害的呢，好像emmmm................反正感觉挺牛逼，要不来一起看看呢。
           
       
       
@@ -765,42 +729,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="C语言笔记——常量与宏定义"><a href="#C语言笔记——常量与宏定义" class="headerlink" title="C语言笔记——常量与宏定义"></a>C语言笔记——常量与宏定义</h1><h2 id="特殊要点"><a href="#特殊要点" class="headerlink" title="特殊要点"></a>特殊要点</h2><ul>
-<li>字符串常量在声明的时候编译器会在其后加一个 <strong>/x00</strong> 空字符</li>
-<li>有 <strong>#</strong> 开头的命令都称为预处理命令</li>
-<li>变量代表的一个空间名字可以改变，而常量是一个确定的值，不能被改变</li>
-</ul>
-<h2 id="常量分类"><a href="#常量分类" class="headerlink" title="常量分类"></a>常量分类</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">类型</th>
-<th style="text-align:left">示例或说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">整型常量</td>
-<td style="text-align:left">如：520，1314，123</td>
-</tr>
-<tr>
-<td style="text-align:center">实型常量</td>
-<td style="text-align:left">如：3.14，1.23，8.97</td>
-</tr>
-<tr>
-<td style="text-align:center">字符常量</td>
-<td style="text-align:left">又分为：普通字符，转义字符</td>
-</tr>
-<tr>
-<td style="text-align:center">字符串常量</td>
-<td style="text-align:left">如：“Love”</td>
-</tr>
-<tr>
-<td style="text-align:center">符号常量</td>
-<td style="text-align:left">使用前必须先定义</td>
-</tr>
-</tbody>
-</table>
-<h2 id="如何定义符号常量"><a href="#如何定义符号常量" class="headerlink" title="如何定义符号常量"></a>如何定义符号常量</h2><p><strong>格式：#define [name]</strong></p>
+              正好，学了两章，就先发两章吧，感觉emmmmm，C语言还是挺接近系统底层控制的，这样的语言学深了也不简单啊..................唉！
           
       
       
@@ -867,24 +796,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="C语言笔记——变量"><a href="#C语言笔记——变量" class="headerlink" title="C语言笔记——变量"></a>C语言笔记——变量</h1><p><strong>好不容易开始学C语言了，那就把笔记忘这上面搬过来吧。</strong></p>
-<h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><ul>
-<li>C语言变量名只能是英文字母（A-Z,a-z）和数字（0-9）或者下划线（_）组成。</li>
-<li>必须是字母或者下划线开头。</li>
-<li>变量名区分大小写（如 F ≠ f ）</li>
-<li>不能使用关键字对变量进行命名。</li>
-<li>C语言的变量必须先声明再使用，包括实参和形参</li>
-</ul>
-<h2 id="传统C语言关键词"><a href="#传统C语言关键词" class="headerlink" title="传统C语言关键词"></a>传统C语言关键词</h2><pre><code>■ auto    ■ break   ■ case   ■ char   ■ const   ■ continue
-■ default   ■ do   ■ double   ■ else   ■ enum   ■ extern
-■ float   ■ for   ■ goto   ■ if   ■ int   ■ long   ■ register
-■ return   ■ short  ■ signed  ■ sizeof   ■ static ■ struct
-■ switch   ■ typedef   ■ union   ■ unsigned   ■ void
-■ volatile   ■ while   ■ inline   ■ restrict   ■ _Bool
-■ _Complex   ■ _Imaginary   ■ _Alignas   ■ _Alignof  
-■ _Atomic   ■ _Static_assert   ■ _Noreturn
-■ _Thread_local   ■ _Generic
-</code></pre>
+              偷得浮生半日闲，学习了下C语言，其实吧，我一直挺想好好学习下C语言的，可是无奈时间总是被占用，真的是.........................留下了没技术的泪水.jpg
           
       
       

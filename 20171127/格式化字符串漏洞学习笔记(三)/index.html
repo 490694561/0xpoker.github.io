@@ -5,18 +5,18 @@
   
   <title>格式化字符串漏洞学习笔记(三) | Poker&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="格式化字符串漏洞学习笔记(三)前言这个部分的相关知识快要完了，不过虽然知识没了，不过用起来却是灵活多变的，主要是用多种攻击手段的组合，来实现攻破的目的。所以，即使这个知识的知识点没了，但是还有其他的知识的，并不是没有需要学习的东西了。    还有一点，我回去又仔细看了下魔术公式，发现其实就是将需要写入的数据分段然后按指">
+  <meta name="description" content="我感觉我学到这里差不多应该把格式化字符串漏洞的相关内容学完了吧..............emmmmm，应该吧。">
 <meta name="keywords" content="格式化字符串,漏洞">
 <meta property="og:type" content="article">
 <meta property="og:title" content="格式化字符串漏洞学习笔记(三)">
 <meta property="og:url" content="http://0xpoker.cuit.site/20171127/格式化字符串漏洞学习笔记(三)/index.html">
 <meta property="og:site_name" content="Poker&#39;s Blog">
-<meta property="og:description" content="格式化字符串漏洞学习笔记(三)前言这个部分的相关知识快要完了，不过虽然知识没了，不过用起来却是灵活多变的，主要是用多种攻击手段的组合，来实现攻破的目的。所以，即使这个知识的知识点没了，但是还有其他的知识的，并不是没有需要学习的东西了。    还有一点，我回去又仔细看了下魔术公式，发现其实就是将需要写入的数据分段然后按指定的字节去输入再拼接。    有binary但是格式化字符串不在栈中可能会有点疑">
+<meta property="og:description" content="我感觉我学到这里差不多应该把格式化字符串漏洞的相关内容学完了吧..............emmmmm，应该吧。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-11-30T17:40:22.644Z">
+<meta property="og:updated_time" content="2017-12-01T18:18:35.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="格式化字符串漏洞学习笔记(三)">
-<meta name="twitter:description" content="格式化字符串漏洞学习笔记(三)前言这个部分的相关知识快要完了，不过虽然知识没了，不过用起来却是灵活多变的，主要是用多种攻击手段的组合，来实现攻破的目的。所以，即使这个知识的知识点没了，但是还有其他的知识的，并不是没有需要学习的东西了。    还有一点，我回去又仔细看了下魔术公式，发现其实就是将需要写入的数据分段然后按指定的字节去输入再拼接。    有binary但是格式化字符串不在栈中可能会有点疑">
+<meta name="twitter:description" content="我感觉我学到这里差不多应该把格式化字符串漏洞的相关内容学完了吧..............emmmmm，应该吧。">
   
     <link rel="alternative" href="/atom.xml" title="Poker&#39;s Blog" type="application/atom+xml">
   
@@ -287,7 +287,7 @@
 <p>在知道这些东西以后我们可以通过直接使用 <strong>现成的“/bin/sh”</strong> 或者<strong>自己构建</strong> 。<br>通常自己构建的话，形如：  </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload = %<span class="number">11</span>$x+p32(system)+‘AAAA’+p32(binsh)</span><br></pre></td></tr></table></figure>
 <p>解释下上面都是些什么意思吧，<br>先打印出偏移为11的栈存的值，然后是system的地址，<br>上述 <strong>AAAA</strong> 部分原本应该存放的是system函数的返回地址，可是我们做大部分题的时候调用完成之后不需要返回了，所以这里就自定义了4个字节。<br>最后是 <strong>/bin/sh</strong> 字符串，这里满足 <strong>call传参调用规则</strong> [先push然后进入call的时候往栈上放返回地址]<br>然后返回的时候会清理栈帧，这时候利用这一点，<strong>++(之前说过数据被存储在堆上)++</strong> 然后将栈上ebp的值覆盖为堆上相关的地址，这样一来，原本会执行如下这样的代码：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov esp,ebp</span><br><span class="line">pop ebp</span><br></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mov </span>esp,ebp</span><br><span class="line"><span class="keyword">pop </span>ebp</span><br></pre></td></tr></table></figure>
 <p>现在执行之后，esp就会指向堆上的内容，这样就实现了堆栈互换，然后再操作堆和栈就基本一致了。<br>感觉头有点晕，什么地方写得不对的，改天再来改改吧，先去睡觉了！</p>
 
       
@@ -301,7 +301,7 @@
         <p><span>本文标题:</span><a href="/20171127/格式化字符串漏洞学习笔记(三)/">格式化字符串漏洞学习笔记(三)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Poker 的个人博客">Poker</a></p>
         <p><span>发布时间:</span>2017年11月28日 - 08时07分</p>
-        <p><span>最后更新:</span>2017年11月30日 - 09时40分</p>
+        <p><span>最后更新:</span>2017年12月01日 - 10时18分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/20171127/格式化字符串漏洞学习笔记(三)/" title="格式化字符串漏洞学习笔记(三)">http://0xpoker.cuit.site/20171127/格式化字符串漏洞学习笔记(三)/</a>
             <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171127/格式化字符串漏洞学习笔记(三)/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
