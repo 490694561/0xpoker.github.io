@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Poker&#39;s Blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://0xpoker.cuit.site/"/>
+  <updated>2017-12-01T18:35:59.737Z</updated>
+  <id>http://0xpoker.cuit.site/</id>
+  
+  <author>
+    <name>Poker</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OD脱壳学习笔记(一)</title>
+    <link href="http://0xpoker.cuit.site/20171130/OD%E8%84%B1%E5%A3%B3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/"/>
+    <id>http://0xpoker.cuit.site/20171130/OD脱壳学习笔记(一)/</id>
+    <published>2017-12-01T01:29:09.000Z</published>
+    <updated>2017-12-01T18:35:59.737Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="OD脱壳学习笔记-一"><a href="#OD脱壳学习笔记-一" class="headerlink" title="OD脱壳学习笔记(一)"></a>OD脱壳学习笔记(一)</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本来在这里我不打算放相关逆向的笔记了，但是emmm本人技术太菜，刚刚看一个比赛的题，签到都卡了好久，心里难受，想着就先放上来吧。</p><h2 id="常用手脱方法"><a href="#常用手脱方法" class="headerlink" title="常用手脱方法"></a>常用手脱方法</h2><h3 id="单步跟踪法"><a href="#单步跟踪法" class="headerlink" title="单步跟踪法"></a>单步跟踪法</h3><ol><li>OD载入程序，不分析其代码</li><li>遵循原则，近CALL用F7，远CALL用F8，实现向下走</li><li>有循环处，在下一句代码处用F4(或者右键-&gt;代码断点运行到所选)</li><li>大的跳转(大跨段，<code>JMP XXXXXXXX</code>或者<code>JE XXXXXXXX</code>或者<code>RETN</code>)，很快就会到OEP的</li></ol><h3 id="最后一次异常法"><a href="#最后一次异常法" class="headerlink" title="最后一次异常法"></a>最后一次异常法</h3><ol><li>OD打开—点选项—调试选项—去掉所有异常—CTRL+F2重载</li><li>SHIFT+F9.只到程序运行，记下次数M</li><li>CTRL+F2重载—按SHIFT+F9(次数为M-1次)</li><li>按CTRL+G—输入OE右下角的SE句柄前的地址</li><li>F2下断—SHIFT+F9到断点处</li><li>去断按F8，到OEP</li></ol><h3 id="模拟跟踪法"><a href="#模拟跟踪法" class="headerlink" title="模拟跟踪法"></a>模拟跟踪法</h3><p><strong>在能判断无暗桩的情况下使用</strong></p><ol><li>F9试运行，跑起来就无SEH暗桩之类的</li><li><code>ALT+N</code>打开内存镜像，找到包含<code>=sfx,imports reloco tions</code>字符</li><li><code>地址=XXX</code>  命令行输入: <code>tceip&lt;XXX</code>,回车</li></ol><h3 id="内存镜像法"><a href="#内存镜像法" class="headerlink" title="内存镜像法"></a>内存镜像法</h3><ol><li>先OD载入软件</li><li>点选项—调试选项—忽略全部—CTRL+F2重载</li><li>ALT+N打开内存镜像，找程序第一个.rsrc段—F2下断—SHIFT+F9运行到断点，再打开找到程序第一个.rsrc段上面的.code段处（就是00401000处），F2下断—SHIFT+F9或无异常按F9，到OEP</li></ol><h3 id="ESP定律法"><a href="#ESP定律法" class="headerlink" title="ESP定律法"></a>ESP定律法</h3><ol><li>F8，观察OD右上角寄存器中ESP有没有实现（红色）</li><li>命令行下 <code>DD XXXXXXXX</code>（当前代码ESP值），回车</li><li>DD就选中下端地址，断点—硬件访问—DWORD断点，F9运行，到跳转处按F8 到OEP  <blockquote><p>讲到ESP定律脱壳，先载入程序然后F8单步执行并观察寄存器中ESP的值变化，当ESP值变红时右键数据窗口跟随，然后数据窗口跟随的值右键断点word，之后F9运行到断点，然后再往下找很长的jmp之后到入口。<br>emm大概就是这样吧。</p></blockquote></li></ol><h3 id="一步到ESP法"><a href="#一步到ESP法" class="headerlink" title="一步到ESP法"></a>一步到ESP法</h3><p><strong>只适用于少数壳，如UPX、ASPACK</strong></p><ol><li>CTRL+F—输入：<code>POPAD</code>回车查找—F2下断—F9运行到此处.</li><li>来到大跳转处，点F8到OEP</li></ol><h3 id="SFX法"><a href="#SFX法" class="headerlink" title="SFX法"></a>SFX法</h3><ol><li>设置OD，忽略所有异常</li><li>切换到SFX选项卡，选择“字节模式跟踪实际入口”，确定</li><li>重载—“否”压缩代码，到OEP</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      脱壳这东西emmm知识点挺广的，我就写一点点基础的，后面需要复杂的，我再去补充成二三好了.........
+    
+    </summary>
+    
+      <category term="逆向" scheme="http://0xpoker.cuit.site/categories/%E9%80%86%E5%90%91/"/>
+    
+    
+      <category term="逆向" scheme="http://0xpoker.cuit.site/tags/%E9%80%86%E5%90%91/"/>
+    
+      <category term="脱壳" scheme="http://0xpoker.cuit.site/tags/%E8%84%B1%E5%A3%B3/"/>
+    
+      <category term="教程" scheme="http://0xpoker.cuit.site/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux下的动态调试起GDB的使用说明</title>
+    <link href="http://0xpoker.cuit.site/20171129/Linux%E4%B8%8B%E7%9A%84%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95%E8%B5%B7GDB%E7%9A%84%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"/>
+    <id>http://0xpoker.cuit.site/20171129/Linux下的动态调试起GDB的使用说明/</id>
+    <published>2017-11-30T01:53:16.000Z</published>
+    <updated>2017-12-01T18:09:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux下的动态调试起GDB的使用说明"><a href="#Linux下的动态调试起GDB的使用说明" class="headerlink" title="Linux下的动态调试起GDB的使用说明"></a>Linux下的动态调试起GDB的使用说明</h1><h2 id="什么是GDB"><a href="#什么是GDB" class="headerlink" title="什么是GDB"></a>什么是GDB</h2><p><strong>参考资料：</strong><a href="https://baike.baidu.com/item/gdb/10869514" title="百度百科----GDB" target="_blank" rel="noopener">百度百科—-GDB</a><br>简单的叙述，GDB就是一个在linux下运行的动态调试器，使用方法和Windows上的那些差不多，但是操作较为复杂，毕竟是命令行控制的动态调试器，不过这也没埋没他的光点，GDB的强大只有用过才知道。  </p><h2 id="人生苦短，我用gdb-peda"><a href="#人生苦短，我用gdb-peda" class="headerlink" title="人生苦短，我用gdb-peda"></a>人生苦短，我用gdb-peda</h2><p>正如我标题叙述的这样，我用的GDB不是原生态的GDB，那个原生态版的太难操作，所以推荐大家去下载使用pwn版的GDB下面给个安装方法，安装环境是Ubuntu：<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git  </span><br><span class="line">sudo apt-get install gdb</span><br><span class="line">git clone https://github.com/longld/peda.git ~/peda  </span><br><span class="line">echo <span class="string">"source ~/peda/peda.py"</span> &gt;&gt; ~/.gdbinit  </span><br><span class="line">echo <span class="string">"DONE! debug your program with gdb and enjoy"</span></span><br></pre></td></tr></table></figure></p><p>这也是官方github给的安装示例。  </p><blockquote><p>peda的一个实用命令checksec检测安全保护<br>peda的另一个实用命令searchmem用搜索内存</p></blockquote><p><strong>下面介绍点命令及使用说明：</strong><br><a id="more"></a></p><table><thead><tr><th style="text-align:center">命令符号</th><th style="text-align:left">使用说明</th></tr></thead><tbody><tr><td style="text-align:center">file 路径</td><td style="text-align:left">附加文件</td></tr><tr><td style="text-align:center">r</td><td style="text-align:left">开始执行</td></tr><tr><td style="text-align:center">c</td><td style="text-align:left">继续执行</td></tr><tr><td style="text-align:center">step</td><td style="text-align:left">单步步入</td></tr><tr><td style="text-align:center">next</td><td style="text-align:left">单步步过</td></tr><tr><td style="text-align:center">b [addr]</td><td style="text-align:left">下断点</td></tr><tr><td style="text-align:center">enable</td><td style="text-align:left">激活断点</td></tr><tr><td style="text-align:center">disable</td><td style="text-align:left">禁用断点</td></tr><tr><td style="text-align:center">info b</td><td style="text-align:left">查看断点</td></tr><tr><td style="text-align:center">del num</td><td style="text-align:left">删除断点</td></tr><tr><td style="text-align:center">x/wx $esp</td><td style="text-align:left">以4字节16进制显示栈中内容</td></tr><tr><td style="text-align:center">stack 100</td><td style="text-align:left">插件提供的，显示栈中100项</td></tr><tr><td style="text-align:center">find xxx</td><td style="text-align:left">快速查找，很实用</td></tr><tr><td style="text-align:center">s</td><td style="text-align:left">按字符串输出</td></tr><tr><td style="text-align:center">x</td><td style="text-align:left">按十六进制格式显示变量。</td></tr><tr><td style="text-align:center">d</td><td style="text-align:left">按十进制格式显示变量。</td></tr><tr><td style="text-align:center">u</td><td style="text-align:left">按十六进制格式显示无符号整型。</td></tr><tr><td style="text-align:center">o</td><td style="text-align:left">按八进制格式显示变量。</td></tr><tr><td style="text-align:center">t</td><td style="text-align:left">按二进制格式显示变量。</td></tr><tr><td style="text-align:center">a</td><td style="text-align:left">按十六进制格式显示变量。</td></tr><tr><td style="text-align:center">c</td><td style="text-align:left">按字符格式显示变量。</td></tr><tr><td style="text-align:center">f</td><td style="text-align:left">按浮点数格式显示变量。</td></tr><tr><td style="text-align:center">x/<n f="" u=""> [addr]</n></td><td style="text-align:left">n、f、u是可选的参数。b表示单字节，h表示双字节，w表示四字 节，g表示八字节</td></tr><tr><td style="text-align:center">(无)</td><td style="text-align:left">但是实际的组合就那么几种</td></tr><tr><td style="text-align:center">x/s 地址</td><td style="text-align:left">查看字符串</td></tr><tr><td style="text-align:center">x/wx 地址</td><td style="text-align:left">查看DWORD</td></tr><tr><td style="text-align:center">x/c 地址</td><td style="text-align:left">单字节查看</td></tr><tr><td style="text-align:center">x/16x $esp+12</td><td style="text-align:left">查看寄存器偏移</td></tr></tbody></table><blockquote><p>set args 可指定运行时参数。(如：set args 10 20 30 40 50)<br>show args 命令可以查看设置好的运行参数。 </p></blockquote><p><strong>使用截图：</strong><br><img src="http://ww1.sinaimg.cn/large/0060lm7Tly1fm0ny2xs5rj30ju0c40uo.jpg" alt="GDB" title="GDB">  </p><p>这是peda的栈视图。其中红色的是栈帧的返回地址，蓝色的表示这个值可能为指针。  </p><blockquote><p>本篇摘自0x9A82师傅的博客<a href="http://www.cnblogs.com/Ox9A82/p/5483186.html" title="相关博文----GDB调试实用命令" target="_blank" rel="noopener">相关博文—-GDB调试实用命令</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      GDB这东西以前没用过，也没想到有这么强大，我感觉比OD强大，而且这是linux最有效的动态调试工具，所以还是学习下吧，正好去0x9A82师傅博客上搜刮了一点资源，2333.............
+    
+    </summary>
+    
+      <category term="调试器" scheme="http://0xpoker.cuit.site/categories/%E8%B0%83%E8%AF%95%E5%99%A8/"/>
+    
+    
+      <category term="调试器" scheme="http://0xpoker.cuit.site/tags/%E8%B0%83%E8%AF%95%E5%99%A8/"/>
+    
+      <category term="使用说明" scheme="http://0xpoker.cuit.site/tags/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>格式化字符串漏洞学习笔记(四)</title>
+    <link href="http://0xpoker.cuit.site/20171129/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E5%9B%9B)/"/>
+    <id>http://0xpoker.cuit.site/20171129/格式化字符串漏洞学习笔记(四)/</id>
+    <published>2017-11-29T23:32:10.000Z</published>
+    <updated>2017-12-01T18:20:07.015Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="格式化字符串漏洞学习笔记-四"><a href="#格式化字符串漏洞学习笔记-四" class="headerlink" title="格式化字符串漏洞学习笔记(四)"></a>格式化字符串漏洞学习笔记(四)</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>格式化字符串的相关内容我也学习了很久了，虽然菜，但还是基本上都看了下，不管看懂没看懂，始终是有一点自己的理解的，所以今天的这篇文章也应该是我学习格式化字符串漏洞的一个阶段的最后一片文章，如果我后续还知道了什么新的骚操作，我一定会补上的。  </p><h2 id="格式化字符串漏洞的灵活运用"><a href="#格式化字符串漏洞的灵活运用" class="headerlink" title="格式化字符串漏洞的灵活运用"></a>格式化字符串漏洞的灵活运用</h2><p>在我之前的学习中我也就学会了格式化字符串来 <strong>读取任意地址的内存和向任意地址写内存</strong> 。可是，仅仅这么一些操作就能满足黑客的心吗？答案是，不能的。在今天的学习中，我发现了用 <strong>printf</strong> 来leak内存，然后把一个原本只能 <strong>nc</strong> 连接的文件给下载下来。  </p><blockquote><p>首先这个操作是应用于那种没有给文件，而又有人需要放进IDA分析一波的，要是弄不下来岂不是很难受了，所有才有了这样的操作。</p></blockquote><h3 id="大致原理"><a href="#大致原理" class="headerlink" title="大致原理"></a>大致原理</h3><p>既然要学习一个东西，那肯定是要先看看原理的。<br>首先，这种没有给文件，直接上一个 <strong>nc</strong> 连接给做pwn题的，叫做 <strong>“blind pwn”</strong> ,故名思意嘛，这就类似于 <strong>web</strong> 题的盲注。可是，不知道是哪位大牛发现这个方式的，真的很厉害。<br><strong>原理：</strong>格式化字符串漏洞的读取任意地址的内存并输出出来。<br><strong>dump .text段：</strong><br>从泄露的栈信息中，我们还可以发现别的东西，比如说我们输入的字符串在栈中的偏移(调用printf时的栈)。可以通过这个来确定一下大概栈上的分布是怎样的。<br><a id="more"></a></p><blockquote><p>主要就是通过格式化字符串漏洞来泄漏text段的内容并且以二进制写入文件，最后对得到的文件进行修补然后虽然文件没法直接运行，但是却可以通过IDA反汇编了。这里的技术细节我也不是很会，所以我也不装逼了，等我以后会了再慢慢装逼。贴几个相关的博文地址吧。</p></blockquote><p><strong>参考资料：</strong><br><a href="http://blog.csdn.net/smalosnail/article/details/53386353" title="初探ROP攻击 Memory Leak &amp; DynELF" target="_blank" rel="noopener">初探ROP攻击 Memory Leak &amp; DynELF</a><br><a href="http://bobao.360.cn/learning/detail/3298.html" title="借助DynELF实现无libc的漏洞利用小结" target="_blank" rel="noopener">借助DynELF实现无libc的漏洞利用小结</a><br><a href="http://bobao.360.cn/ctf/detail/189.html" title="格式化字符串blind pwn详细教程" target="_blank" rel="noopener">格式化字符串blind pwn详细教程</a><br><a href="http://bobao.360.cn/learning/detail/3674.html" title="格式化字符串漏洞利用小结(二)" target="_blank" rel="noopener">格式化字符串漏洞利用小结(二)</a>  </p><h3 id="修补过程"><a href="#修补过程" class="headerlink" title="修补过程"></a>修补过程</h3><p>这个东西在上面的资料里有提到，对比ELF文件模版来修补，不用达到100%修复源文件，这一般也达不到，所以只要修到IDA能反汇编就好，那样就已经方便我们看文件了。  </p><h3 id="常见格式化字符串漏洞攻击操作"><a href="#常见格式化字符串漏洞攻击操作" class="headerlink" title="常见格式化字符串漏洞攻击操作"></a>常见格式化字符串漏洞攻击操作</h3><p><strong>下面这句话引自0x9A82师傅的博客：</strong>  </p><blockquote><p>格式化字符串还有%s参数。那么，如果在栈中保存有指向我们感兴趣数据的 <strong>指针</strong> ，我们就可以在打印指针的时候使用一个%s来打印别的地方的内容。而且一般的程序都会将用户输入的数据储存在栈上。这就给了我们一个 <strong>构造指针</strong> 的机会，再结合格式化字符串漏洞， <strong>几乎</strong> 可以得到所有内存数据。</p></blockquote><h4 id="CTF中该漏洞常见套路"><a href="#CTF中该漏洞常见套路" class="headerlink" title="CTF中该漏洞常见套路"></a>CTF中该漏洞常见套路</h4><p><strong>0x9A82师傅的：</strong><br>由此可见格式化字符串漏洞主要是：<br>1.泄漏任意地址的值，leak内存(比如leak出libc基地址)<br>2.写任意地址，可用于修改got表<br><strong>参考资料：</strong><a href="http://www.cnblogs.com/Ox9A82/p/5429099.html" title="Linux下的格式化字符串漏洞利用姿势" target="_blank" rel="noopener">Linux下的格式化字符串漏洞利用姿势</a>  </p><p><strong>4SUN4_C8师傅的：</strong><br>思路就是覆盖got表并获取shell的流程是(以覆盖printf的got表为例):<br>1.确定printf的plt地址<br>2.通过泄露plt表中的指令内容确定对应的got表地址<br>3.通过泄露的got表地址泄露printf函数的地址<br>4.通过泄露的printf的函数地址确定libc基址，从而获得system地址<br>5.使用格式化字符串的任意写功能将printf的got表中的地址修改为system的地址<br>6.send字符串“/bin/sh;”，那么在调用printf(“/bin/sh;”)的时候实际上调用的是system(“/bin/sh;”)，从而成功获取shell<br><strong>参考资料：</strong><a href="http://bobao.360.cn/ctf/detail/189.html" title="格式化字符串blind pwn详细教程" target="_blank" rel="noopener">格式化字符串blind pwn详细教程</a>  </p><h2 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h2><p>我觉得学习了这个格式化字符串漏洞以后，感觉发现了一片新天地，只能说我觉得我一开始对二进制的理解是有错误的，而且这几天想了想，其实漏洞不会越修补越少，只会越修补越多，只是那些漏洞相对而言是以前没有发现过的，需要经过一个探索过程。<br>这一个学习阶段留下的坑实在是有点多，等我补写东西，再来填坑吧………………</p>]]></content>
+    
+    <summary type="html">
+    
+      好吧，纠正下上一次笔记，我错了，看来我到今天都还没学完printf的格式化字符串漏洞.................博大精深，遥不可及啊。
+    
+    </summary>
+    
+      <category term="漏洞" scheme="http://0xpoker.cuit.site/categories/%E6%BC%8F%E6%B4%9E/"/>
+    
+    
+      <category term="格式化字符串" scheme="http://0xpoker.cuit.site/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="漏洞" scheme="http://0xpoker.cuit.site/tags/%E6%BC%8F%E6%B4%9E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>格式化字符串漏洞学习笔记(三)</title>
+    <link href="http://0xpoker.cuit.site/20171127/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%89)/"/>
+    <id>http://0xpoker.cuit.site/20171127/格式化字符串漏洞学习笔记(三)/</id>
+    <published>2017-11-28T00:07:29.000Z</published>
+    <updated>2017-12-01T18:18:35.975Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="格式化字符串漏洞学习笔记-三"><a href="#格式化字符串漏洞学习笔记-三" class="headerlink" title="格式化字符串漏洞学习笔记(三)"></a>格式化字符串漏洞学习笔记(三)</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这个部分的相关知识快要完了，不过虽然知识没了，不过用起来却是灵活多变的，主要是用多种攻击手段的组合，来实现攻破的目的。所以，即使这个知识的知识点没了，但是还有其他的知识的，并不是没有需要学习的东西了。  </p><blockquote><p>还有一点，我回去又仔细看了下魔术公式，发现其实就是将需要写入的数据分段然后按指定的字节去输入再拼接。  </p></blockquote><h2 id="有binary但是格式化字符串不在栈中"><a href="#有binary但是格式化字符串不在栈中" class="headerlink" title="有binary但是格式化字符串不在栈中"></a>有binary但是格式化字符串不在栈中</h2><p>可能会有点疑问，不在栈上能在哪里呢？<br><strong>在堆上</strong>  </p><h3 id="什么是堆，什么是栈？"><a href="#什么是堆，什么是栈？" class="headerlink" title="什么是堆，什么是栈？"></a>什么是堆，什么是栈？</h3><p>堆栈是两种数据结构，两者都是一种数据项按序排列的数据结构。<br><strong>主要特点：堆，队列优先,先进先出（FIFO—first in first out）。栈，先进后出(FILO—First-In/Last-Out)。</strong><br><strong>参考资料：</strong><a href="https://baike.baidu.com/item/堆栈/1682032" title="堆栈介绍" target="_blank" rel="noopener">百度百科—-堆栈</a><br><a id="more"></a></p><h3 id="那具体该如何操作呢？"><a href="#那具体该如何操作呢？" class="headerlink" title="那具体该如何操作呢？"></a>那具体该如何操作呢？</h3><p>首先使用检查的插件对程序进行保护检测，用以确定该程序开启了什么防护<br>然后使用 <strong>%08x….</strong> 这类的格式化字符泄漏栈上内容大概确定一个栈的结构为什么样的。在确定这一块的栈大致分布着什么和分布在什么位置之后再进行下一步操作。<br>如果是那种开启了 <strong>NX</strong> 保护的程序，那我们就没法通过 <strong>直接写shellcode然后返回地址指向shellcode并执行shellcode</strong> 这种方法来攻击了。<br>这时候我们期待找到一个现成的 <strong>system(“/bin/sh”)</strong> 的地址，然后直接用return的地址指向他来获得shell，可这是理想化的，很多时候这种方法行不通。这时候就得引入一个东西名叫libc函数库。  </p><h4 id="什么是libc函数库？"><a href="#什么是libc函数库？" class="headerlink" title="什么是libc函数库？"></a>什么是libc函数库？</h4><p>libc是linux下C的标准函数库，它包含了C语言最基本的库函数。<br>libc函数库拥有不同的版本，每个版本有它 <strong>独特的特性</strong> ，我们也可以借助此特性找出他的版本。<strong>不同版本的libc里函数的偏移不同。</strong>  </p><h4 id="用什么来查询libc的版本呢？"><a href="#用什么来查询libc的版本呢？" class="headerlink" title="用什么来查询libc的版本呢？"></a>用什么来查询libc的版本呢？</h4><p>首先是泄露出libc相关的参数然后参考下面的操作。  </p><blockquote><p><strong>niklasb</strong> 的 <strong>libc-database</strong> 可以根据main函数返回<strong>libc_start_main函数的 <strong>返回地址的后12bit</strong> 来确定libc版本，需要下载这个软件并运行get文件来获得最新的libc-symbol库。libc-database的原理就是遍历db文件夹下所有libc文件的symbol并比对最后12bit来确定libc版本。除了所有libc库函数的调用地址外，还特别加入了</strong>libc_start_main_ret和“/bin/sh”字符串地址。当然，好像方法不止这一种，大家可以自行百度谷歌看看其他的方法。  </p></blockquote><p>在知道这些东西以后我们可以通过直接使用 <strong>现成的“/bin/sh”</strong> 或者<strong>自己构建</strong> 。<br>通常自己构建的话，形如：  </p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload = %<span class="number">11</span>$x+p32(system)+‘AAAA’+p32(binsh)</span><br></pre></td></tr></table></figure><p>解释下上面都是些什么意思吧，<br>先打印出偏移为11的栈存的值，然后是system的地址，<br>上述 <strong>AAAA</strong> 部分原本应该存放的是system函数的返回地址，可是我们做大部分题的时候调用完成之后不需要返回了，所以这里就自定义了4个字节。<br>最后是 <strong>/bin/sh</strong> 字符串，这里满足 <strong>call传参调用规则</strong> [先push然后进入call的时候往栈上放返回地址]<br>然后返回的时候会清理栈帧，这时候利用这一点，<strong>++(之前说过数据被存储在堆上)++</strong> 然后将栈上ebp的值覆盖为堆上相关的地址，这样一来，原本会执行如下这样的代码：  </p><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mov </span>esp,ebp</span><br><span class="line"><span class="keyword">pop </span>ebp</span><br></pre></td></tr></table></figure><p>现在执行之后，esp就会指向堆上的内容，这样就实现了堆栈互换，然后再操作堆和栈就基本一致了。<br>感觉头有点晕，什么地方写得不对的，改天再来改改吧，先去睡觉了！</p>]]></content>
+    
+    <summary type="html">
+    
+      我感觉我学到这里差不多应该把格式化字符串漏洞的相关内容学完了吧..............emmmmm，应该吧。
+    
+    </summary>
+    
+      <category term="漏洞" scheme="http://0xpoker.cuit.site/categories/%E6%BC%8F%E6%B4%9E/"/>
+    
+    
+      <category term="格式化字符串" scheme="http://0xpoker.cuit.site/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="漏洞" scheme="http://0xpoker.cuit.site/tags/%E6%BC%8F%E6%B4%9E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>格式化字符串漏洞学习笔记(二)</title>
+    <link href="http://0xpoker.cuit.site/20171126/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%BA%8C)/"/>
+    <id>http://0xpoker.cuit.site/20171126/格式化字符串漏洞学习笔记(二)/</id>
+    <published>2017-11-27T01:23:56.000Z</published>
+    <updated>2017-12-01T18:16:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="格式化字符串漏洞学习笔记-二"><a href="#格式化字符串漏洞学习笔记-二" class="headerlink" title="格式化字符串漏洞学习笔记(二)"></a>格式化字符串漏洞学习笔记(二)</h1><h2 id="利用格式化字符串漏洞构建任意读payload"><a href="#利用格式化字符串漏洞构建任意读payload" class="headerlink" title="利用格式化字符串漏洞构建任意读payload"></a>利用格式化字符串漏洞构建任意读payload</h2><p>该漏洞形如：  </p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;a);</span><br><span class="line"><span class="built_in">printf</span>(&amp;a);</span><br></pre></td></tr></table></figure><p>在代码中我们可以直接看到我们可以通过输入格式化字符，来泄露栈上内容，同理，我们先输入某个值，用一长串 <strong>%08X.%08X.%08X……..</strong><br>来定位我们输入的值是放在哪里的，然后就可以利用 <strong>%s</strong> 对那个地址所指向的内容进行读取。<br>同时，还有个知识点，那就是不定参数的使用，比如： <strong>%10$08X</strong> 意为读取栈上 <strong>相对esp偏移量为10的参数 [形如%08X这样的默认是读偏移为1的参数]</strong> 同理， <strong>%s、%p、%n</strong> 都可以使用这个方法，用法相似。<br>挂一张与之相关的图吧，方便理解<br><img src="http://p9.qhimg.com/dr/__50/t0163bde2c444318577.png" alt="栈结构" title="栈的结构">  </p><blockquote><p><strong>用这个一般是泄漏地址，好像是libc函数库地址吧，这样好像可以推算出libc函数库的版本，然后加以利用。</strong>  </p></blockquote><h2 id="利用格式化字符串漏洞构建任意写payload"><a href="#利用格式化字符串漏洞构建任意写payload" class="headerlink" title="利用格式化字符串漏洞构建任意写payload"></a>利用格式化字符串漏洞构建任意写payload</h2><p>当然这个是建立在上一个知识点的基础上的，要是啥都不知道那不相当于乱写吗。<br><a id="more"></a></p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;a);</span><br><span class="line"><span class="built_in">printf</span>(&amp;a);</span><br></pre></td></tr></table></figure><p>代码格式还是不变吧……<br>printf在我们学习的过程中没有学过 <strong>%n</strong> 这些，而且我查百度百科也看到说现在的编译器一般是 <strong>默认禁掉了%n</strong> 但是这个printf任意写的漏洞依然是值得关注的。<br>而且printf任意写漏洞好像对printf家族都有效。在笔记(一)中有写到 <strong>%n的用法是将之前输出的内容长度写到某个地址上去</strong><br>假设我们先了解到了我们输入的内容是从栈上偏移11开始的，并且通过IDA我们找到了需要修改的相关地址。<br><strong>[这里假设地址为0x0804A02C]</strong><br>那就可以构建出如下payload：  </p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\x2c\xa0\x04\x08%<span class="number">11</span>$n</span><br></pre></td></tr></table></figure><p>那上面输入的东西是什么意思呢？<br>解释一下，就是最开始 <strong>以字符形式</strong> 输入地址，因为字符可能没法直接打出来所以用的形式就像这样，但是这个字符不是重点，重点是他对应的地址我们知道是放在栈上偏移为11的地方，这时候我们就 <strong>相当于把一个地址存进了栈里</strong>，然后 <strong>%11$n</strong> 就意为 <strong>将之前输出的字符数量存到栈上偏移量为11的那个地址指向的空间里</strong> 。就这样就实现了任意写。  </p><blockquote><p>在写入时还要考虑精简不然输出字符过多服务器连接就自己断开了<br>精简格式：比如我们要加入4个无关的填充字符，我们可以写成aaaa+”……”但是这样写在短的时候无所谓，长了之后，比如上千个，可能就不支持了或者时间太久了。<br>这时候就考虑两个方法，%[数值][c/x]来输出指定长度的字符串最后再利用%n来对指定的地址写入数据<br>同时在写入数据时也有讲究……<br>正如之前说的我们直接改4字节可能需要输出的字符串长度太长了，这时候就需要 <strong>%hn[两字节]、%hhn[一字节]</strong> 来控制写入的长度，与之相关还有 <strong>%lln</strong> 对应8字节，但是这个好像就用的不是很多了。</p></blockquote><h2 id="魔术公式"><a href="#魔术公式" class="headerlink" title="魔术公式"></a>魔术公式</h2><p>之前看讲解看到过，就是相当于将修改的值拼接在一起，只是在上述例子中还没用到而已，这里贴一张图吧。<br><img src="http://upload-images.jianshu.io/upload_images/2405665-7a4f10104bdb0662.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="魔术公式表" title="魔术公式表"></p><h2 id="相关学习连接"><a href="#相关学习连接" class="headerlink" title="相关学习连接"></a>相关学习连接</h2><p><a href="https://m.bobao.360.cn/learning/appdetail/3654.html" title="格式化字符串漏洞利用小结（一）" target="_blank" rel="noopener">格式化字符串漏洞利用小结（一）</a><br><a href="http://bobao.360.cn/learning/detail/3674.html" title="格式化字符串漏洞利用小结（一）" target="_blank" rel="noopener">格式化字符串漏洞利用小结（二）</a><br><a href="http://veritas501.space/2017/04/28/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/" title="格式化字符串漏洞学习" target="_blank" rel="noopener">格式化字符串漏洞学习</a><br><a href="http://www.jianshu.com/p/f2acfeb66b6c" title="linux高级漏洞攻击" target="_blank" rel="noopener">linux高级漏洞攻击</a></p>]]></content>
+    
+    <summary type="html">
+    
+      实不相瞒，我感觉这个格式化字符加printf家族的成员可以搞好多事啊，不如叫printf家族作搞事家族算了。
+    
+    </summary>
+    
+      <category term="漏洞" scheme="http://0xpoker.cuit.site/categories/%E6%BC%8F%E6%B4%9E/"/>
+    
+    
+      <category term="格式化字符串" scheme="http://0xpoker.cuit.site/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="漏洞" scheme="http://0xpoker.cuit.site/tags/%E6%BC%8F%E6%B4%9E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>保护技术-此文章长期更新</title>
+    <link href="http://0xpoker.cuit.site/20171126/%E4%BF%9D%E6%8A%A4%E6%8A%80%E6%9C%AF-%E6%AD%A4%E6%96%87%E7%AB%A0%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0/"/>
+    <id>http://0xpoker.cuit.site/20171126/保护技术-此文章长期更新/</id>
+    <published>2017-11-26T17:02:50.000Z</published>
+    <updated>2017-12-01T18:21:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="保护技术-此文章长期更新"><a href="#保护技术-此文章长期更新" class="headerlink" title="保护技术-此文章长期更新"></a>保护技术-此文章长期更新</h1><h2 id="NX保护和DEP保护"><a href="#NX保护和DEP保护" class="headerlink" title="NX保护和DEP保护"></a>NX保护和DEP保护</h2><p>两个保护措施都有相同点，都是使数据与代码分离，防止恶意代码被执行简单来说就是关闭了堆栈执行权限  </p><h3 id="NX保护"><a href="#NX保护" class="headerlink" title="NX保护"></a>NX保护</h3><p>NX保护，全称为 <strong>“No eXecute”</strong> ，意为 <strong>[禁止执行]</strong><br>我对它的理解即为栈上数据区域去除执行权限，就能防止大多数溢出攻击，即一些恶意程式，把自身的恶意指令集放在其他程式的数据储存区并执行。  </p><blockquote><p><strong>linux最早的漏洞防护机制nx-stack刚刚出现后就有人想出了突破方法。那就是只有栈是不可执行，而除了栈以外的其他地方还是可以执行的，只要把返回地址执行别的地方就可以。</strong></p></blockquote><p><strong>参考资料：</strong><a href="https://baike.baidu.com/item/NX/18775031" title="NX保护技术" target="_blank" rel="noopener">百度百科—-NX</a></p><h3 id="DEP保护"><a href="#DEP保护" class="headerlink" title="DEP保护"></a>DEP保护</h3><p>DEP保护，全称为 <strong>Data Execution Prevention</strong> ，意为 <strong>数据执行保护</strong>  </p><blockquote><p><strong>数据执行保护(DEP)</strong> 是一套软硬件技术，能够在内存上执行额外检查以帮助防止在系统上运行恶意代码</p></blockquote><h4 id="主要优点"><a href="#主要优点" class="headerlink" title="主要优点"></a>主要优点</h4><blockquote><p>我觉得这种保护技术组要应用于Windows</p></blockquote><a id="more"></a><p>这种技术的保护方式和NX方式有相同的地方，也就是让堆和堆栈上的内容不可执行。 <strong>可帮助防止数据页当作代码执行，从而有效分离数据与代码。</strong><br><strong>百度百科上有这样一句话：</strong>  </p><blockquote><p>可以说，溢出是操作系统(应用软件)永远的痛，Windows 7自然也不例外。所谓溢出主要指缓冲区溢出，就是利用系统(应用软件)漏洞从只有Windows和其他程序可以使用的内存位置执行恶意代码从而达到控制系统的目的。如前所述，缓冲区溢出攻击经常在其它程序的内存缓冲区写入可执行的恶意代码，然后诱骗程序执行恶意代码。使用DEP的目的是阻止恶意插入代码的执行，其运行机制是，Windows利用DEP标记只包含数据的内存位置为非可执行(NX)，当应用程序试图从标记为NX的内存位置执行代码时，Windows的DEP逻辑将阻止应用程序这样做，从而达到保护系统防止溢出。  </p></blockquote><p><strong>参考资料：</strong><a href="https://baike.baidu.com/item/DEP/7694630" title="DEP保护技术" target="_blank" rel="noopener">百度百科—-DEP</a></p><blockquote><p>好像这部分还分为硬件实施DEP和软件实施DEP，鉴于我才开始学习，这个坑先留着吧，过些日子理解之后我再来填</p></blockquote><h2 id="Linux-Canary保护"><a href="#Linux-Canary保护" class="headerlink" title="Linux Canary保护"></a>Linux Canary保护</h2><p><strong>Canary</strong> ，又名 <strong>金丝雀</strong> ，是一个防止溢出修改ret的措施， <strong>Canary</strong> 是Linux众多安全保护机制中的一种，主要用于 <strong>防护栈溢出攻击</strong> 。我们知道，在32位系统上，对于栈溢出漏洞，攻击者通常是通过 <strong>溢出栈缓冲区</strong> ， <strong>覆盖栈上保存的函数返回地址</strong> 来达到 <strong>劫持程序执行流</strong> 的目的：<br><img src="http://ww4.sinaimg.cn/large/0060lm7Tly1fly8rbuqe5j30fh08jwev.jpg" alt="溢出栈缓冲区" title="劫持方式"><br>如上图所示我们只要能够精确计算出需要覆盖的长度是多少，就能精确覆盖ret的地址，达到攻击效果。<br>然而，针对此种攻击情况，如果在函数返回之前，我们能够判断ret地址是否被改写，若被改写则终止程序的执行，便可以有效地应对攻击。如何做到呢？一个很自然的想法是在刚进入函数时，在栈上放置一个标志，在函数结束时，<strong>判断该标志是否被改变</strong>，如果被改变，则表示有攻击行为发生。 <strong>Linux Canary保护机制</strong> 便是如此，如下：<br><img src="http://ww2.sinaimg.cn/large/0060lm7Tly1fly8td94gdj30fh08pdg9.jpg" alt="Canary保护机制" title="Canary保护机制"><br>攻击者如果要通过栈溢出覆盖ret，则必先覆盖Canary。如果我们能判断Canary前后是否一致，便能够判断是否有攻击行为发生。  </p><blockquote><p><strong>注：上述图例仅用于说明，实际上canary并不一定是与栈上保存的BP地址相邻的。</strong><br><strong>参考资料：</strong><a href="https://www.cnblogs.com/gsharpsh00ter/p/6420233.html" title="Canary绕过之__stack_chk_fail劫持" target="_blank" rel="noopener">0ctf2015 flagen - Canary绕过之__stack_chk_fail劫持</a>  </p></blockquote><h2 id="ASLR地址空间布局随机化"><a href="#ASLR地址空间布局随机化" class="headerlink" title="ASLR地址空间布局随机化"></a>ASLR地址空间布局随机化</h2><p><strong>ASLR</strong> ，全称为 <strong>Address space layout randomization</strong><br>顾名思义，这个保护措施的主要内容就是把地址给随机化了，用以增加攻击者对地址预测的难度，防止攻击者直接定位攻击代码位置，达到阻止溢出攻击的目的的一种技术。  </p><blockquote><p>但是在百度百科上也说了这个措施只是能降低缓冲区溢出攻击的成功率，并不是能完全防止溢出。  </p></blockquote><p>关于这个，多的我也说不上来，给几个文章的地址吧。<br><strong>参考资料：</strong><br><a href="http://blog.csdn.net/yygydjkthh/article/details/41794395" title="ASLR地址随机化" target="_blank" rel="noopener">ASLR(Address space layout randomization)地址空间布局随机化</a><br><a href="https://baike.baidu.com/item/aslr/5779647" title="百度百科--ASLR" target="_blank" rel="noopener">百度百科—-ASLR</a>  </p><h2 id="PIE"><a href="#PIE" class="headerlink" title="PIE"></a>PIE</h2><p><strong>PIE</strong> ，全称为 <strong>position-independent executables</strong><br>一般情况下NX和地址空间分布随机化会同时工作。在linux下内存空间随机化被称作PIE。</p><p>内存地址随机化机制，有以下三种情况：  </p><table><thead><tr><th style="text-align:center">参数</th><th style="text-align:left">意义</th></tr></thead><tbody><tr><td style="text-align:center">0</td><td style="text-align:left">表示关闭进程地址空间随机化</td></tr><tr><td style="text-align:center">1</td><td style="text-align:left">表示将mmap的基址，stack和vdso页面随机化</td></tr><tr><td style="text-align:center">2</td><td style="text-align:left">表示在1的基础上增加栈（heap）的随机化</td></tr></tbody></table><blockquote><p>可以防范基于Ret2libc方式的针对DEP的攻击。ASLR和DEP配合使用，能有效阻止攻击者在堆栈上运行恶意代码。<br><strong>Built as PIE：位置独立的可执行区域（position-independent executables）。这样使得在利用缓冲溢出和移动操作系统中存在的其他内存崩溃缺陷时采用面向返回的编程（return-oriented programming）方法变得难得多。</strong>  </p></blockquote><h2 id="FORTIFY"><a href="#FORTIFY" class="headerlink" title="FORTIFY"></a>FORTIFY</h2><p>这个好像是编译器的保护措施，将函数名改变了，从而达到防止缓冲区溢出的作用。具体的坑emmm等我以后学会了些再来填吧。  </p><p>系统防护（全）：<br><a href="http://www.mamicode.com/info-detail-1990426.html" title="二进制的保护机制" target="_blank" rel="noopener">二进制的保护机制</a><br><a href="http://blog.csdn.net/x_nirvana/article/details/61420056" title="保护机制" target="_blank" rel="noopener">WINDOWS和LINUX的内存防护机制</a>  </p>]]></content>
+    
+    <summary type="html">
+    
+      这篇文章就用来汇总我看到过的和我后期学习看到的软件保护和系统保护技术吧，这些东西，记着总没错。
+    
+    </summary>
+    
+      <category term="漏洞" scheme="http://0xpoker.cuit.site/categories/%E6%BC%8F%E6%B4%9E/"/>
+    
+    
+      <category term="漏洞防护" scheme="http://0xpoker.cuit.site/tags/%E6%BC%8F%E6%B4%9E%E9%98%B2%E6%8A%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>格式化字符串漏洞学习笔记(一)</title>
+    <link href="http://0xpoker.cuit.site/20171126/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/"/>
+    <id>http://0xpoker.cuit.site/20171126/格式化字符串漏洞学习笔记(一)/</id>
+    <published>2017-11-26T16:03:40.000Z</published>
+    <updated>2017-12-01T18:12:38.712Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="格式化字符串漏洞学习笔记-一"><a href="#格式化字符串漏洞学习笔记-一" class="headerlink" title="格式化字符串漏洞学习笔记(一)"></a>格式化字符串漏洞学习笔记(一)</h1><h2 id="格式化字符串漏洞产生原因"><a href="#格式化字符串漏洞产生原因" class="headerlink" title="格式化字符串漏洞产生原因"></a>格式化字符串漏洞产生原因</h2><p><strong>该漏洞的产生主要是因为程序员偷懒</strong><br>格式化字符串漏洞在通用漏洞类型库 <strong>CWE</strong> 中的编号是 <strong>134</strong>，其解释为 <strong>“软件使用了格式化字符串作为参数，且该格式化字符串来自外部输入”</strong>。<br>下面举例说明下什么时候存在这样的漏洞什么时候没有  </p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,str);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%s"</span>,str);</span><br></pre></td></tr></table></figure><p>在上述这个程序中就不存在这样的漏洞，也是正常学习者编程的方式，但是接下来这样就会出现漏洞<br><a id="more"></a></p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,str);</span><br><span class="line"><span class="built_in">printf</span>(str)</span><br></pre></td></tr></table></figure><p>在上面这个程序中如果第一次输入的是如：“love”，那后来输出的一样是love，可是，如果我们输入如：<strong>%2$x</strong>，则输出<strong>偏移2处的16进制数据</strong>，在遇到 <strong>%开头的这类字符时</strong>，printf就会<strong>优先</strong>把他当成格式化字符去读取对应的数据甚至修改对应数据，从而达到利用格式化字符串漏洞的作用效果。  </p><h2 id="基本的格式化字符串参数"><a href="#基本的格式化字符串参数" class="headerlink" title="基本的格式化字符串参数"></a>基本的格式化字符串参数</h2><table><thead><tr><th style="text-align:center">符号</th><th style="text-align:left">含义</th></tr></thead><tbody><tr><td style="text-align:center">%c</td><td style="text-align:left">输出字符，配上%n可用于向指定地址写数据。</td></tr><tr><td style="text-align:center">%d</td><td style="text-align:left">输出十进制整数，配上%n可用于向指定地址写数据。</td></tr><tr><td style="text-align:center">%x</td><td style="text-align:left">输出16进制数据，如%i$x表示要泄漏偏移i处4字节长的16进制数据，%i$lx表示要泄漏偏移i处8字节长的16进制数据，32bit和64bit环境下一样。</td></tr><tr><td style="text-align:center">%p</td><td style="text-align:left">输出16进制数据，与%x基本一样，只是附加了前缀0x，在32bit下输出4字节，在64bit下输出8字节，可通过输出字节的长度来判断目标环境是32bit还是64bit。</td></tr><tr><td style="text-align:center">%s</td><td style="text-align:left">输出的内容是字符串，即将偏移处指针指向的字符串输出，如%i$s表示输出偏移i处地址所指向的字符串，在32bit和64bit环境下一样，可用于读取GOT表等信息。</td></tr><tr><td style="text-align:center">%n</td><td style="text-align:left">将%n之前printf已经打印的字符个数赋值给偏移处指针所指向的地址位置，如%100x10$n表示将0x64写入偏移10处保存的指针所指向的地址（4字节），而%$hn表示写入的地址空间为2字节，%$hhn表示写入的地址空间为1字节，%$lln表示写入的地址空间为8字节，在32bit和64bit环境下一样。有时，直接写4字节会导致程序崩溃或等候时间过长，可以通过%$hn或%$hhn来适时调整。</td></tr></tbody></table><blockquote><p>注：<strong>%n</strong>是通过格式化字符串漏洞<strong>改变程序流程</strong>的关键方式，而其他格式化字符串参数可用于读取信息或配合%n写数据。</p></blockquote><h3 id="尾言"><a href="#尾言" class="headerlink" title="尾言"></a>尾言</h3><p>就先介绍这么多吧，本人也是才开始学习，晚上看完一些再继续写下一章吧。  </p>]]></content>
+    
+    <summary type="html">
+    
+      从今天开始重新学习格式化字符串了，这东西感觉挺厉害的呢，好像emmmm................反正感觉挺牛逼，要不来一起看看呢。
+    
+    </summary>
+    
+      <category term="漏洞" scheme="http://0xpoker.cuit.site/categories/%E6%BC%8F%E6%B4%9E/"/>
+    
+    
+      <category term="格式化字符串" scheme="http://0xpoker.cuit.site/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="漏洞" scheme="http://0xpoker.cuit.site/tags/%E6%BC%8F%E6%B4%9E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C语言笔记——常量与宏定义</title>
+    <link href="http://0xpoker.cuit.site/20171124/C%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%B8%B8%E9%87%8F%E4%B8%8E%E5%AE%8F%E5%AE%9A%E4%B9%89/"/>
+    <id>http://0xpoker.cuit.site/20171124/C语言笔记——常量与宏定义/</id>
+    <published>2017-11-24T23:06:54.000Z</published>
+    <updated>2017-12-01T18:25:19.723Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="C语言笔记——常量与宏定义"><a href="#C语言笔记——常量与宏定义" class="headerlink" title="C语言笔记——常量与宏定义"></a>C语言笔记——常量与宏定义</h1><h2 id="特殊要点"><a href="#特殊要点" class="headerlink" title="特殊要点"></a>特殊要点</h2><ul><li>字符串常量在声明的时候编译器会在其后加一个 <strong>/x00</strong> 空字符</li><li>有 <strong>#</strong> 开头的命令都称为预处理命令</li><li>变量代表的一个空间名字可以改变，而常量是一个确定的值，不能被改变</li></ul><h2 id="常量分类"><a href="#常量分类" class="headerlink" title="常量分类"></a>常量分类</h2><table><thead><tr><th style="text-align:center">类型</th><th style="text-align:left">示例或说明</th></tr></thead><tbody><tr><td style="text-align:center">整型常量</td><td style="text-align:left">如：520，1314，123</td></tr><tr><td style="text-align:center">实型常量</td><td style="text-align:left">如：3.14，1.23，8.97</td></tr><tr><td style="text-align:center">字符常量</td><td style="text-align:left">又分为：普通字符，转义字符</td></tr><tr><td style="text-align:center">字符串常量</td><td style="text-align:left">如：“Love”</td></tr><tr><td style="text-align:center">符号常量</td><td style="text-align:left">使用前必须先定义</td></tr></tbody></table><h2 id="如何定义符号常量"><a href="#如何定义符号常量" class="headerlink" title="如何定义符号常量"></a>如何定义符号常量</h2><p><strong>格式：#define [name]</strong></p><a id="more"></a><h2 id="常量标识符命名规则"><a href="#常量标识符命名规则" class="headerlink" title="常量标识符命名规则"></a>常量标识符命名规则</h2><p><strong>和变量命名基本一致</strong></p><h2 id="备用表——转义字符"><a href="#备用表——转义字符" class="headerlink" title="备用表——转义字符"></a>备用表——转义字符</h2><table><thead><tr><th style="text-align:center">转义字符</th><th style="text-align:center">意义</th><th style="text-align:center">ASCII码值（十进制）</th></tr></thead><tbody><tr><td style="text-align:center">\a</td><td style="text-align:center">响铃</td><td style="text-align:center">007</td></tr><tr><td style="text-align:center">\b</td><td style="text-align:center">退格</td><td style="text-align:center">008</td></tr><tr><td style="text-align:center">\f</td><td style="text-align:center">换页</td><td style="text-align:center">012</td></tr><tr><td style="text-align:center">\n</td><td style="text-align:center">换行</td><td style="text-align:center">010</td></tr><tr><td style="text-align:center">\r</td><td style="text-align:center">回车</td><td style="text-align:center">013</td></tr><tr><td style="text-align:center">\t</td><td style="text-align:center">水平制表</td><td style="text-align:center">009</td></tr><tr><td style="text-align:center">\v</td><td style="text-align:center">垂直制表</td><td style="text-align:center">011</td></tr><tr><td style="text-align:center">\\</td><td style="text-align:center">代表反斜线字符</td><td style="text-align:center">092</td></tr><tr><td style="text-align:center">\‘</td><td style="text-align:center">代表一个单引号</td><td style="text-align:center">039</td></tr><tr><td style="text-align:center">\“</td><td style="text-align:center">代表一个双引号</td><td style="text-align:center">034</td></tr><tr><td style="text-align:center">\?</td><td style="text-align:center">代表一个问号</td><td style="text-align:center">063</td></tr><tr><td style="text-align:center">\0</td><td style="text-align:center">代表一个空字符</td><td style="text-align:center">000</td></tr><tr><td style="text-align:center">\ooo</td><td style="text-align:center">1到3位八进制数所代表的任意字符</td><td style="text-align:center">三位八进制</td></tr><tr><td style="text-align:center">\xff</td><td style="text-align:center">1到2位十六进制所代表的任意字符</td><td style="text-align:center">两位十六进制</td></tr></tbody></table>]]></content>
+    
+    <summary type="html">
+    
+      正好，学了两章，就先发两章吧，感觉emmmmm，C语言还是挺接近系统底层控制的，这样的语言学深了也不简单啊..................唉！
+    
+    </summary>
+    
+      <category term="C语言笔记" scheme="http://0xpoker.cuit.site/categories/C%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="C语言" scheme="http://0xpoker.cuit.site/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="笔记" scheme="http://0xpoker.cuit.site/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C语言笔记——变量</title>
+    <link href="http://0xpoker.cuit.site/20171124/C%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%8F%98%E9%87%8F/"/>
+    <id>http://0xpoker.cuit.site/20171124/C语言笔记——变量/</id>
+    <published>2017-11-24T17:52:10.000Z</published>
+    <updated>2017-12-01T18:23:35.708Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="C语言笔记——变量"><a href="#C语言笔记——变量" class="headerlink" title="C语言笔记——变量"></a>C语言笔记——变量</h1><p><strong>好不容易开始学C语言了，那就把笔记忘这上面搬过来吧。</strong></p><h2 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h2><ul><li>C语言变量名只能是英文字母（A-Z,a-z）和数字（0-9）或者下划线（_）组成。</li><li>必须是字母或者下划线开头。</li><li>变量名区分大小写（如 F ≠ f ）</li><li>不能使用关键字对变量进行命名。</li><li>C语言的变量必须先声明再使用，包括实参和形参</li></ul><h2 id="传统C语言关键词"><a href="#传统C语言关键词" class="headerlink" title="传统C语言关键词"></a>传统C语言关键词</h2><pre><code>■ auto    ■ break   ■ case   ■ char   ■ const   ■ continue■ default   ■ do   ■ double   ■ else   ■ enum   ■ extern■ float   ■ for   ■ goto   ■ if   ■ int   ■ long   ■ register■ return   ■ short  ■ signed  ■ sizeof   ■ static ■ struct■ switch   ■ typedef   ■ union   ■ unsigned   ■ void■ volatile   ■ while   ■ inline   ■ restrict   ■ _Bool■ _Complex   ■ _Imaginary   ■ _Alignas   ■ _Alignof  ■ _Atomic   ■ _Static_assert   ■ _Noreturn■ _Thread_local   ■ _Generic</code></pre><a id="more"></a><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><table><thead><tr><th>类型</th><th>符号</th><th>说明</th></tr></thead><tbody><tr><td>整数型</td><td>int</td><td>整型，通常反映了所用机器中整数的最自然长度</td></tr><tr><td>字符型</td><td>char</td><td>字符型，占用一个字节默认无符号</td></tr><tr><td>单精度浮点型</td><td>float</td><td>（无）</td></tr><tr><td>双精度浮点型</td><td>double</td><td>（无）</td></tr></tbody></table><h2 id="格式化字符串与变量对应转换规则"><a href="#格式化字符串与变量对应转换规则" class="headerlink" title="格式化字符串与变量对应转换规则"></a>格式化字符串与变量对应转换规则</h2><table><thead><tr><th style="text-align:center">格式码</th><th style="text-align:center">参数</th><th style="text-align:left">说明</th></tr></thead><tbody><tr><td style="text-align:center">%c</td><td style="text-align:center">字符</td><td style="text-align:left">参数被裁剪为8位字节码并作为字符进行打印</td></tr><tr><td style="text-align:center">%i,%d</td><td style="text-align:center">数字值</td><td style="text-align:left">参数作为一个十进制整数打印。如果给出了精度而且值的位数小于精度位数，前面就用0填充</td></tr><tr><td style="text-align:center">%u,%o,%x,%X</td><td style="text-align:center">数字值</td><td style="text-align:left">参数作为一个无符号数字值打印，u使用十进制，o使用八进制，x或X使用十六进制，两者的区别是x约定使用abcdef，而X约定使用ABCDEF</td></tr><tr><td style="text-align:center">%e,%E</td><td style="text-align:center">数字值</td><td style="text-align:left">参数根据指数形式打印。例如，6.023000e23是使用代码e，6.023000E23是使用代码E。小数点后面的位数由精度字段决定，缺省值是6</td></tr><tr><td style="text-align:center">%f</td><td style="text-align:center">数字值</td><td style="text-align:left">参数按照的常规浮点格式打印。精度字段决定小数点后面的位数，缺省值是6</td></tr><tr><td style="text-align:center">%g,%G</td><td style="text-align:center">数字值</td><td style="text-align:left">参数以%f或%e（如G则%E）的格式打印，取决于它的值。如果指数大于等于-4但小于精度字段就使用%f格式，否则使用指数格式</td></tr><tr><td style="text-align:center">%s</td><td style="text-align:center">字符串</td><td style="text-align:left">打印一个字符串</td></tr><tr><td style="text-align:center">%q</td><td style="text-align:center">（无）</td><td style="text-align:left">打印一个字符串，并将字符串置于一对引号中，如果字符串中包含引号换行等自动添加转义符。如果要读取一个字符串传为代码。为避免用户恶意注入引号等特殊字符，可以使用%q进行格式化</td></tr><tr><td style="text-align:center">%%</td><td style="text-align:center">（无）</td><td style="text-align:left">取消%转义打印一个%字符,即用%%表示本来的%</td></tr></tbody></table><blockquote><p>注： %11.9f中的9表示精确到小数点后9位，以此类推；11表示输出字符串长度为11不够在后面加空格</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      偷得浮生半日闲，学习了下C语言，其实吧，我一直挺想好好学习下C语言的，可是无奈时间总是被占用，真的是.........................留下了没技术的泪水.jpg
+    
+    </summary>
+    
+      <category term="C语言笔记" scheme="http://0xpoker.cuit.site/categories/C%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="C语言" scheme="http://0xpoker.cuit.site/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="笔记" scheme="http://0xpoker.cuit.site/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+</feed>
