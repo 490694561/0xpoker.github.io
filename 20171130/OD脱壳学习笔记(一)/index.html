@@ -3,23 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>格式化字符串漏洞学习笔记(二) | Poker&#39;s Blog</title>
+  <title>OD脱壳学习笔记(一) | Poker&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="格式化字符串漏洞学习笔记(二)利用格式化字符串漏洞构建任意读payload该漏洞形如：   12scanf(&quot;%s&quot;,&amp;amp;a);printf(&amp;amp;a); 在代码中我们可以直接看到我们可以通过输入格式化字符，来泄露栈上内容，同理，我们先输入某个值，用一长串 %08X.%08">
-<meta name="keywords" content="格式化字符串,漏洞">
+  <meta name="description" content="脱壳这东西emmm知识点挺广的，我就写一点点基础的，后面需要复杂的，我再去补充成二三好了.........">
+<meta name="keywords" content="逆向,脱壳,教程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="格式化字符串漏洞学习笔记(二)">
-<meta property="og:url" content="http://0xpoker.cuit.site/20171126/格式化字符串漏洞学习笔记(二)/index.html">
+<meta property="og:title" content="OD脱壳学习笔记(一)">
+<meta property="og:url" content="http://0xpoker.cuit.site/20171130/OD脱壳学习笔记(一)/index.html">
 <meta property="og:site_name" content="Poker&#39;s Blog">
-<meta property="og:description" content="格式化字符串漏洞学习笔记(二)利用格式化字符串漏洞构建任意读payload该漏洞形如：   12scanf(&quot;%s&quot;,&amp;amp;a);printf(&amp;amp;a); 在代码中我们可以直接看到我们可以通过输入格式化字符，来泄露栈上内容，同理，我们先输入某个值，用一长串 %08X.%08X.%08X……..来定位我们输入的值是放在哪里的，然后就可以利用 %s 对那个地址所指向的内容进行读取。同时，还有">
+<meta property="og:description" content="脱壳这东西emmm知识点挺广的，我就写一点点基础的，后面需要复杂的，我再去补充成二三好了.........">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://p9.qhimg.com/dr/__50/t0163bde2c444318577.png">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2405665-7a4f10104bdb0662.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-11-30T17:41:16.000Z">
+<meta property="og:updated_time" content="2017-12-01T18:03:43.041Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="格式化字符串漏洞学习笔记(二)">
-<meta name="twitter:description" content="格式化字符串漏洞学习笔记(二)利用格式化字符串漏洞构建任意读payload该漏洞形如：   12scanf(&quot;%s&quot;,&amp;amp;a);printf(&amp;amp;a); 在代码中我们可以直接看到我们可以通过输入格式化字符，来泄露栈上内容，同理，我们先输入某个值，用一长串 %08X.%08X.%08X……..来定位我们输入的值是放在哪里的，然后就可以利用 %s 对那个地址所指向的内容进行读取。同时，还有">
-<meta name="twitter:image" content="http://p9.qhimg.com/dr/__50/t0163bde2c444318577.png">
+<meta name="twitter:title" content="OD脱壳学习笔记(一)">
+<meta name="twitter:description" content="脱壳这东西emmm知识点挺广的，我就写一点点基础的，后面需要复杂的，我再去补充成二三好了.........">
   
     <link rel="alternative" href="/atom.xml" title="Poker&#39;s Blog" type="application/atom+xml">
   
@@ -233,11 +230,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-格式化字符串漏洞学习笔记(二)" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-OD脱壳学习笔记(一)" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/20171126/格式化字符串漏洞学习笔记(二)/" class="article-date">
-      <time datetime="2017-11-27T01:23:56.000Z" itemprop="datePublished">2017-11-27</time>
+      <a href="/20171130/OD脱壳学习笔记(一)/" class="article-date">
+      <time datetime="2017-12-01T01:29:09.000Z" itemprop="datePublished">2017-12-01</time>
 </a>
     </div>
   
@@ -250,7 +247,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      格式化字符串漏洞学习笔记(二)
+      OD脱壳学习笔记(一)
     </h1>
   
 
@@ -259,13 +256,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/漏洞/">漏洞</a>
+    <a class="article-category-link" href="/categories/逆向/">逆向</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/格式化字符串/">格式化字符串</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漏洞/">漏洞</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/脱壳/">脱壳</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/逆向/">逆向</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -275,22 +272,50 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="格式化字符串漏洞学习笔记-二"><a href="#格式化字符串漏洞学习笔记-二" class="headerlink" title="格式化字符串漏洞学习笔记(二)"></a>格式化字符串漏洞学习笔记(二)</h1><h2 id="利用格式化字符串漏洞构建任意读payload"><a href="#利用格式化字符串漏洞构建任意读payload" class="headerlink" title="利用格式化字符串漏洞构建任意读payload"></a>利用格式化字符串漏洞构建任意读payload</h2><p>该漏洞形如：  </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;a);</span><br><span class="line"><span class="built_in">printf</span>(&amp;a);</span><br></pre></td></tr></table></figure>
-<p>在代码中我们可以直接看到我们可以通过输入格式化字符，来泄露栈上内容，同理，我们先输入某个值，用一长串 <strong>%08X.%08X.%08X……..</strong><br>来定位我们输入的值是放在哪里的，然后就可以利用 <strong>%s</strong> 对那个地址所指向的内容进行读取。<br>同时，还有个知识点，那就是不定参数的使用，比如： <strong>%10$08X</strong> 意为读取栈上 <strong>相对esp偏移量为10的参数 [形如%08X这样的默认是读偏移为1的参数]</strong> 同理， <strong>%s、%p、%n</strong> 都可以使用这个方法，用法相似。<br>挂一张与之相关的图吧，方便理解<br><img src="http://p9.qhimg.com/dr/__50/t0163bde2c444318577.png" alt="栈结构" title="栈的结构">  </p>
-<blockquote>
-<p><strong>用这个一般是泄漏地址，好像是libc函数库地址吧，这样好像可以推算出libc函数库的版本，然后加以利用。</strong>  </p>
+        <h1 id="OD脱壳学习笔记-一"><a href="#OD脱壳学习笔记-一" class="headerlink" title="OD脱壳学习笔记(一)"></a>OD脱壳学习笔记(一)</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本来在这里我不打算放相关逆向的笔记了，但是emmm本人技术太菜，刚刚看一个比赛的题，签到都卡了好久，心里难受，想着就先放上来吧。</p>
+<h2 id="常用手脱方法"><a href="#常用手脱方法" class="headerlink" title="常用手脱方法"></a>常用手脱方法</h2><h3 id="单步跟踪法"><a href="#单步跟踪法" class="headerlink" title="单步跟踪法"></a>单步跟踪法</h3><ol>
+<li>OD载入程序，不分析其代码</li>
+<li>遵循原则，近CALL用F7，远CALL用F8，实现向下走</li>
+<li>有循环处，在下一句代码处用F4(或者右键-&gt;代码断点运行到所选)</li>
+<li>大的跳转(大跨段，<code>JMP XXXXXXXX</code>或者<code>JE XXXXXXXX</code>或者<code>RETN</code>)，很快就会到OEP的</li>
+</ol>
+<h3 id="最后一次异常法"><a href="#最后一次异常法" class="headerlink" title="最后一次异常法"></a>最后一次异常法</h3><ol>
+<li>OD打开—点选项—调试选项—去掉所有异常—CTRL+F2重载</li>
+<li>SHIFT+F9.只到程序运行，记下次数M</li>
+<li>CTRL+F2重载—按SHIFT+F9(次数为M-1次)</li>
+<li>按CTRL+G—输入OE右下角的SE句柄前的地址</li>
+<li>F2下断—SHIFT+F9到断点处</li>
+<li>去断按F8，到OEP</li>
+</ol>
+<h3 id="模拟跟踪法"><a href="#模拟跟踪法" class="headerlink" title="模拟跟踪法"></a>模拟跟踪法</h3><p><strong>在能判断无暗桩的情况下使用</strong></p>
+<ol>
+<li>F9试运行，跑起来就无SEH暗桩之类的</li>
+<li><code>ALT+N</code>打开内存镜像，找到包含<code>=sfx,imports reloco tions</code>字符</li>
+<li><code>地址=XXX</code>  命令行输入: <code>tceip&lt;XXX</code>,回车</li>
+</ol>
+<h3 id="内存镜像法"><a href="#内存镜像法" class="headerlink" title="内存镜像法"></a>内存镜像法</h3><ol>
+<li>先OD载入软件</li>
+<li>点选项—调试选项—忽略全部—CTRL+F2重载</li>
+<li>ALT+N打开内存镜像，找程序第一个.rsrc段—F2下断—SHIFT+F9运行到断点，再打开找到程序第一个.rsrc段上面的.code段处（就是00401000处），F2下断—SHIFT+F9或无异常按F9，到OEP</li>
+</ol>
+<h3 id="ESP定律法"><a href="#ESP定律法" class="headerlink" title="ESP定律法"></a>ESP定律法</h3><ol>
+<li>F8，观察OD右上角寄存器中ESP有没有实现（红色）</li>
+<li>命令行下 <code>DD XXXXXXXX</code>（当前代码ESP值），回车</li>
+<li>DD就选中下端地址，断点—硬件访问—DWORD断点，F9运行，到跳转处按F8 到OEP<blockquote>
+<p>讲到ESP定律脱壳，先载入程序然后F8单步执行并观察寄存器中ESP的值变化，当ESP值变红时右键数据窗口跟随，然后数据窗口跟随的值右键断点word，之后F9运行到断点，然后再往下找很长的jmp之后到入口。<br>emm大概就是这样吧。</p>
 </blockquote>
-<h2 id="利用格式化字符串漏洞构建任意写payload"><a href="#利用格式化字符串漏洞构建任意写payload" class="headerlink" title="利用格式化字符串漏洞构建任意写payload"></a>利用格式化字符串漏洞构建任意写payload</h2><p>当然这个是建立在上一个知识点的基础上的，要是啥都不知道那不相当于乱写吗。<br><a id="more"></a></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;a);</span><br><span class="line"><span class="built_in">printf</span>(&amp;a);</span><br></pre></td></tr></table></figure>
-<p>代码格式还是不变吧……<br>printf在我们学习的过程中没有学过 <strong>%n</strong> 这些，而且我查百度百科也看到说现在的编译器一般是 <strong>默认禁掉了%n</strong> 但是这个printf任意写的漏洞依然是值得关注的。<br>而且printf任意写漏洞好像对printf家族都有效。在笔记(一)中有写到 <strong>%n的用法是将之前输出的内容长度写到某个地址上去</strong><br>假设我们先了解到了我们输入的内容是从栈上偏移11开始的，并且通过IDA我们找到了需要修改的相关地址。<br><strong>[这里假设地址为0x0804A02C]</strong><br>那就可以构建出如下payload：  </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\x2c\xa0\x04\x08%<span class="number">11</span>$n</span><br></pre></td></tr></table></figure>
-<p>那上面输入的东西是什么意思呢？<br>解释一下，就是最开始 <strong>以字符形式</strong> 输入地址，因为字符可能没法直接打出来所以用的形式就像这样，但是这个字符不是重点，重点是他对应的地址我们知道是放在栈上偏移为11的地方，这时候我们就 <strong>相当于把一个地址存进了栈里</strong>，然后 <strong>%11$n</strong> 就意为 <strong>将之前输出的字符数量存到栈上偏移量为11的那个地址指向的空间里</strong> 。就这样就实现了任意写。  </p>
-<blockquote>
-<p>在写入时还要考虑精简不然输出字符过多服务器连接就自己断开了<br>精简格式：比如我们要加入4个无关的填充字符，我们可以写成aaaa+”……”但是这样写在短的时候无所谓，长了之后，比如上千个，可能就不支持了或者时间太久了。<br>这时候就考虑两个方法，%[数值][c/x]来输出指定长度的字符串最后再利用%n来对指定的地址写入数据<br>同时在写入数据时也有讲究……<br>正如之前说的我们直接改4字节可能需要输出的字符串长度太长了，这时候就需要 <strong>%hn[两字节]、%hhn[一字节]</strong> 来控制写入的长度，与之相关还有 <strong>%lln</strong> 对应8字节，但是这个好像就用的不是很多了。</p>
-</blockquote>
-<h2 id="魔术公式"><a href="#魔术公式" class="headerlink" title="魔术公式"></a>魔术公式</h2><p>之前看讲解看到过，就是相当于将修改的值拼接在一起，只是在上述例子中还没用到而已，这里贴一张图吧。<br><img src="http://upload-images.jianshu.io/upload_images/2405665-7a4f10104bdb0662.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="魔术公式表" title="魔术公式表"></p>
-<h2 id="相关学习连接"><a href="#相关学习连接" class="headerlink" title="相关学习连接"></a>相关学习连接</h2><p><a href="https://m.bobao.360.cn/learning/appdetail/3654.html" title="格式化字符串漏洞利用小结（一）" target="_blank" rel="noopener">格式化字符串漏洞利用小结（一）</a><br><a href="http://bobao.360.cn/learning/detail/3674.html" title="格式化字符串漏洞利用小结（一）" target="_blank" rel="noopener">格式化字符串漏洞利用小结（二）</a><br><a href="http://veritas501.space/2017/04/28/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/" title="格式化字符串漏洞学习" target="_blank" rel="noopener">格式化字符串漏洞学习</a><br><a href="http://www.jianshu.com/p/f2acfeb66b6c" title="linux高级漏洞攻击" target="_blank" rel="noopener">linux高级漏洞攻击</a></p>
+</li>
+</ol>
+<h3 id="一步到ESP法"><a href="#一步到ESP法" class="headerlink" title="一步到ESP法"></a>一步到ESP法</h3><p><strong>只适用于少数壳，如UPX、ASPACK</strong></p>
+<ol>
+<li>CTRL+F—输入：<code>POPAD</code>回车查找—F2下断—F9运行到此处.</li>
+<li>来到大跳转处，点F8到OEP</li>
+</ol>
+<h3 id="SFX法"><a href="#SFX法" class="headerlink" title="SFX法"></a>SFX法</h3><ol>
+<li>设置OD，忽略所有异常</li>
+<li>切换到SFX选项卡，选择“字节模式跟踪实际入口”，确定</li>
+<li>重载—“否”压缩代码，到OEP</li>
+</ol>
 
       
       
@@ -300,13 +325,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/20171126/格式化字符串漏洞学习笔记(二)/">格式化字符串漏洞学习笔记(二)</a></p>
+        <p><span>本文标题:</span><a href="/20171130/OD脱壳学习笔记(一)/">OD脱壳学习笔记(一)</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Poker 的个人博客">Poker</a></p>
-        <p><span>发布时间:</span>2017年11月27日 - 09时23分</p>
-        <p><span>最后更新:</span>2017年11月30日 - 09时41分</p>
+        <p><span>发布时间:</span>2017年12月01日 - 09时29分</p>
+        <p><span>最后更新:</span>2017年12月01日 - 10时03分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/20171126/格式化字符串漏洞学习笔记(二)/" title="格式化字符串漏洞学习笔记(二)">http://0xpoker.cuit.site/20171126/格式化字符串漏洞学习笔记(二)/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171126/格式化字符串漏洞学习笔记(二)/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/20171130/OD脱壳学习笔记(一)/" title="OD脱壳学习笔记(一)">http://0xpoker.cuit.site/20171130/OD脱壳学习笔记(一)/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171130/OD脱壳学习笔记(一)/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -319,18 +344,9 @@
 
 <nav id="article-nav">
   
-    <a href="/20171127/格式化字符串漏洞学习笔记(三)/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          格式化字符串漏洞学习笔记(三)
-        
-      </div>
-    </a>
   
-  
-    <a href="/20171126/保护技术-此文章长期更新/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">保护技术-此文章长期更新</div>
+    <a href="/20171129/Linux下的动态调试起GDB的使用说明/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux下的动态调试起GDB的使用说明</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -341,7 +357,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#格式化字符串漏洞学习笔记-二"><span class="toc-number">1.</span> <span class="toc-text">格式化字符串漏洞学习笔记(二)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#利用格式化字符串漏洞构建任意读payload"><span class="toc-number">1.1.</span> <span class="toc-text">利用格式化字符串漏洞构建任意读payload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#利用格式化字符串漏洞构建任意写payload"><span class="toc-number">1.2.</span> <span class="toc-text">利用格式化字符串漏洞构建任意写payload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#魔术公式"><span class="toc-number">1.3.</span> <span class="toc-text">魔术公式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关学习连接"><span class="toc-number">1.4.</span> <span class="toc-text">相关学习连接</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OD脱壳学习笔记-一"><span class="toc-number">1.</span> <span class="toc-text">OD脱壳学习笔记(一)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用手脱方法"><span class="toc-number">1.2.</span> <span class="toc-text">常用手脱方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单步跟踪法"><span class="toc-number">1.2.1.</span> <span class="toc-text">单步跟踪法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后一次异常法"><span class="toc-number">1.2.2.</span> <span class="toc-text">最后一次异常法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模拟跟踪法"><span class="toc-number">1.2.3.</span> <span class="toc-text">模拟跟踪法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存镜像法"><span class="toc-number">1.2.4.</span> <span class="toc-text">内存镜像法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ESP定律法"><span class="toc-number">1.2.5.</span> <span class="toc-text">ESP定律法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一步到ESP法"><span class="toc-number">1.2.6.</span> <span class="toc-text">一步到ESP法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SFX法"><span class="toc-number">1.2.7.</span> <span class="toc-text">SFX法</span></a></li></ol></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -392,13 +408,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/20171127/格式化字符串漏洞学习笔记(三)/" title="上一篇: 格式化字符串漏洞学习笔记(三)">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/20171126/保护技术-此文章长期更新/" title="下一篇: 保护技术-此文章长期更新">
+            <a href="/20171129/Linux下的动态调试起GDB的使用说明/" title="下一篇: Linux下的动态调试起GDB的使用说明">
                 <i class="fa fa-angle-right"></i>
             </a>
         
