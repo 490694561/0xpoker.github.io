@@ -153,7 +153,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/C语言/" style="font-size: 15px;">C语言</a> <a href="/tags/PE文件结构/" style="font-size: 10px;">PE文件结构</a> <a href="/tags/使用说明/" style="font-size: 10px;">使用说明</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/格式化字符串/" style="font-size: 20px;">格式化字符串</a> <a href="/tags/漏洞/" style="font-size: 20px;">漏洞</a> <a href="/tags/漏洞防护/" style="font-size: 10px;">漏洞防护</a> <a href="/tags/笔记/" style="font-size: 15px;">笔记</a> <a href="/tags/脱壳/" style="font-size: 10px;">脱壳</a> <a href="/tags/调试器/" style="font-size: 10px;">调试器</a> <a href="/tags/逆向/" style="font-size: 10px;">逆向</a>
+                        <a href="/tags/C语言/" style="font-size: 15px;">C语言</a> <a href="/tags/PE文件结构/" style="font-size: 10px;">PE文件结构</a> <a href="/tags/canary/" style="font-size: 10px;">canary</a> <a href="/tags/使用说明/" style="font-size: 10px;">使用说明</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/栈溢出/" style="font-size: 10px;">栈溢出</a> <a href="/tags/格式化字符串/" style="font-size: 20px;">格式化字符串</a> <a href="/tags/漏洞/" style="font-size: 20px;">漏洞</a> <a href="/tags/漏洞防护/" style="font-size: 10px;">漏洞防护</a> <a href="/tags/笔记/" style="font-size: 15px;">笔记</a> <a href="/tags/绕过技巧/" style="font-size: 10px;">绕过技巧</a> <a href="/tags/脱壳/" style="font-size: 10px;">脱壳</a> <a href="/tags/调试器/" style="font-size: 10px;">调试器</a> <a href="/tags/逆向/" style="font-size: 10px;">逆向</a>
                     </div>
                 </section>
                 
@@ -236,6 +236,73 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-一点关于利用__stack_chk_fail绕过canary的方法" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/20171202/一点关于利用__stack_chk_fail绕过canary的方法/" class="article-date">
+      <time datetime="2017-12-02T14:26:31.000Z" itemprop="datePublished">2017-12-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/20171202/一点关于利用__stack_chk_fail绕过canary的方法/">一点关于利用__stack_chk_fail绕过canary的方法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              今天中午看某到PWN题的writeup的时候，看到了我这里要写的相关内容，所以我就来我自己的博客上总结下了，可能内容涉及pwntools和gdb的配合使用，和确定缓冲区长度计算技巧。
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/绕过技巧/">绕过技巧</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canary/">canary</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/栈溢出/">栈溢出</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/绕过技巧/">绕过技巧</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/20171202/一点关于利用__stack_chk_fail绕过canary的方法/#more">For more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-bss段-data段-text段等这些东西是什么" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -840,73 +907,10 @@
 
 
   
-    <article id="post-C语言笔记——变量" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/20171124/C语言笔记——变量/" class="article-date">
-      <time datetime="2017-11-24T17:52:10.000Z" itemprop="datePublished">2017-11-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/20171124/C语言笔记——变量/">C语言笔记——变量</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              偷得浮生半日闲，学习了下C语言，其实吧，我一直挺想好好学习下C语言的，可是无奈时间总是被占用，真的是.........................留下了没技术的泪水.jpg
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/C语言笔记/">C语言笔记</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言/">C语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记/">笔记</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/20171124/C语言笔记——变量/#more">For more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">

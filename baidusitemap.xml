@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>http://0xpoker.cuit.site/20171202/%E4%B8%80%E7%82%B9%E5%85%B3%E4%BA%8E%E5%88%A9%E7%94%A8__stack_chk_fail%E7%BB%95%E8%BF%87canary%E7%9A%84%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2017-12-03T07:16:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>一点关于利用__stack_chk_fail绕过canary的方法</title>
+        <pubTime>2017-12-02T14:26:31.000Z</pubTime>
+        
+        <tag>绕过技巧</tag>
+         
+        <tag>canary</tag>
+         
+        <tag>栈溢出</tag>
+         
+         
+           
+             
+              <breadCrumb title="绕过技巧" url="http://0xpoker.cuit.site/categories/%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://0xpoker.cuit.site/20171201/bss%E6%AE%B5-data%E6%AE%B5-text%E6%AE%B5%E7%AD%89%E8%BF%99%E4%BA%9B%E4%B8%9C%E8%A5%BF%E6%98%AF%E4%BB%80%E4%B9%88/</loc>
     <lastmod>2017-12-02T14:11:39.449Z</lastmod>
     <data>
