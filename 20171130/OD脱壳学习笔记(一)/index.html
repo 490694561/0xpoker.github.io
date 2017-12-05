@@ -1,281 +1,369 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
+
+
+
   
-  <title>OD脱壳学习笔记(一) | Poker&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="脱壳这东西emmm知识点挺广的，我就写一点点基础的，后面需要复杂的，我再去补充成二三好了.........">
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/duck.jpg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="逆向,脱壳,教程," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Poker's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="脱壳这东西emmm知识点挺广的，我就写一点点基础的，后面需要复杂的，我再去补充成二三好了.........">
 <meta name="keywords" content="逆向,脱壳,教程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OD脱壳学习笔记(一)">
 <meta property="og:url" content="http://0xpoker.cuit.site/20171130/OD脱壳学习笔记(一)/index.html">
 <meta property="og:site_name" content="Poker&#39;s Blog">
 <meta property="og:description" content="脱壳这东西emmm知识点挺广的，我就写一点点基础的，后面需要复杂的，我再去补充成二三好了.........">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-12-01T18:35:59.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OD脱壳学习笔记(一)">
 <meta name="twitter:description" content="脱壳这东西emmm知识点挺广的，我就写一点点基础的，后面需要复杂的，我再去补充成二三好了.........">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://0xpoker.cuit.site/20171130/OD脱壳学习笔记(一)/"/>
+
+
+
+
+
+  <title>OD脱壳学习笔记(一) | Poker's Blog</title>
   
-    <link rel="alternative" href="/atom.xml" title="Poker&#39;s Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/img/favicon.png">
-  
-  
-      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  
-  
-      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  
-  <!-- 加载特效 -->
-    <script src="/js/pace.js"></script>
-    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
-  <script>
-      var yiliaConfig = {
-          rootUrl: '/',
-          fancybox: true,
-          animate: true,
-          isHome: false,
-          isPost: true,
-          isArchive: false,
-          isTag: false,
-          isCategory: false,
-          open_in_new: false
-      }
-  </script>
+
+
+
+
+
+
+
+
 </head>
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            
-            <img lazy-src="/img/head.jpg" class="js-avatar">
-            
-        </a>
 
-        <hgroup>
-          <h1 class="header-author"><a href="/" title="Hi Mate">Poker</a></h1>
-        </hgroup>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-        
-        
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
-                        
-                        <li>友情链接</li>
-                        
-                        
-                        <li>关于我</li>
-                        
-                    </ul>
-                </div>
-            </div>
-        
+  
+  
+    
+  
 
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                            <li><a href="/">博客首页</a></li>
-                        
-                            <li><a href="/archives">文章归档</a></li>
-                        
-                            <li><a href="/tags/C语言笔记">C语言笔记</a></li>
-                        
-                            <li><a href="/categories/漏洞">漏洞相关笔记</a></li>
-                        
-                            <li><a href="/tags">静心阅读</a></li>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=Z1NeV1FeU1JRVicWFkkECAo" title="mail">mail</a>
-                            
-                                <a class="fl github" target="_blank" href="https://github.com/490694561" title="github">github</a>
-                            
-                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com/people/poker-56/" title="zhihu">zhihu</a>
-                            
-                                <a class="fl google" target="_blank" href="https://plus.google.com/u/0/111245765553979099592" title="google">google</a>
-                            
-                                <a class="fl twitter" target="_blank" href="https://twitter.com/UDhautthHjIDY40" title="twitter">twitter</a>
-                            
-                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
-                            
-                                <a class="fl QQ" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=490694561&site=qq&menu=yes" title="QQ">QQ</a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/C语言/" style="font-size: 15px;">C语言</a> <a href="/tags/PE文件结构/" style="font-size: 10px;">PE文件结构</a> <a href="/tags/canary/" style="font-size: 10px;">canary</a> <a href="/tags/shellcode编写/" style="font-size: 10px;">shellcode编写</a> <a href="/tags/使用说明/" style="font-size: 10px;">使用说明</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/栈溢出/" style="font-size: 10px;">栈溢出</a> <a href="/tags/格式化字符串/" style="font-size: 20px;">格式化字符串</a> <a href="/tags/汇编指令/" style="font-size: 10px;">汇编指令</a> <a href="/tags/漏洞/" style="font-size: 20px;">漏洞</a> <a href="/tags/漏洞防护/" style="font-size: 10px;">漏洞防护</a> <a href="/tags/笔记/" style="font-size: 15px;">笔记</a> <a href="/tags/系统调用/" style="font-size: 10px;">系统调用</a> <a href="/tags/绕过技巧/" style="font-size: 10px;">绕过技巧</a> <a href="/tags/脱壳/" style="font-size: 10px;">脱壳</a> <a href="/tags/调试器/" style="font-size: 10px;">调试器</a> <a href="/tags/逆向/" style="font-size: 10px;">逆向</a>
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.baidu.com/">百度</a>
-                    
-                    </div>
-                </section>
-                
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
 
-                
-                
-                <section class="switch-part switch-part4">
-                
-                    <div id="js-aboutme">真正的热爱并不是说出来而已，能做到似乎比能说到更好噢 @_@</div>
-                </section>
-                
-            </div>
-        </div>
-    </header>                
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Poker's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Poker</a></h1>
-      </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                
-                    <img lazy-src="/img/head.jpg" class="js-avatar">
-                
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="Me">Poker</a></h1>
-            </hgroup>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-            <nav class="header-menu">
-                <ul>
-                
-                    <li><a href="/">博客首页</a></li>
-                
-                    <li><a href="/archives">文章归档</a></li>
-                
-                    <li><a href="/tags/C语言笔记">C语言笔记</a></li>
-                
-                    <li><a href="/categories/漏洞">漏洞相关笔记</a></li>
-                
-                    <li><a href="/tags">静心阅读</a></li>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                <div class="social">
-                    
-                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=Z1NeV1FeU1JRVicWFkkECAo" title="mail">mail</a>
-                    
-                        <a class="github" target="_blank" href="https://github.com/490694561" title="github">github</a>
-                    
-                        <a class="zhihu" target="_blank" href="https://www.zhihu.com/people/poker-56/" title="zhihu">zhihu</a>
-                    
-                        <a class="google" target="_blank" href="https://plus.google.com/u/0/111245765553979099592" title="google">google</a>
-                    
-                        <a class="twitter" target="_blank" href="https://twitter.com/UDhautthHjIDY40" title="twitter">twitter</a>
-                    
-                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
-                    
-                        <a class="QQ" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=490694561&site=qq&menu=yes" title="QQ">QQ</a>
-                    
-                </div>
-            </nav>
-        </header>                
-    </div>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
 </nav>
-      <div class="body-wrap"><article id="post-OD脱壳学习笔记(一)" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
   
-    <div class="article-meta">
-      <a href="/20171130/OD脱壳学习笔记(一)/" class="article-date">
-      <time datetime="2017-12-01T01:29:09.000Z" itemprop="datePublished">2017-12-01</time>
-</a>
-    </div>
+
   
-  <div class="article-inner">
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://0xpoker.cuit.site/20171130/OD脱壳学习笔记(一)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Poker">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/duck.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Poker's Blog">
+    </span>
+
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 class="article-title" itemprop="name">
-      OD脱壳学习笔记(一)
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/逆向/">逆向</a>
-    </div>
-
-
+          <h2 class="post-title" itemprop="name headline">OD脱壳学习笔记(一)</h2>
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/脱壳/">脱壳</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/逆向/">逆向</a></li></ul>
-    </div>
 
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-30T17:29:09-08:00">
+                2017-12-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-01T10:35:59-08:00">
+                2017-12-02
+              </time>
+            
+          </span>
+
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/逆向/" itemprop="url" rel="index">
+                    <span itemprop="name">逆向</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  脱壳这东西emmm知识点挺广的，我就写一点点基础的，后面需要复杂的，我再去补充成二三好了.........
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
         <h1 id="OD脱壳学习笔记-一"><a href="#OD脱壳学习笔记-一" class="headerlink" title="OD脱壳学习笔记(一)"></a>OD脱壳学习笔记(一)</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本来在这里我不打算放相关逆向的笔记了，但是emmm本人技术太菜，刚刚看一个比赛的题，签到都卡了好久，心里难受，想着就先放上来吧。</p>
 <h2 id="常用手脱方法"><a href="#常用手脱方法" class="headerlink" title="常用手脱方法"></a>常用手脱方法</h2><h3 id="单步跟踪法"><a href="#单步跟踪法" class="headerlink" title="单步跟踪法"></a>单步跟踪法</h3><ol>
 <li>OD载入程序，不分析其代码</li>
@@ -322,216 +410,404 @@
 </ol>
 
       
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/逆向/" rel="tag"># 逆向</a>
+          
+            <a href="/tags/脱壳/" rel="tag"># 脱壳</a>
+          
+            <a href="/tags/教程/" rel="tag"># 教程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20171129/Linux下的动态调试起GDB的使用说明/" rel="next" title="Linux下的动态调试起GDB的使用说明">
+                <i class="fa fa-chevron-left"></i> Linux下的动态调试起GDB的使用说明
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20171201/bss段-data段-text段等这些东西是什么/" rel="prev" title="bss段.data段.text段等这些东西是什么">
+                bss段.data段.text段等这些东西是什么 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
       
     </div>
-    
   </div>
+
+
+          </div>
+          
+
+
+          
   
-    
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/20171130/OD脱壳学习笔记(一)/">OD脱壳学习笔记(一)</a></p>
-        <p><span>文章作者:</span><a href="/" title="访问 Poker 的个人博客">Poker</a></p>
-        <p><span>发布时间:</span>2017年12月01日 - 09时29分</p>
-        <p><span>最后更新:</span>2017年12月01日 - 10时35分</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/20171130/OD脱壳学习笔记(一)/" title="OD脱壳学习笔记(一)">http://0xpoker.cuit.site/20171130/OD脱壳学习笔记(一)/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://0xpoker.cuit.site/20171130/OD脱壳学习笔记(一)/　　作者: Poker" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script src="/js/clipboard.min.js"></script>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
-        </p>
-    </div>
 
 
-
-<nav id="article-nav">
-  
-    <a href="/20171201/bss段-data段-text段等这些东西是什么/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          bss段.data段.text段等这些东西是什么
-        
-      </div>
-    </a>
-  
-  
-    <a href="/20171129/Linux下的动态调试起GDB的使用说明/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Linux下的动态调试起GDB的使用说明</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OD脱壳学习笔记-一"><span class="toc-number">1.</span> <span class="toc-text">OD脱壳学习笔记(一)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用手脱方法"><span class="toc-number">1.2.</span> <span class="toc-text">常用手脱方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单步跟踪法"><span class="toc-number">1.2.1.</span> <span class="toc-text">单步跟踪法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后一次异常法"><span class="toc-number">1.2.2.</span> <span class="toc-text">最后一次异常法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模拟跟踪法"><span class="toc-number">1.2.3.</span> <span class="toc-text">模拟跟踪法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存镜像法"><span class="toc-number">1.2.4.</span> <span class="toc-text">内存镜像法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ESP定律法"><span class="toc-number">1.2.5.</span> <span class="toc-text">ESP定律法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一步到ESP法"><span class="toc-number">1.2.6.</span> <span class="toc-text">一步到ESP法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SFX法"><span class="toc-number">1.2.7.</span> <span class="toc-text">SFX法</span></a></li></ol></li></ol></li></ol>
-</div>
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script>
-    var valueHide = "隐藏目录";
-    var valueShow = "显示目录";
-
-    if ($(".left-col").is(":hidden")) {
-        $("#tocButton").attr("value", valueShow);
-    }
-    $("#tocButton").click(function() {
-        if ($("#toc").is(":hidden")) {
-            $("#tocButton").attr("value", valueHide);
-            $("#toc").slideDown(320);
-        }
-        else {
-            $("#tocButton").attr("value", valueShow);
-            $("#toc").slideUp(350);
-        }
-    })
-    if ($(".toc").length < 1) {
-        $("#toc, #tocButton").hide();
-    }
-</script>
-
-
-
-
-
-<div class="bdsharebuttonbox">
-	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
-	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
-	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
-	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
-	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
-</div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-
-
-
-
-    
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/20171201/bss段-data段-text段等这些东西是什么/" title="上一篇: bss段.data段.text段等这些东西是什么">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-        
-            <a href="/20171129/Linux下的动态调试起GDB的使用说明/" title="下一篇: Linux下的动态调试起GDB的使用说明">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/20171204/Linux系统下的int-80h系统调用/">Linux系统下的int 80h系统调用</a></li><li class="post-list-item"><a class="post-list-link" href="/20171202/一点关于利用__stack_chk_fail绕过canary的方法/">一点关于利用__stack_chk_fail绕过canary的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/20171201/bss段-data段-text段等这些东西是什么/">bss段.data段.text段等这些东西是什么</a></li><li class="post-list-item"><a class="post-list-link" href="/20171130/OD脱壳学习笔记(一)/">OD脱壳学习笔记(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171129/Linux下的动态调试起GDB的使用说明/">Linux下的动态调试起GDB的使用说明</a></li><li class="post-list-item"><a class="post-list-link" href="/20171129/格式化字符串漏洞学习笔记(四)/">格式化字符串漏洞学习笔记(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171127/格式化字符串漏洞学习笔记(三)/">格式化字符串漏洞学习笔记(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171126/格式化字符串漏洞学习笔记(二)/">格式化字符串漏洞学习笔记(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171126/保护技术-此文章长期更新/">保护技术-此文章长期更新</a></li><li class="post-list-item"><a class="post-list-link" href="/20171126/格式化字符串漏洞学习笔记(一)/">格式化字符串漏洞学习笔记(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/20171124/C语言笔记——常量与宏定义/">C语言笔记——常量与宏定义</a></li><li class="post-list-item"><a class="post-list-link" href="/20171124/C语言笔记——变量/">C语言笔记——变量</a></li></ul>
-    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-    <script>
-        $(".post-list").addClass("toc-article");
-        $(".post-list-item a").attr("target","_blank");
-        $("#post-nav-button > a:nth-child(2)").click(function() {
-            $(".fa-bars, .fa-times").toggle();
-            $(".post-list").toggle(300);
-            if ($(".toc").length > 0) {
-                $("#toc, #tocButton").toggle(200, function() {
-                    if ($(".switch-area").is(":visible")) {
-                        $("#tocButton").attr("value", valueHide);
-                        }
-                    })
-            }
-            else {
-            }
-        })
-    </script>
-
-
-
-    <script>
-        
-    </script>
-</div>
-      <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                &copy; 2017 Poker
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
-            </div>
         </div>
         
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
-</footer>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/duck.jpg"
+                alt="Poker" />
+            
+              <p class="site-author-name" itemprop="name">Poker</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/490694561" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:490694561@qq.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/u/0/111245765553979099592" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OD脱壳学习笔记-一"><span class="nav-number">1.</span> <span class="nav-text">OD脱壳学习笔记(一)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用手脱方法"><span class="nav-number">1.2.</span> <span class="nav-text">常用手脱方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单步跟踪法"><span class="nav-number">1.2.1.</span> <span class="nav-text">单步跟踪法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后一次异常法"><span class="nav-number">1.2.2.</span> <span class="nav-text">最后一次异常法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟跟踪法"><span class="nav-number">1.2.3.</span> <span class="nav-text">模拟跟踪法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存镜像法"><span class="nav-number">1.2.4.</span> <span class="nav-text">内存镜像法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ESP定律法"><span class="nav-number">1.2.5.</span> <span class="nav-text">ESP定律法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一步到ESP法"><span class="nav-number">1.2.6.</span> <span class="nav-text">一步到ESP法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SFX法"><span class="nav-number">1.2.7.</span> <span class="nav-text">SFX法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
 
     </div>
-    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script src="/js/main.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            var backgroundnum = 24;
-            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
-            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-        })
-    </script>
+  </aside>
 
 
+        
+      </div>
+    </main>
 
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Poker</span>
 
-
-<div class="scroll" id="scroll">
-    <a href="#"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+  
 </div>
-<script>
-    $(document).ready(function() {
-        if ($("#comments").length < 1) {
-            $("#scroll > a:nth-child(2)").hide();
-        };
-    })
-</script>
 
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
 
-  <script language="javascript">
-    $(function() {
-        $("a[title]").each(function() {
-            var a = $(this);
-            var title = a.attr('title');
-            if (title == undefined || title == "") return;
-            a.data('title', title).removeAttr('title').hover(
 
-            function() {
-                var offset = a.offset();
-                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
-                    top: offset.top - a.outerHeight() - 15,
-                    left: offset.left + a.outerWidth()/2 + 1
-                }).fadeIn(function() {
-                    var pop = $(this);
-                    setTimeout(function() {
-                        pop.remove();
-                    }, pop.text().length * 800);
-                });
-            }, function() {
-                $("#anchortitlecontainer").remove();
-            });
-        });
-    });
-</script>
 
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
