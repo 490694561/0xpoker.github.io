@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/duck.jpg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="漏洞,ROP链," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Poker's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="唉，昨晚忙着准备做题去了，没来写笔记，感觉这一周我天天都在考试，可是下星期还得考试，不过，在闲暇时间，还是看了下ROP的相关操作，我就简单记录下吧........................">
+<meta name="keywords" content="漏洞,ROP链">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ROP学习之旅(一)">
+<meta property="og:url" content="http://0xpoker.cuit.site/20171206/ROP学习之旅(一)/index.html">
+<meta property="og:site_name" content="Poker&#39;s Blog">
+<meta property="og:description" content="唉，昨晚忙着准备做题去了，没来写笔记，感觉这一周我天天都在考试，可是下星期还得考试，不过，在闲暇时间，还是看了下ROP的相关操作，我就简单记录下吧........................">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-07T07:25:27.862Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ROP学习之旅(一)">
+<meta name="twitter:description" content="唉，昨晚忙着准备做题去了，没来写笔记，感觉这一周我天天都在考试，可是下星期还得考试，不过，在闲暇时间，还是看了下ROP的相关操作，我就简单记录下吧........................">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://0xpoker.cuit.site/20171206/ROP学习之旅(一)/"/>
+
+
+
+
+
+  <title>ROP学习之旅(一) | Poker's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Poker's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签列表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            文章归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://0xpoker.cuit.site/20171206/ROP学习之旅(一)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Poker">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/duck.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Poker's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">ROP学习之旅(一)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-06T22:08:01+08:00">
+                2017-12-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-07T15:25:27+08:00">
+                2017-12-07
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/漏洞/" itemprop="url" rel="index">
+                    <span itemprop="name">漏洞</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/漏洞/返回编程/" itemprop="url" rel="index">
+                    <span itemprop="name">返回编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  唉，昨晚忙着准备做题去了，没来写笔记，感觉这一周我天天都在考试，可是下星期还得考试，不过，在闲暇时间，还是看了下ROP的相关操作，我就简单记录下吧........................
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="ROP学习之旅-一"><a href="#ROP学习之旅-一" class="headerlink" title="ROP学习之旅(一)"></a>ROP学习之旅(一)</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这块我还没学完，所以我只能先懂多少写多少…………………………….</p>
+<h2 id="ROP相关原理"><a href="#ROP相关原理" class="headerlink" title="ROP相关原理"></a>ROP相关原理</h2><p>随着 <strong>NX</strong> 技术的产生，我们溢出的时候没法写 <strong>shellcode并执行</strong> 它了，那么就产生了一种名叫 <strong>ROP</strong> 的技术来绕过保护。<br><em>ROP</em> ，全称为： <strong>Return Oriented Programming</strong> ，是一种 <strong>面向返回的攻击技术</strong> ，又被称为 <strong>最有效最直接的攻击手法</strong> 。</p>
+<h2 id="相关操作介绍"><a href="#相关操作介绍" class="headerlink" title="相关操作介绍"></a>相关操作介绍</h2><h3 id="检查文件是否满足条件"><a href="#检查文件是否满足条件" class="headerlink" title="检查文件是否满足条件"></a>检查文件是否满足条件</h3><p>首先，还是需要 <strong>pwntools</strong> 的一个功能 <strong>checksec</strong> ，先对文件的防护进行检查，或者使用python库的 <code>ELF(&quot;./XXXXXXX&quot;)</code> 来对文件的保护措施进行检查。检查形如：<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  $ checksec XXXXXXXXXXX</span><br><span class="line"><span class="symbol">    Arch:</span>     i386-<span class="number">32</span>-little</span><br><span class="line"><span class="symbol">    RELRO:</span>    Partial RELRO</span><br><span class="line"><span class="symbol">    Stack:</span>    No canary found</span><br><span class="line"><span class="symbol">    NX:</span>       NX enabled</span><br><span class="line"><span class="symbol">    PIE:</span>      No PIE (<span class="number">0x8048000</span>)</span><br></pre></td></tr></table></figure></p>
+<p>我们可以看出，该文件是 <strong>32位</strong> 程序，并且 <strong>开启了栈不可执行</strong> 保护，但是其他都没开，我们先不去管其他的保护措施。<br>如果题目提供了文件的话，我们可以把文件拖进IDA，然后一顿暴打…………..走偏了，我们把文件放进 <strong>IDA</strong> ，然后查看相关的函数地址，或者我们需要的操作地址。<br>然后最重要的是我们要查看是不是可以通过接收输入的函数进行溢出，如果可以，那就看输入缓冲区的大小然后再加上 <strong>pwntools</strong> 里的<code>p32/p64(address)</code>然后最后接收完输入后，你输入的前面那一堆都不起作用，最重要是后面的地址，覆盖了原来的返回地址，所以现在 <strong>函数返回就会跳到你给的那个地址开始执行指令</strong> 。如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v4; <span class="comment">// [sp+1Ch] [bp-64h]@1</span></span><br><span class="line"></span><br><span class="line">  setvbuf(<span class="built_in">stdout</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  setvbuf(_bss_start, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"There is something amazing here, do you know anything?"</span>);</span><br><span class="line">  gets((<span class="keyword">char</span> *)&amp;v4);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Maybe I will tell you next time !"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这上面的代码就有很明显的gets函数可以溢出的漏洞。</p>
+</blockquote>
+<h3 id="PWN之ROPgadget"><a href="#PWN之ROPgadget" class="headerlink" title="PWN之ROPgadget"></a>PWN之ROPgadget</h3><p><strong>这个工具主要是用来寻找能够组成ROP链的小部分代码块。</strong><br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ROPgadget --<span class="keyword">binary </span>XXXXXX --only <span class="string">'int'</span></span><br><span class="line"><span class="symbol">Gadgets</span> information</span><br><span class="line">============================================================</span><br><span class="line"><span class="number">0x08049421</span> : int <span class="number">0x80</span></span><br><span class="line"><span class="number">0x080938fe</span> : int <span class="number">0xbb</span></span><br><span class="line"><span class="number">0x080869b5</span> : int <span class="number">0xf6</span></span><br><span class="line"><span class="number">0x0807b4d4</span> : int <span class="number">0xfc</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">Unique</span> gadgets found: <span class="number">4</span></span><br></pre></td></tr></table></figure></p>
+<p>通过一小块一小块的代码，组成一个链最终就形成了ROP链。</p>
+<blockquote>
+<p>但是需要注意的是32位的系统和64位的系统传递参数的方式不同，所以溢出的时候也是一个要注意的点。</p>
+</blockquote>
+<p><em>例如，我们可以通过一个ROP链然后调用int 80h就是system call来实现getshell。也可以通过 ROPgadget里面的pop将我们在栈上放置好的参数依次出栈到相关的寄存器，然后调用相关的call达到效果。</em></p>
+<h3 id="32位系统和64位系统传递参数的区别"><a href="#32位系统和64位系统传递参数的区别" class="headerlink" title="32位系统和64位系统传递参数的区别"></a>32位系统和64位系统传递参数的区别</h3><p>32位系统一般都是 <strong>eax</strong> 接收返回值，然后 <strong>eax接收系统调用号</strong> 这些，然后通过 <strong>栈传递参数</strong> ，如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setvbuf(<span class="built_in">stdout</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure></p>
+<p>在汇编指令中， <strong>入栈的顺序是从右向左依次入栈</strong> ，遵循栈的先进后出原则。<br>而， <strong>64位系统一般都是前六个参数放在寄存器中，从第七个参数开始才在栈上出现。</strong><br><em>前6个参数的顺序是：</em> <strong>RDI，RSI，RDX，RCX，R8，R9</strong> </p>
+<h2 id="shell获取小结"><a href="#shell获取小结" class="headerlink" title="shell获取小结"></a>shell获取小结</h2><ul>
+<li>执行shellcode，这一方面也会有不同的情况</li>
+<li>可以直接返回shell</li>
+<li>可以将shell返回到某一个端口</li>
+<li>shellcode中字符有时候需要满足不同的需求</li>
+<li>注意， <strong>我们需要将shellcode写在可以执行的内存区域中。</strong></li>
+<li>执行<code>system(“/bin/sh”)</code> , <code>system(&quot;sh&quot;)</code>等等</li>
+<li>关于<code>system</code>的地址，参见下面章节的地址寻找。</li>
+<li>关于<code>/bin/sh</code>， <code>sh</code><ul>
+<li>首先寻找binary里面有没有对应的字符串,比如说有flush函数，那就一定有sh了</li>
+<li>考虑个人读取对应字符串</li>
+<li><strong>libc中其实是有/bin/sh的</strong></li>
+</ul>
+</li>
+<li>优点<ul>
+<li><strong>只需要一个参数。</strong></li>
+</ul>
+</li>
+<li>缺点<ul>
+<li><strong>有可能因为破坏环境变量而无法执行。</strong></li>
+</ul>
+</li>
+<li>执行<code>execve(“/bin/sh”,NULL,NULL)</code></li>
+<li>前几条同<code>system</code></li>
+<li>优点<ul>
+<li>几乎不受环境变量的影响。</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>需要3个参数。</li>
+</ul>
+</li>
+<li>系统调用</li>
+<li>系统调用号 <strong>11</strong><blockquote>
+<p>用这些自己构建ROP链的时候可以参考int 80h的system call相关的参数知识</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="地址寻找小结"><a href="#地址寻找小结" class="headerlink" title="地址寻找小结"></a>地址寻找小结</h2><h3 id="通用寻找"><a href="#通用寻找" class="headerlink" title="通用寻找"></a>通用寻找</h3><h4 id="直接地址寻找"><a href="#直接地址寻找" class="headerlink" title="直接地址寻找"></a>直接地址寻找</h4><p>程序中已经给出了相关变量或者函数的地址了。这时候，我们就可以直接进行利用了。</p>
+<h4 id="got表寻找"><a href="#got表寻找" class="headerlink" title="got表寻找"></a>got表寻找</h4><p>有时候我们并不一定非得直接知道某个函数的地址，可以利用GOT表的跳转到对应函数的地址。当然，如果我们非得知道这个函数的地址，我们可以利用write，puts等输出函数将GOT表中地址处对应的内容输出出来 ( <strong>前提是这个函数已经被解析一次了</strong> ) 。</p>
+<h3 id="有libc"><a href="#有libc" class="headerlink" title="有libc"></a>有libc</h3><p><strong>相对偏移寻找</strong> ，这时候我们就需要考虑利用libc中函数的基地址一样这个特性来寻找了。其实__libc_start_main就是libc在内存中的基地址。 <strong>注意：不要选择有wapper的函数，这样会使得函数的基地址计算不正确。</strong> 常见的有wapper的函数有………………………………………..(待补充)。</p>
+<h3 id="无libc"><a href="#无libc" class="headerlink" title="无libc"></a>无libc</h3><p>其实，这种情况的解决策略分为两种</p>
+<ul>
+<li>想办法获取libc</li>
+<li>想办法直接获取对应的地址。<br>而对于想要泄露的地址，我们只是单纯地需要其对应的内容，所以puts和write均可以。</li>
+<li>puts会有\x00截断的问题</li>
+<li>write可以指定长度输出的内容。<br>下面是一些相应的方法</li>
+</ul>
+<h4 id="DynELF"><a href="#DynELF" class="headerlink" title="DynELF"></a>DynELF</h4><p>前提是我们可以泄露任意地址的内容。</p>
+<ul>
+<li><strong>如果要使用write函数泄露的话，一次最好多输出一些地址的内容，因为我们一般是只是不断地向高地址读内容，很有可能导致高地址的环境变量被覆盖，就会导致shell不能启动。</strong></li>
+</ul>
+<h4 id="libc数据库"><a href="#libc数据库" class="headerlink" title="libc数据库"></a>libc数据库</h4><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">## 更新数据库</span><br><span class="line">./<span class="meta">get</span></span><br><span class="line">## 将已有libc添加到数据库中</span><br><span class="line">./<span class="keyword">add </span>libc.so</span><br><span class="line">## Find all the libc<span class="string">'s in the database that have the given names at the given addresses.</span></span><br><span class="line"><span class="string">./find function1 addr function2 addr</span></span><br><span class="line"><span class="string">## Dump some useful offsets, given a libc ID. You can also provide your own names to dump.</span></span><br><span class="line"><span class="string">./Dump some useful offsets</span></span><br></pre></td></tr></table></figure>
+<p>去libc的数据库中找到对应的和已经出现的地址一样的libc，这时候很有可能是一样的。</p>
+<ul>
+<li>libcdb.com  </li>
+</ul>
+<p>当然，还有上面提到的<a href="https://github.com/lieanu/LibcSearcher。" target="_blank" rel="noopener">https://github.com/lieanu/LibcSearcher。</a></p>
+<h4 id="ret2dl-resolve"><a href="#ret2dl-resolve" class="headerlink" title="ret2dl-resolve"></a>ret2dl-resolve</h4><p>当ELF文件采用动态链接时，got表会采用延迟绑定技术。当第一次调用某个libc函数时，程序会调用_dl_runtime_resolve函数对其地址解析。因此，我们可以利用栈溢出构造ROP链，伪造对其他函数(如：system)解析。这也是我们在高级rop中会介绍的技巧。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/漏洞/" rel="tag"># 漏洞</a>
+          
+            <a href="/tags/ROP链/" rel="tag"># ROP链</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20171204/Linux系统下的int-80h系统调用/" rel="next" title="Linux系统下的int 80h系统调用">
+                <i class="fa fa-chevron-left"></i> Linux系统下的int 80h系统调用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/duck.jpg"
+                alt="Poker" />
+            
+              <p class="site-author-name" itemprop="name">Poker</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/490694561" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:490694561@qq.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/u/0/111245765553979099592" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ROP学习之旅-一"><span class="nav-number">1.</span> <span class="nav-text">ROP学习之旅(一)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ROP相关原理"><span class="nav-number">1.2.</span> <span class="nav-text">ROP相关原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关操作介绍"><span class="nav-number">1.3.</span> <span class="nav-text">相关操作介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检查文件是否满足条件"><span class="nav-number">1.3.1.</span> <span class="nav-text">检查文件是否满足条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PWN之ROPgadget"><span class="nav-number">1.3.2.</span> <span class="nav-text">PWN之ROPgadget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32位系统和64位系统传递参数的区别"><span class="nav-number">1.3.3.</span> <span class="nav-text">32位系统和64位系统传递参数的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell获取小结"><span class="nav-number">1.4.</span> <span class="nav-text">shell获取小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地址寻找小结"><span class="nav-number">1.5.</span> <span class="nav-text">地址寻找小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通用寻找"><span class="nav-number">1.5.1.</span> <span class="nav-text">通用寻找</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接地址寻找"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">直接地址寻找</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#got表寻找"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">got表寻找</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有libc"><span class="nav-number">1.5.2.</span> <span class="nav-text">有libc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无libc"><span class="nav-number">1.5.3.</span> <span class="nav-text">无libc</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DynELF"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">DynELF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#libc数据库"><span class="nav-number">1.5.3.2.</span> <span class="nav-text">libc数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ret2dl-resolve"><span class="nav-number">1.5.3.3.</span> <span class="nav-text">ret2dl-resolve</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Poker</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

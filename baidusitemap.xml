@@ -3,6 +3,31 @@
 
 
     
+  <url>
+    <loc>http://0xpoker.cuit.site/20171206/ROP%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85(%E4%B8%80)/</loc>
+    <lastmod>2017-12-07T07:25:27.862Z</lastmod>
+    <data>
+        <display>
+        <title>ROP学习之旅(一)</title>
+        <pubTime>2017-12-06T14:08:01.000Z</pubTime>
+        
+        <tag>漏洞</tag>
+         
+        <tag>ROP链</tag>
+         
+         
+           
+             
+              <breadCrumb title="漏洞" url="http://0xpoker.cuit.site/categories/%E6%BC%8F%E6%B4%9E/"/>
+          
+             
+              <breadCrumb title="返回编程" url="http://0xpoker.cuit.site/categories/%E6%BC%8F%E6%B4%9E/%E8%BF%94%E5%9B%9E%E7%BC%96%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://0xpoker.cuit.site/20171204/Linux%E7%B3%BB%E7%BB%9F%E4%B8%8B%E7%9A%84int-80h%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</loc>
@@ -175,9 +200,9 @@
         <title>格式化字符串漏洞学习笔记(四)</title>
         <pubTime>2017-11-29T23:32:10.000Z</pubTime>
         
-        <tag>格式化字符串</tag>
-         
         <tag>漏洞</tag>
+         
+        <tag>格式化字符串</tag>
          
          
            
@@ -197,9 +222,9 @@
         <title>格式化字符串漏洞学习笔记(三)</title>
         <pubTime>2017-11-28T00:07:29.000Z</pubTime>
         
-        <tag>格式化字符串</tag>
-         
         <tag>漏洞</tag>
+         
+        <tag>格式化字符串</tag>
          
          
            
@@ -219,9 +244,9 @@
         <title>格式化字符串漏洞学习笔记(二)</title>
         <pubTime>2017-11-27T01:23:56.000Z</pubTime>
         
-        <tag>格式化字符串</tag>
-         
         <tag>漏洞</tag>
+         
+        <tag>格式化字符串</tag>
          
          
            
@@ -241,9 +266,9 @@
         <title>格式化字符串漏洞学习笔记(一)</title>
         <pubTime>2017-11-26T16:03:40.000Z</pubTime>
         
-        <tag>格式化字符串</tag>
-         
         <tag>漏洞</tag>
+         
+        <tag>格式化字符串</tag>
          
          
            
