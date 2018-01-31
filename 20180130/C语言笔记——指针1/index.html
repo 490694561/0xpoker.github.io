@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="Poker&#39;s Blog">
 <meta property="og:description" content="一直说要学指针，到今天终于开始了，之前一直做题，对指针也是有所了解，所以感觉这第一天的内容还不算太难。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-31T13:05:00.876Z">
+<meta property="og:updated_time" content="2018-01-31T13:16:00.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言笔记——指针1">
 <meta name="twitter:description" content="一直说要学指针，到今天终于开始了，之前一直做题，对指针也是有所了解，所以感觉这第一天的内容还不算太难。">
@@ -207,16 +207,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签列表
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -304,7 +294,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-01-31T05:05:00-08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-01-31T05:16:00-08:00">
                 2018-01-31
               </time>
             
@@ -377,6 +367,9 @@
 </ol>
 <h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>要避免访问未初始化的指针，比如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *a;</span><br><span class="line">*a = <span class="number">123</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure></p>
 <p>看似这段代码没有什么大问题，但是我们虽然定义了一个指针，却并未对它初始化，指针变量 a 到底指向哪里我们并不知道，这个值是随机的，会导致程序出现致命漏洞。</p>
+<blockquote>
+<p>这种未初始化的指针就是没有对象的野指针了</p>
+</blockquote>
 <h2 id="数组与指针的关系"><a href="#数组与指针的关系" class="headerlink" title="数组与指针的关系"></a>数组与指针的关系</h2><p><strong>数组名其实是数组指针的第一个元素的地址。</strong><br>所以，让指针指向数组，只需要这样：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="keyword">char</span> *pa = &amp;a[<span class="number">0</span>];</span><br></pre></td></tr></table></figure></p>
 <p>这样就让 <strong>pa</strong> 指针指向了数组 <strong>a</strong><br>访问数组中的值，可以将指针按照数据类型占有的地址空间，加上相应的空间，就能通过地址间接访问数组数据了。</p>
 <h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>在代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">3</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">char</span> *p = a;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%c\n%c\n%c"</span>,*p,*(p+<span class="number">1</span>),*(p+<span class="number">2</span>));</span><br></pre></td></tr></table></figure></p>
@@ -582,6 +575,30 @@
                 
                   <li class="links-of-blogroll-item">
                     <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://o0xmuhe.github.io/" title="0xmuhe师傅" target="_blank">0xmuhe师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.cnblogs.com/Ox9A82/" title="0x9A82师傅" target="_blank">0x9A82师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.cnblogs.com/iamstudy" title="l3m0n师傅" target="_blank">l3m0n师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://daedalus.kim/" title="江小白大佬" target="_blank">江小白大佬</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://bestwing.me/" title="swing师傅" target="_blank">swing师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://edvison.cn/" title="林小姐姐" target="_blank">林小姐姐</a>
                   </li>
                 
               </ul>
