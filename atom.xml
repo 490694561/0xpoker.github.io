@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://0xpoker.cuit.site/"/>
-  <updated>2018-01-12T07:49:35.552Z</updated>
+  <updated>2018-01-31T13:05:00.876Z</updated>
   <id>http://0xpoker.cuit.site/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C语言笔记——杂记</title>
+    <link href="http://0xpoker.cuit.site/20180131/C%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E6%9D%82%E8%AE%B0/"/>
+    <id>http://0xpoker.cuit.site/20180131/C语言笔记——杂记/</id>
+    <published>2018-01-31T12:00:54.000Z</published>
+    <updated>2018-01-31T13:05:00.876Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="C语言笔记——这都是些比较杂的东西了"><a href="#C语言笔记——这都是些比较杂的东西了" class="headerlink" title="C语言笔记——这都是些比较杂的东西了"></a>C语言笔记——这都是些比较杂的东西了</h1><h2 id="字符数组"><a href="#字符数组" class="headerlink" title="字符数组"></a>字符数组</h2><p>字符数组可以有以下几种初始化方式，选择自己喜欢的(也就是简便的来记一下就好了)。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="comment">//初始化字符数组的每个元素</span></span><br><span class="line">str1[<span class="number">6</span>] = &#123;<span class="string">'P'</span>,<span class="string">'o'</span>,<span class="string">'k'</span>,<span class="string">'e'</span>,<span class="string">'r'</span>,<span class="string">'\0'</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//也可以不写元素个数</span></span><br><span class="line">str2[] = &#123;<span class="string">'P'</span>,<span class="string">'o'</span>,<span class="string">'k'</span>,<span class="string">'e'</span>,<span class="string">'r'</span>,<span class="string">'\0'</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用字符串常量初始化字符数组</span></span><br><span class="line">str3[] = &#123;<span class="string">"Poker"</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用字符串常量初始化字符数组，可以省略大括号</span></span><br><span class="line">str4[] = <span class="string">"Poker"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><h2 id="处理字符串的函数"><a href="#处理字符串的函数" class="headerlink" title="处理字符串的函数"></a>处理字符串的函数</h2><p>这一类函数主要被定义在 <code>string.h</code> 这个头文件中。</p><h3 id="sizeof和strlen"><a href="#sizeof和strlen" class="headerlink" title="sizeof和strlen"></a>sizeof和strlen</h3><p>这两个函数在之前就讲过了，在这里就再提一下。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">char</span> str[] = <span class="string">"Poker"</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"sizeof is: %d"</span>,<span class="keyword">sizeof</span>(str));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"strlen is: %u"</span>,<span class="built_in">strlen</span>(str));</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>结果，程序运行时输出的内容为:<br><strong>sizeof is: 6</strong><br><strong>strlen is: 5</strong><br>这就是他们的不同点之一，在之前我们说过，字符数组的最后一位是 \0 但是strlen是不计算这个的，但是 sizeof 是要计算的。</p><h3 id="strcpy和strncpy"><a href="#strcpy和strncpy" class="headerlink" title="strcpy和strncpy"></a>strcpy和strncpy</h3><p>这两个函数都是字符串的拷贝，但是用法不一样。<br><code>strcpy([目标数组],[原始数组]);</code><br><code>strncpy([目标数组],[原始数组],[拷贝长度]);</code><br>就相当于两个一个是不受限制的拷贝，另一个是受限制的拷贝。<br>同时， <strong>strncpy</strong> 并不会自动追加一个 \0 需要自己去追加。</p><blockquote><p>在使用拷贝函数的时候还应该注意，目标数组要足够大，至少要能够容纳原始数组，不然就会发生溢出。</p></blockquote><h3 id="strcat和strncat"><a href="#strcat和strncat" class="headerlink" title="strcat和strncat"></a>strcat和strncat</h3><p>这两个都是字符串的拼接。<br>这里的 <strong>strncat</strong> 在字符串最后会自动追加一个 <code>\0</code> </p><h3 id="strcmp和strncmp"><a href="#strcmp和strncmp" class="headerlink" title="strcmp和strncmp"></a>strcmp和strncmp</h3><p><em>这个函数运行原理就是逐一对比两个数组的值</em><br>然后如果<strong>完全相等</strong>，返回值就是 <strong>0</strong> ，如果不完全相等，就返回 <strong>非0数</strong> 但不一定是 <strong>1</strong> </p><h3 id="二维数组的特点"><a href="#二维数组的特点" class="headerlink" title="二维数组的特点"></a>二维数组的特点</h3><p>在声明的时候，形式如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>][<span class="number">4</span>]</span><br></pre></td></tr></table></figure></p><p>这个意思就是声明了一个3行4列的数组，然后呢，在具体声明的时候写法可以按照如下来，方便看清，也方便日后debug………..<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>][<span class="number">4</span>] = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;,&#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,&#123;<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;&#125;</span><br></pre></td></tr></table></figure></p><p>这样来声明多维数组既能保证在一行上的舒坦，又方便debug。</p>]]></content>
+    
+    <summary type="html">
+    
+      emmmmmm...............这篇文章里的东西呀，那都是些比较杂的东西，主要是用法吧，需要就看下吧，不需要就直接无视好了。
+    
+    </summary>
+    
+      <category term="C语言笔记" scheme="http://0xpoker.cuit.site/categories/C%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="C语言" scheme="http://0xpoker.cuit.site/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="笔记" scheme="http://0xpoker.cuit.site/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C语言笔记——指针1</title>
+    <link href="http://0xpoker.cuit.site/20180130/C%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E6%8C%87%E9%92%881/"/>
+    <id>http://0xpoker.cuit.site/20180130/C语言笔记——指针1/</id>
+    <published>2018-01-30T20:56:44.000Z</published>
+    <updated>2018-01-31T13:05:00.876Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="C语言笔记——指针1"><a href="#C语言笔记——指针1" class="headerlink" title="C语言笔记——指针1"></a>C语言笔记——指针1</h1><h2 id="关于指针的东西终于开始了"><a href="#关于指针的东西终于开始了" class="headerlink" title="关于指针的东西终于开始了"></a>关于指针的东西终于开始了</h2><h3 id="指针变量的定义方式"><a href="#指针变量的定义方式" class="headerlink" title="指针变量的定义方式"></a>指针变量的定义方式</h3><p>实质上就是在普通声明方式放加上一个 <code>*</code> ，形如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a ---&gt; <span class="keyword">int</span> *a</span><br><span class="line"><span class="keyword">char</span> b ---&gt; <span class="keyword">char</span> *b</span><br></pre></td></tr></table></figure></p><p>这就是他们的基本定义方式。</p><h3 id="取地址运算符和取值运算符"><a href="#取地址运算符和取值运算符" class="headerlink" title="取地址运算符和取值运算符"></a>取地址运算符和取值运算符</h3><p>总体上来说就是 <code>&amp;</code> 和 <code>*</code> ，这两个就分别对应了去地址运算符和取值运算符，具体用法看下面的示例代码：</p><ol><li><p>取地址运算符：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *pa = &amp;a;</span><br><span class="line"><span class="keyword">int</span> *pb = &amp;b;</span><br></pre></td></tr></table></figure></li><li><p>取值运算符：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"%c,%d"</span>,*pa,*pb);</span><br></pre></td></tr></table></figure></li></ol><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>要避免访问未初始化的指针，比如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *a;</span><br><span class="line">*a = <span class="number">123</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure></p><p>看似这段代码没有什么大问题，但是我们虽然定义了一个指针，却并未对它初始化，指针变量 a 到底指向哪里我们并不知道，这个值是随机的，会导致程序出现致命漏洞。</p><h2 id="数组与指针的关系"><a href="#数组与指针的关系" class="headerlink" title="数组与指针的关系"></a>数组与指针的关系</h2><p><strong>数组名其实是数组指针的第一个元素的地址。</strong><br>所以，让指针指向数组，只需要这样：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="keyword">char</span> *pa = &amp;a[<span class="number">0</span>];</span><br></pre></td></tr></table></figure></p><p>这样就让 <strong>pa</strong> 指针指向了数组 <strong>a</strong><br>访问数组中的值，可以将指针按照数据类型占有的地址空间，加上相应的空间，就能通过地址间接访问数组数据了。</p><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>在代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">3</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">char</span> *p = a;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%c\n%c\n%c"</span>,*p,*(p+<span class="number">1</span>),*(p+<span class="number">2</span>));</span><br></pre></td></tr></table></figure></p><p>这样的话，是能够正确打印出数组变量的值的，那么这样呢：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> *p = a;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n%d\n%d"</span>,*p,*(p+<span class="number">1</span>),*(p+<span class="number">2</span>));</span><br></pre></td></tr></table></figure></p><p>其实这样打印出来还是正确的。因为在定义指针变量的时候我们就写出了指针变量对应的数据类型，编译器也按照这个类型来进行加减，每个数据占多少字节，并不需要我们手动去单独写这方面的代码。</p>]]></content>
+    
+    <summary type="html">
+    
+      一直说要学指针，到今天终于开始了，之前一直做题，对指针也是有所了解，所以感觉这第一天的内容还不算太难。
+    
+    </summary>
+    
+      <category term="C语言笔记" scheme="http://0xpoker.cuit.site/categories/C%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="C语言" scheme="http://0xpoker.cuit.site/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="笔记" scheme="http://0xpoker.cuit.site/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>C语言笔记——这章的主要内容我也没懂是啥</title>
@@ -264,9 +312,9 @@
       <category term="漏洞" scheme="http://0xpoker.cuit.site/categories/%E6%BC%8F%E6%B4%9E/"/>
     
     
-      <category term="漏洞" scheme="http://0xpoker.cuit.site/tags/%E6%BC%8F%E6%B4%9E/"/>
-    
       <category term="格式化字符串" scheme="http://0xpoker.cuit.site/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="漏洞" scheme="http://0xpoker.cuit.site/tags/%E6%BC%8F%E6%B4%9E/"/>
     
   </entry>
   
@@ -288,9 +336,9 @@
       <category term="漏洞" scheme="http://0xpoker.cuit.site/categories/%E6%BC%8F%E6%B4%9E/"/>
     
     
-      <category term="漏洞" scheme="http://0xpoker.cuit.site/tags/%E6%BC%8F%E6%B4%9E/"/>
-    
       <category term="格式化字符串" scheme="http://0xpoker.cuit.site/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="漏洞" scheme="http://0xpoker.cuit.site/tags/%E6%BC%8F%E6%B4%9E/"/>
     
   </entry>
   
@@ -312,9 +360,9 @@
       <category term="漏洞" scheme="http://0xpoker.cuit.site/categories/%E6%BC%8F%E6%B4%9E/"/>
     
     
-      <category term="漏洞" scheme="http://0xpoker.cuit.site/tags/%E6%BC%8F%E6%B4%9E/"/>
-    
       <category term="格式化字符串" scheme="http://0xpoker.cuit.site/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="漏洞" scheme="http://0xpoker.cuit.site/tags/%E6%BC%8F%E6%B4%9E/"/>
     
   </entry>
   
@@ -358,9 +406,9 @@
       <category term="漏洞" scheme="http://0xpoker.cuit.site/categories/%E6%BC%8F%E6%B4%9E/"/>
     
     
-      <category term="漏洞" scheme="http://0xpoker.cuit.site/tags/%E6%BC%8F%E6%B4%9E/"/>
-    
       <category term="格式化字符串" scheme="http://0xpoker.cuit.site/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="漏洞" scheme="http://0xpoker.cuit.site/tags/%E6%BC%8F%E6%B4%9E/"/>
     
   </entry>
   

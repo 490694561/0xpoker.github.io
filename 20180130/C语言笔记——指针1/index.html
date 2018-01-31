@@ -85,18 +85,18 @@
 
 
 
-<meta name="description" content="唉，按照这个趋势下去，我明天的英语考试是得去裸考一波了...............真让人心凉。">
+<meta name="description" content="一直说要学指针，到今天终于开始了，之前一直做题，对指针也是有所了解，所以感觉这第一天的内容还不算太难。">
 <meta name="keywords" content="C语言,笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C语言笔记——取值范围">
-<meta property="og:url" content="http://0xpoker.cuit.site/20180110/C语言笔记——取值范围/index.html">
+<meta property="og:title" content="C语言笔记——指针1">
+<meta property="og:url" content="http://0xpoker.cuit.site/20180130/C语言笔记——指针1/index.html">
 <meta property="og:site_name" content="Poker&#39;s Blog">
-<meta property="og:description" content="唉，按照这个趋势下去，我明天的英语考试是得去裸考一波了...............真让人心凉。">
+<meta property="og:description" content="一直说要学指针，到今天终于开始了，之前一直做题，对指针也是有所了解，所以感觉这第一天的内容还不算太难。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-11T08:03:37.030Z">
+<meta property="og:updated_time" content="2018-01-31T13:05:00.876Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C语言笔记——取值范围">
-<meta name="twitter:description" content="唉，按照这个趋势下去，我明天的英语考试是得去裸考一波了...............真让人心凉。">
+<meta name="twitter:title" content="C语言笔记——指针1">
+<meta name="twitter:description" content="一直说要学指针，到今天终于开始了，之前一直做题，对指针也是有所了解，所以感觉这第一天的内容还不算太难。">
 
 
 
@@ -126,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://0xpoker.cuit.site/20180110/C语言笔记——取值范围/"/>
+  <link rel="canonical" href="http://0xpoker.cuit.site/20180130/C语言笔记——指针1/"/>
 
 
 
 
 
-  <title>C语言笔记——取值范围 | Poker's Blog</title>
+  <title>C语言笔记——指针1 | Poker's Blog</title>
   
 
 
@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://0xpoker.cuit.site/20180110/C语言笔记——取值范围/">
+    <link itemprop="mainEntityOfPage" href="http://0xpoker.cuit.site/20180130/C语言笔记——指针1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Poker">
@@ -276,7 +276,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">C语言笔记——取值范围</h2>
+          <h2 class="post-title" itemprop="name headline">C语言笔记——指针1</h2>
         
 
         <div class="post-meta">
@@ -288,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-10T07:15:06-08:00">
-                2018-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-31T04:56:44+08:00">
+                2018-01-31
               </time>
             
 
@@ -304,8 +304,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-01-11T00:03:37-08:00">
-                2018-01-11
+              <time title="更新于" itemprop="dateModified" datetime="2018-01-31T21:05:00+08:00">
+                2018-01-31
               </time>
             
           </span>
@@ -347,7 +347,7 @@
 
           
               <div class="post-description">
-                  唉，按照这个趋势下去，我明天的英语考试是得去裸考一波了...............真让人心凉。
+                  一直说要学指针，到今天终于开始了，之前一直做题，对指针也是有所了解，所以感觉这第一天的内容还不算太难。
               </div>
           
 
@@ -364,105 +364,24 @@
       
 
       
-        <h1 id="C语言笔记——取值范围"><a href="#C语言笔记——取值范围" class="headerlink" title="C语言笔记——取值范围"></a>C语言笔记——取值范围</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这章主要是留作备用，作为补充知识的吧，不过常用的数据类型的取值范围还是得做一下了解，并且记住的。<br><strong>这里得先明确几个个概念：</strong></p>
-<blockquote>
-<p>CPU能读懂的最小单位是：比特位，单位：bit，简写为：b<br>内存中最小的寻址单位为：字节，单位：Byte，简写为：B<br>有这样一个关系：1 Byte == 1 bit</p>
-</blockquote>
-<p><strong>那么一个字节的大小能表示多大的数呢？</strong><br><em>11111111b = FFh = 255</em><br>所以我们可以看出，在无符号位的情况下，一个字节就能表示 0 ~ 255 的数。</p>
-<h3 id="符号位"><a href="#符号位" class="headerlink" title="符号位"></a>符号位</h3><p>通常，在有符号情况下，也就是变量类型之前有 signed 这样的情况下，8 个比特位的第一位为符号位。<br>关系为：如果符号位是 0 ，那么这就是一个正数；如果符号位为 1 ，那么这就是一个负数。<br><strong>那么们举个栗子：</strong><br>一个 int 型的变量，默认是 signed int 并且是 4 个字节的，那么就占有 <code>8 * 4 = 32</code> 个比特位，同时他第一位是符号位，那么就只有 31 个比特位是表示数值的，表示的大小就是 <code>-2的31次方~2的31次方</code> </p>
-<h2 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h2><p>这里引入一个补码的概念，虽然我并不知道这个有啥用，但是我看教程都讲了，那就也写一下吧。</p>
-<h3 id="补码的算法"><a href="#补码的算法" class="headerlink" title="补码的算法"></a>补码的算法</h3><ul>
-<li>如果是一个正数的补码<ul>
-<li>那他的补码就是这个正数的二进制形式</li>
-</ul>
+        <h1 id="C语言笔记——指针1"><a href="#C语言笔记——指针1" class="headerlink" title="C语言笔记——指针1"></a>C语言笔记——指针1</h1><h2 id="关于指针的东西终于开始了"><a href="#关于指针的东西终于开始了" class="headerlink" title="关于指针的东西终于开始了"></a>关于指针的东西终于开始了</h2><h3 id="指针变量的定义方式"><a href="#指针变量的定义方式" class="headerlink" title="指针变量的定义方式"></a>指针变量的定义方式</h3><p>实质上就是在普通声明方式放加上一个 <code>*</code> ，形如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a ---&gt; <span class="keyword">int</span> *a</span><br><span class="line"><span class="keyword">char</span> b ---&gt; <span class="keyword">char</span> *b</span><br></pre></td></tr></table></figure></p>
+<p>这就是他们的基本定义方式。</p>
+<h3 id="取地址运算符和取值运算符"><a href="#取地址运算符和取值运算符" class="headerlink" title="取地址运算符和取值运算符"></a>取地址运算符和取值运算符</h3><p>总体上来说就是 <code>&amp;</code> 和 <code>*</code> ，这两个就分别对应了去地址运算符和取值运算符，具体用法看下面的示例代码：</p>
+<ol>
+<li><p>取地址运算符：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *pa = &amp;a;</span><br><span class="line"><span class="keyword">int</span> *pb = &amp;b;</span><br></pre></td></tr></table></figure>
 </li>
-<li>如果是一个负数的补码<ul>
-<li>那就先取这个负数的绝对值</li>
-<li>然后将绝对值换为二进制形式</li>
-<li>将二进制按位取反得到一个二进制数</li>
-<li>将得到的二进制数加 1 就得到了这个负数的补码</li>
-</ul>
+<li><p>取值运算符：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"%c,%d"</span>,*pa,*pb);</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<h2 id="基本数据类型的取值范围"><a href="#基本数据类型的取值范围" class="headerlink" title="基本数据类型的取值范围"></a>基本数据类型的取值范围</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">数据类型</th>
-<th style="text-align:center">字节数</th>
-<th style="text-align:center">取值范围</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">char</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">-128 ~ 127</td>
-</tr>
-<tr>
-<td style="text-align:center">unsigned char</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0 ~ 255</td>
-</tr>
-<tr>
-<td style="text-align:center">short</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">-32768 ~ 32767</td>
-</tr>
-<tr>
-<td style="text-align:center">unsigned short</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">0 ~ 65535</td>
-</tr>
-<tr>
-<td style="text-align:center">int</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">-2147483648 ~ 2147483647</td>
-</tr>
-<tr>
-<td style="text-align:center">unsigned int</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">0 ~ 4294967295</td>
-</tr>
-<tr>
-<td style="text-align:center">long</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">-2147483648 ~ 2147483647</td>
-</tr>
-<tr>
-<td style="text-align:center">unsigned long</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">0 ~ 4294967295</td>
-</tr>
-<tr>
-<td style="text-align:center">long long</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">-9223372036854775808 ~ 9223372036854775807</td>
-</tr>
-<tr>
-<td style="text-align:center">unsigned long long</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">0 ~ 18446744073709551615</td>
-</tr>
-<tr>
-<td style="text-align:center">float</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center"><code>1.17549*10^(-38) ~ 3.40282*10^38</code></td>
-</tr>
-<tr>
-<td style="text-align:center">double</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center"><code>2.22507*10^(-308) ~ 1.79769*10^308</code></td>
-</tr>
-<tr>
-<td style="text-align:center">long double</td>
-<td style="text-align:center">12</td>
-<td style="text-align:center"><code>1.2*10^(-4932) ~ 1.2*10^4932</code></td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>最后一组数据不准确，只做参考，在上述表中， ^ 为乘方符号</p>
-</blockquote>
+</ol>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>要避免访问未初始化的指针，比如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *a;</span><br><span class="line">*a = <span class="number">123</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure></p>
+<p>看似这段代码没有什么大问题，但是我们虽然定义了一个指针，却并未对它初始化，指针变量 a 到底指向哪里我们并不知道，这个值是随机的，会导致程序出现致命漏洞。</p>
+<h2 id="数组与指针的关系"><a href="#数组与指针的关系" class="headerlink" title="数组与指针的关系"></a>数组与指针的关系</h2><p><strong>数组名其实是数组指针的第一个元素的地址。</strong><br>所以，让指针指向数组，只需要这样：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="keyword">char</span> *pa = &amp;a[<span class="number">0</span>];</span><br></pre></td></tr></table></figure></p>
+<p>这样就让 <strong>pa</strong> 指针指向了数组 <strong>a</strong><br>访问数组中的值，可以将指针按照数据类型占有的地址空间，加上相应的空间，就能通过地址间接访问数组数据了。</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>在代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">3</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">char</span> *p = a;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%c\n%c\n%c"</span>,*p,*(p+<span class="number">1</span>),*(p+<span class="number">2</span>));</span><br></pre></td></tr></table></figure></p>
+<p>这样的话，是能够正确打印出数组变量的值的，那么这样呢：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> *p = a;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n%d\n%d"</span>,*p,*(p+<span class="number">1</span>),*(p+<span class="number">2</span>));</span><br></pre></td></tr></table></figure></p>
+<p>其实这样打印出来还是正确的。因为在定义指针变量的时候我们就写出了指针变量对应的数据类型，编译器也按照这个类型来进行加减，每个数据占多少字节，并不需要我们手动去单独写这方面的代码。</p>
 
       
     </div>
@@ -495,8 +414,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/20180103/关于运算符号优先级的总结/" rel="next" title="关于运算符号优先级的总结">
-                <i class="fa fa-chevron-left"></i> 关于运算符号优先级的总结
+              <a href="/20180111/C语言笔记——这章其实我是有些迷的/" rel="next" title="C语言笔记——这章的主要内容我也没懂是啥">
+                <i class="fa fa-chevron-left"></i> C语言笔记——这章的主要内容我也没懂是啥
               </a>
             
           </div>
@@ -505,8 +424,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/20180111/C语言笔记——这章其实我是有些迷的/" rel="prev" title="C语言笔记——这章的主要内容我也没懂是啥">
-                C语言笔记——这章的主要内容我也没懂是啥 <i class="fa fa-chevron-right"></i>
+              <a href="/20180131/C语言笔记——杂记/" rel="prev" title="C语言笔记——杂记">
+                C语言笔记——杂记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -684,7 +603,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C语言笔记——取值范围"><span class="nav-number">1.</span> <span class="nav-text">C语言笔记——取值范围</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#符号位"><span class="nav-number">1.1.1.</span> <span class="nav-text">符号位</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补码"><span class="nav-number">1.2.</span> <span class="nav-text">补码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#补码的算法"><span class="nav-number">1.2.1.</span> <span class="nav-text">补码的算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本数据类型的取值范围"><span class="nav-number">1.3.</span> <span class="nav-text">基本数据类型的取值范围</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C语言笔记——指针1"><span class="nav-number">1.</span> <span class="nav-text">C语言笔记——指针1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于指针的东西终于开始了"><span class="nav-number">1.1.</span> <span class="nav-text">关于指针的东西终于开始了</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针变量的定义方式"><span class="nav-number">1.1.1.</span> <span class="nav-text">指针变量的定义方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#取地址运算符和取值运算符"><span class="nav-number">1.1.2.</span> <span class="nav-text">取地址运算符和取值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">1.1.3.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组与指针的关系"><span class="nav-number">1.2.</span> <span class="nav-text">数组与指针的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">1.2.1.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
